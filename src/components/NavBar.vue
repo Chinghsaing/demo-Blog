@@ -1,33 +1,31 @@
 <template>
-    <div class="header-container">
-        <el-header class="el-header">
-            <div class="logo-box">
-                <el-image class="el-img" :src="data.logoUrl" fit="fill"></el-image>
-                <h1>{{ data.title }}</h1>
-            </div>
-            <div class="buttom-group">
-                <el-button type="primary" style="--el-button-hover-bg-color:transparent" size="large" @click=""
-                    color="transparent" icon="User">{{
-                        data.buttonText.button_1
-                    }}</el-button>
-                <el-button type="primary" style="--el-button-hover-bg-color:transparent" size="large" @click=""
-                    color="transparent" icon="User">{{
-                        data.buttonText.button_2
-                    }}</el-button>
-                <el-button type="primary" style="--el-button-hover-bg-color:transparent" size="large" @click=""
-                    color="transparent" icon="User">{{
-                        data.buttonText.button_3
-                    }}</el-button>
-                <el-button type="primary" style="--el-button-hover-bg-color:transparent" size="large" @click=""
-                    color="transparent" icon="User">{{
-                        data.buttonText.button_4
-                    }}</el-button>
-                <el-button type="primary" style="--el-button-hover-bg-color:transparent" size="large" @click=""
-                    color="transparent" icon="User">{{
-                        data.buttonText.button_5
-                    }}</el-button>
-            </div>
-        </el-header>
+    <div class="logo-box-container">
+        <div class="logo-box">
+            <el-image class="el-img" :src="data.logoUrl" fit="fill"></el-image>
+            <h2>{{ data.title }}</h2>
+        </div>
+        <div class="buttom-group">
+            <el-button type="primary" style="--el-button-hover-bg-color:transparent" size="large" @click=""
+                color="transparent" icon="User">{{
+                    data.buttonText.button_1
+                }}</el-button>
+            <el-button type="primary" style="--el-button-hover-bg-color:transparent" size="large" @click=""
+                color="transparent" icon="User">{{
+                    data.buttonText.button_2
+                }}</el-button>
+            <el-button type="primary" style="--el-button-hover-bg-color:transparent" size="large" @click=""
+                color="transparent" icon="User">{{
+                    data.buttonText.button_3
+                }}</el-button>
+            <el-button type="primary" style="--el-button-hover-bg-color:transparent" size="large" @click=""
+                color="transparent" icon="User">{{
+                    data.buttonText.button_4
+                }}</el-button>
+            <el-button type="primary" style="--el-button-hover-bg-color:transparent" size="large" @click=""
+                color="transparent" icon="User">{{
+    data.buttonText.button_5
+                }}</el-button>
+        </div>
     </div>
 
 </template>
@@ -59,9 +57,11 @@ const data: dataType = reactive({
 </script>
 
 <style scoped lang="less">
-.el-header {
+.logo-box-container {
+    .publicWH(100%, 0);
     .publicMP(0, 0 5% 0 5%);
     .publicFlex(center, none, space-between);
+    box-sizing: border-box;
 
     .logo-box {
         .publicWH(fit-content, fit-content);

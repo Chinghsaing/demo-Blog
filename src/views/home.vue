@@ -1,19 +1,24 @@
 <template>
-    <div class="home-container">
-        <el-container direction="vertical">
-            <NavBar></NavBar>
-            <el-main>
-                <div class="mid-box-container">
-                    <div class="mid-box">
-                        <div class="title-box">
-                            <img :src="store.$state.NavBarData.logoUrl" alt="" srcset="">
-                            <h1>Lemon Blog</h1>
-                        </div>
-                        <TextAmt></TextAmt>
+    <div class="main-container-1">
+        <NavBar></NavBar>
+        <div class="center-box-container">
+            <div class="title-box-container">
+                <div class="title-box">
+                    <div class="title">
+                        <img :src="store.$state.NavBarData.logoUrl" alt="" srcset="">
+                        <h1>Lemon Blog</h1>
                     </div>
+                    <TextAmt></TextAmt>
                 </div>
-            </el-main>
-        </el-container>
+            </div>
+        </div>
+        <div>
+            <el-icon class="arrow" color="#fff" size="32">
+                <ArrowDown />
+            </el-icon>
+        </div>
+    </div>
+    <div class="main-container-2">
     </div>
 </template>
 
@@ -23,53 +28,85 @@ import TextAmt from '@/components/TextAmt.vue'
 import { useStore } from "@/store/HomeState"
 
 const store = useStore()
-
 </script>
 
 <style scoped lang="less">
 //样式
-.home-container {
+.main-container-1 {
+    .publicFlex(center, none, center);
     .publicWH(100%, 100%);
+    flex-direction: column;
     background: url('@/assets/images/background.jpg') no-repeat center;
-    background-position: center;
     background-size: 100% 100%;
 
-    .el-container {
-        .publicWH(100%, 100%);
+    .center-box-container {
+        .publicWH(100%, 85%);
+        .publicFlex(center, none, center);
+        flex-direction: column;
 
-        .el-main {
-            .publicWH(100%, 100%);
+        .title-box-container {
             .publicFlex(center, none, center);
             flex-direction: column;
-            .mid-box-container {
-                // .publicFlex(center, none, center);
-                // flex-direction: column;
-                .publicWH(100%, 45%);
-                .publicMP(0, auto);
+            .publicWH(100%, 100%);
+            .publicMP(0, auto);
 
-                .mid-box {
+            .title-box {
+                .publicFlex(center, none, center);
+                flex-direction: column;
+
+                .title {
                     .publicFlex(center, none, center);
-                    flex-direction: column;
 
-                    .title-box {
-                        .publicFlex(center, none, center);
+                    img {
+                        .publicWH(64px, 64px)
+                    }
 
-                        img {
-                            .publicWH(64px, 64px)
-                        }
-
-                        h1 {
-                            .publicMP(0, 0);
-                            color: @defult;
-                            font-size: 2.5em;
-                        }
+                    h1 {
+                        .publicMP(0, 0);
+                        color: @defult;
+                        font-size: 2.5em;
                     }
                 }
-
-
             }
-
         }
+    }
+
+    .arrow {
+        animation-name: arrowAnimation;
+        animation-duration: 1s;
+        animation-direction: alternate-reverse;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+    }
+}
+
+.main-container-2 {
+}
+
+//创建帧动画
+@keyframes arrowAnimation {
+    0% {
+        transform: scale(1);
+    }
+
+    20% {
+        transform: scale(1.1);
+    }
+
+    40% {
+        transform: scale(1.2);
+    }
+
+    60% {
+        transform: scale(1.3);
+    }
+
+    80% {
+        transform: scale(1.4);
+    }
+
+    100% {
+        transform: scale(1.5);
     }
 }
 </style>
