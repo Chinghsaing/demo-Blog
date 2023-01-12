@@ -1,7 +1,7 @@
 <template>
     <div class="logo-box-container">
         <div class="logo-box">
-            <el-image class="el-img" :src="data.logoUrl" fit="fill"></el-image>
+            <img class="el-img" :src="data.logoUrl" >
             <h2>{{ data.title }}</h2>
         </div>
         <div class="buttom-group">
@@ -69,7 +69,7 @@ const data: dataType = reactive({
         display: flex;
         align-items: center;
 
-        .el-img {
+        img {
             .publicWH(32px, 32px);
         }
     }

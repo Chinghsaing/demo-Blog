@@ -1,6 +1,7 @@
 //公共颜色
 @defult: #fff;
 @defultBG: transparent;
+
 //公共样式
 .publicWH(@w, @h) {
     width: @w;
@@ -17,4 +18,79 @@
     align-items: @a;
     justify-items: @ji;
     justify-content: @jt;
+}
+.leftSlideIn(@time,@ease){
+    animation-name: leftSlideIn;
+    animation-duration: @time;
+    animation-timing-function:@ease;
+}
+
+.rightSlideIn(@time,@ease){
+    animation-name: rightSlideIn;
+    animation-duration: @time;
+    animation-timing-function:@ease;
+}
+
+.topSlideIn(@time,@ease){
+    animation-name: topSlideIn;
+    animation-duration: @time;
+    animation-timing-function:@ease;
+}
+.arrowAnimation(){
+    animation-name: arrowAnimation;
+    animation-duration: 1s;
+    animation-direction: alternate-reverse;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+//公共动画组
+@keyframes leftSlideIn{
+    from {
+        margin-right: 100%;
+    }
+    to{
+        margin-right: 0%;
+    }
+}
+
+@keyframes rightSlideIn{
+    from {
+        margin-left: 100%;
+    }
+    to{
+        margin-left: 0%;
+    }
+}
+@keyframes topSlideIn{
+    from {
+        margin-top: 100%;
+    }
+    to{
+        margin-top: 0%;
+    }
+}
+@keyframes arrowAnimation {
+    0% {
+        transform: scale(1);
+    }
+
+    20% {
+        transform: scale(1.1);
+    }
+
+    40% {
+        transform: scale(1.2);
+    }
+
+    60% {
+        transform: scale(1.3);
+    }
+
+    80% {
+        transform: scale(1.4);
+    }
+
+    100% {
+        transform: scale(1.5);
+    }
 }
