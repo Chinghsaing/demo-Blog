@@ -21,8 +21,10 @@
     <div class="main-container-2">
         <div class="card-container">
             <SmallCard></SmallCard>
+
             <div class="userinfocard-container">
-                <UserInfoCard class="UserInfoCard" :style="fixed == true ? 'position: fixed;top: 0;' : ''"></UserInfoCard>
+                <UserInfoCard class="UserInfoCard" :style="fixed == true ? 'position: fixed;top: 0;' : ''">
+                </UserInfoCard>
             </div>
 
         </div>
@@ -36,7 +38,7 @@ import TextAmt from '@/components/TextAmt.vue'
 import SmallCard from '@/components/SmallCard.vue'
 import UserInfoCard from '@/components/UserInfoCard.vue'
 import { useStore } from '@/store/HomeState'
-import UseScroll  from '@/hooks/UseScroll'
+import UseScroll from '@/hooks/UseScroll'
 
 const store = useStore()
 const fixed = UseScroll()
@@ -102,22 +104,18 @@ const fixed = UseScroll()
     box-sizing: border-box;
     .publicWH(100%, auto);
     .publicMP(0, 0 10% 0 10%);
+    background-color: #F7F9FA;
 
     .card-container {
         position: relative;
         .publicFlex(none, none, center);
         .publicWH(100%, auto);
-        margin-top: 2%;
+        .publicMP(20px, none);
 
         .userinfocard-container {
-            .publicWH(300px, 400px);
-            margin-left: 20px;
+            .publicWH(300px, 350px);
+            .publicMP(0 0 0 20px, 0)
         }
     }
 }
-
-// .fixed {
-//     position: fixed;
-//     top: 0;
-// }
 </style>

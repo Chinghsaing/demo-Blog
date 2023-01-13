@@ -1,7 +1,7 @@
 <template>
     <div class="smallcard-container">
-        <el-row :gutter="20" type="flex" style="flex-wrap: wrap;">
-            <el-col v-for="item in news" :key="item.id" :span="6" :offset="0">
+        <el-row :gutter="0" type="flex" style="flex-wrap: wrap;">
+            <el-col v-for="item in news" :key="item.id" :span="6" :offset="0" >
                 <el-card shadow="always" :body-style="{ padding: '20px' }">
                     <div>
                         <span>Tilte</span>

@@ -1,6 +1,8 @@
 //公共颜色
 @defult: #fff;
 @defultBG: transparent;
+@pfontColor:#3c3c3c;
+@sfontColor:#666666;
 
 //公共样式
 .publicWH(@w, @h) {
@@ -11,6 +13,13 @@
 .publicMP(@m, @p) {
     margin: @m;
     padding: @p;
+}
+
+.publicFont(@size, @weight, @color, @space){
+    font-size: @size;
+    font-weight: @weight;
+    color: @color;
+    letter-spacing: @space;
 }
 
 .publicFlex(@a, @ji, @jt) {
