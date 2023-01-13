@@ -131,7 +131,7 @@ onMounted(() => {
             position: relative;
 
             .cut {
-                color: @defult;
+                color: @defaultFont;
             }
 
             .typer-cursor {
@@ -139,7 +139,7 @@ onMounted(() => {
                 .publicWH(3px, 100%);
                 top: 0;
                 right: -10px;
-                background-color: @defult;
+                background-color: @defaultFont;
                 animation: flash 1.5s linear infinite;
             }
         }

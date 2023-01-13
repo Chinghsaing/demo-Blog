@@ -65,7 +65,7 @@ const data: dataType = reactive({
 
     .logo-box {
         .publicWH(fit-content, fit-content);
-        color: @defult;
+        color: @defaultFont;
         display: flex;
         align-items: center;
 
@@ -85,12 +85,12 @@ const data: dataType = reactive({
             .publicMP(0 0 0 12px, 1px 6px);
 
             &:hover {
-                background-color: @defultBG;
-                border-bottom: 4px solid @defult;
+                background-color: @defaultCR;
+                border-bottom: 4px solid @defaultFont;
             }
 
             &:active {
-                background-color: @defultBG;
+                background-color: @defaultCR;
             }
         }
     }

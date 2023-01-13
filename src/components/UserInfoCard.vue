@@ -1,5 +1,5 @@
 <template>
-    <div class="infocard-container">
+    <div class="userinfocard">
         <el-card shadow="always" :body-style="{ padding: '20px' }" style="border-radius: 20px;">
             <div class="main-container">
                 <el-avatar icon="el-icon-user-solid" size="large" shape="circle" :src="img" fit="fill"></el-avatar>
@@ -42,7 +42,7 @@ const img = new URL(`@/assets/images/userIcon.gif`, import.meta.url).href
 
 <style scoped lang="less">
 .el-card {
-    background-color: @defult;
+    background-color: @defaultFont;
     .publicWH(300px, 350px);
 
     .main-container {
@@ -70,12 +70,12 @@ const img = new URL(`@/assets/images/userIcon.gif`, import.meta.url).href
             .publicMP(10px 10px, 0px);
 
             .el-button {
-                color: black;
+                color: @pfontColor;
                 border: none;
                 transition: all .5s ease;
 
                 &:hover {
-                    background-color: #e4e4e4;
+                    background-color: @defaultHv;
                 }
             }
 

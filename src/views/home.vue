@@ -20,8 +20,9 @@
     </div>
     <div class="main-container-2">
         <div class="card-container">
-            <SmallCard></SmallCard>
-
+            <div class="newscard-container">
+                <NewsCard></NewsCard>
+            </div>
             <div class="userinfocard-container">
                 <UserInfoCard class="UserInfoCard" :style="fixed == true ? 'position: fixed;top: 0;' : ''">
                 </UserInfoCard>
@@ -35,7 +36,7 @@
 <script setup lang="ts" >
 import NavBar from '@/components/NavBar.vue'
 import TextAmt from '@/components/TextAmt.vue'
-import SmallCard from '@/components/SmallCard.vue'
+import NewsCard from '@/components/NewsCard.vue'
 import UserInfoCard from '@/components/UserInfoCard.vue'
 import { useStore } from '@/store/HomeState'
 import UseScroll from '@/hooks/UseScroll'
@@ -82,7 +83,7 @@ const fixed = UseScroll()
 
                     h1 {
                         .publicMP(0, 0);
-                        color: @defult;
+                        color: @defaultFont;
                         font-size: 2.5em;
                     }
                 }
@@ -103,8 +104,8 @@ const fixed = UseScroll()
     .publicFlex(none, none, none);
     box-sizing: border-box;
     .publicWH(100%, auto);
-    .publicMP(0, 0 10% 0 10%);
-    background-color: #F7F9FA;
+    .publicMP(0, 0 5% 0 5%);
+    background-color: @defaultBG;
 
     .card-container {
         position: relative;
@@ -112,9 +113,13 @@ const fixed = UseScroll()
         .publicWH(100%, auto);
         .publicMP(20px, none);
 
+        .newscard-container{
+            .publicWH(55%, 151.6px);
+        }
         .userinfocard-container {
             .publicWH(300px, 350px);
-            .publicMP(0 0 0 20px, 0)
+            .publicMP(0 0 0 20px, 0);
+            
         }
     }
 }
