@@ -1,9 +1,10 @@
 <template>
-    <div class="userinfocard">
+    <div class="userinfocard"  
+    ref="main1">
         <el-card shadow="always" :body-style="{ padding: '20px' }" style="border-radius: 20px;">
             <div class="main-container">
                 <el-avatar icon="el-icon-user-solid" size="large" shape="circle" :src="img" fit="fill"></el-avatar>
-                <span class="name">Test</span>
+                <span class="name">Mishuroki</span>
                 <p class="name-tag">Happy everyday</p>
                 <div style="display:flex;margin-top: 20px;">
                     <div class="select">
@@ -38,6 +39,7 @@
 
 <script setup lang="ts">
 const img = new URL(`@/assets/images/usericon.png`, import.meta.url).href
+
 </script>
 
 <style scoped lang="less">
@@ -85,6 +87,6 @@ const img = new URL(`@/assets/images/usericon.png`, import.meta.url).href
             }
         }
     }
-
 }
+
 </style>

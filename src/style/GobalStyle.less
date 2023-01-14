@@ -61,7 +61,11 @@
     animation-duration: @time;
     animation-timing-function: @ease;
 }
-
+.opacityAmt(@time, @ease){
+    animation-name: opacityAmt;
+    animation-duration: @time;
+    animation-timing-function: @ease;
+}
 .arrowAnimation() {
     animation-name: arrowAnimation;
     animation-duration: 1s;
@@ -98,6 +102,15 @@
 
     to {
         margin-top: 0%;
+    }
+}
+
+@keyframes opacityAmt {
+    from {
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
     }
 }
 

@@ -21,7 +21,9 @@
     <div class="main-container-2">
         <div class="card-container">
             <div class="newscard-container">
-                <NewsCard></NewsCard>
+                <div ref="main1" :style="showEmerge">
+                    <NewsCard></NewsCard>
+                </div>
                 <ArtCard></ArtCard>
             </div>
             <div class="userinfocard-container">
@@ -40,12 +42,25 @@ import NewsCard from '@/components/NewsCard.vue'
 import UserInfoCard from '@/components/UserInfoCard.vue'
 import ArtCard from '@/components/ArtCard.vue'
 
+import { ref, onMounted } from 'vue'
+
 import { useStore } from '@/store/HomeState'
 
 import UseScroll from '@/hooks/UseScroll'
+import UseEmerge from '@/hooks/UseEmerge'
 
 const store = useStore()
 const fixed = UseScroll()
+const main1 = ref()
+const showEmerge = UseEmerge(main1)
+
+// let Y1 = 0
+// let radio = 0.05
+
+// window.onload= () =>{
+//     positionY.value = Y1 = main1.value.offsetTop * radio
+// }
+
 
 
 </script>
@@ -125,5 +140,16 @@ const fixed = UseScroll()
 
         }
     }
+}
+
+
+.wrapanimate {
+    opacity: 0;
+}
+
+.wrapanimated {
+    // .rightSlideIn(1.5s, ease)
+    transition: all 1s ease;
+    opacity: 1 !important;
 }
 </style>
