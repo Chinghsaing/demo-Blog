@@ -4,13 +4,13 @@
 //  //默认透明颜色
 @defaultCR: transparent;
 // //默认背景颜色
-@defaultBG:#F7F9FA;
+@defaultBG: #F7F9FA;
 // //默认黑色字体颜色 主
 // //默认黑色字体颜色 次
-@pfontColor:#3c3c3c;
-@sfontColor:#666666;
+@pfontColor: #3c3c3c;
+@sfontColor: #666666;
 
-@defaultHv:#e4e4e4;
+@defaultHv: #e4e4e4;
 
 //公共样式
 .publicWH(@w, @h) {
@@ -23,7 +23,7 @@
     padding: @p;
 }
 
-.publicFont(@size, @weight, @color, @space){
+.publicFont(@size, @weight, @color, @space) {
     font-size: @size;
     font-weight: @weight;
     color: @color;
@@ -36,56 +36,71 @@
     justify-items: @ji;
     justify-content: @jt;
 }
-.leftSlideIn(@time,@ease){
+
+.textEllipsis(@size,@warp) {
+    font-size: @size;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: @warp;
+}
+
+.leftSlideIn(@time, @ease) {
     animation-name: leftSlideIn;
     animation-duration: @time;
-    animation-timing-function:@ease;
+    animation-timing-function: @ease;
 }
 
-.rightSlideIn(@time,@ease){
+.rightSlideIn(@time, @ease) {
     animation-name: rightSlideIn;
     animation-duration: @time;
-    animation-timing-function:@ease;
+    animation-timing-function: @ease;
 }
 
-.topSlideIn(@time,@ease){
+.topSlideIn(@time, @ease) {
     animation-name: topSlideIn;
     animation-duration: @time;
-    animation-timing-function:@ease;
+    animation-timing-function: @ease;
 }
-.arrowAnimation(){
+
+.arrowAnimation() {
     animation-name: arrowAnimation;
     animation-duration: 1s;
     animation-direction: alternate-reverse;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
 }
+
 //公共动画组
-@keyframes leftSlideIn{
+@keyframes leftSlideIn {
     from {
         margin-right: 100%;
     }
-    to{
+
+    to {
         margin-right: 0%;
     }
 }
 
-@keyframes rightSlideIn{
+@keyframes rightSlideIn {
     from {
         margin-left: 100%;
     }
-    to{
+
+    to {
         margin-left: 0%;
     }
 }
-@keyframes topSlideIn{
+
+@keyframes topSlideIn {
     from {
         margin-top: 100%;
     }
-    to{
+
+    to {
         margin-top: 0%;
     }
 }
+
 @keyframes arrowAnimation {
     0% {
         transform: scale(1);

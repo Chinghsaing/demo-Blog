@@ -22,12 +22,12 @@
         <div class="card-container">
             <div class="newscard-container">
                 <NewsCard></NewsCard>
+                <ArtCard></ArtCard>
             </div>
             <div class="userinfocard-container">
                 <UserInfoCard class="UserInfoCard" :style="fixed == true ? 'position: fixed;top: 0;' : ''">
                 </UserInfoCard>
             </div>
-
         </div>
 
     </div>
@@ -38,7 +38,10 @@ import NavBar from '@/components/NavBar.vue'
 import TextAmt from '@/components/TextAmt.vue'
 import NewsCard from '@/components/NewsCard.vue'
 import UserInfoCard from '@/components/UserInfoCard.vue'
+import ArtCard from '@/components/ArtCard.vue'
+
 import { useStore } from '@/store/HomeState'
+
 import UseScroll from '@/hooks/UseScroll'
 
 const store = useStore()
@@ -103,9 +106,8 @@ const fixed = UseScroll()
 .main-container-2 {
     .publicFlex(none, none, none);
     box-sizing: border-box;
-    .publicWH(100%, auto);
+    .publicWH(100%, 100%);
     .publicMP(0, 0 5% 0 5%);
-    background-color: @defaultBG;
 
     .card-container {
         position: relative;
@@ -113,13 +115,14 @@ const fixed = UseScroll()
         .publicWH(100%, auto);
         .publicMP(20px, none);
 
-        .newscard-container{
-            .publicWH(55%, 151.6px);
+        .newscard-container {
+            .publicWH(55%, 201.6px);
         }
+
         .userinfocard-container {
             .publicWH(300px, 350px);
             .publicMP(0 0 0 20px, 0);
-            
+
         }
     }
 }

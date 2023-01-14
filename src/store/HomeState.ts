@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 
 export const useStore = defineStore({
-    id: "GobalState",
+    id: "HomeState",
 
     state: () => ({
         //NavBar组件数据
@@ -19,16 +19,16 @@ export const useStore = defineStore({
         //TextAmt组件数据
         TextAmtData: {
             words: [],
-            str: '请输入标题1',
+            str: '东风夜放花千树，更吹落、星如雨。',
             letters: [],
             order: 1,
             status: true,
         },
         TextAmtChangeData: {
-            str_1: '请输入标题11',
-            str_2: '请输入标题111',
-            str_3: '请输入标题1111',
-            str_4: '请输入标题11111',
+            str_1: '醉后不知天在水，满船清梦压星河。',
+            str_2: '星稀河影转，霜重月华孤。',
+            str_3: '秋夜长，殊未央，月明白露澄清光，层城绮阁遥相望。',
+            str_4: '静夜沉沉，浮光霭霭，冷浸溶溶月。',
         }
     })
 })

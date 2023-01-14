@@ -3,7 +3,7 @@
         <el-card shadow="always" :body-style="{ padding: '20px' }" style="border-radius: 20px;">
             <div class="main-container">
                 <el-avatar icon="el-icon-user-solid" size="large" shape="circle" :src="img" fit="fill"></el-avatar>
-                <span class="name">Mishuorki</span>
+                <span class="name">Test</span>
                 <p class="name-tag">Happy everyday</p>
                 <div style="display:flex;margin-top: 20px;">
                     <div class="select">
@@ -37,7 +37,7 @@
 </template>
 
 <script setup lang="ts">
-const img = new URL(`@/assets/images/userIcon.gif`, import.meta.url).href
+const img = new URL(`@/assets/images/usericon.png`, import.meta.url).href
 </script>
 
 <style scoped lang="less">
@@ -56,7 +56,7 @@ const img = new URL(`@/assets/images/userIcon.gif`, import.meta.url).href
 
         .name {
             .publicMP(10px 0 0 0, 0px);
-            .publicFont(28px, 600, @pfontColor, 1px)
+            .publicFont(28px, 600, @pfontColor, 0px)
         }
 
         .name-tag {
