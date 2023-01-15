@@ -1,7 +1,7 @@
 <template>
     <div class="userinfocard"  
     ref="main1">
-        <el-card shadow="always" :body-style="{ padding: '20px' }" style="border-radius: 20px;">
+        <el-card shadow="always" :body-style="{ padding: '20px' }" style="border-radius: 10px;">
             <div class="main-container">
                 <el-avatar icon="el-icon-user-solid" size="large" shape="circle" :src="img" fit="fill"></el-avatar>
                 <span class="name">Mishuroki</span>
@@ -38,7 +38,7 @@
 </template>
 
 <script setup lang="ts">
-const img = new URL(`@/assets/images/usericon.png`, import.meta.url).href
+const img = new URL(`@/assets/images/news/4.jpg`, import.meta.url).href
 
 </script>
 
@@ -74,10 +74,13 @@ const img = new URL(`@/assets/images/usericon.png`, import.meta.url).href
             .el-button {
                 color: @pfontColor;
                 border: none;
-                transition: all .5s ease;
+                transition: all .2s ease;
 
                 &:hover {
                     background-color: @defaultHv;
+                }
+                &:active {
+                    background-color: @defaultAct;
                 }
             }
 

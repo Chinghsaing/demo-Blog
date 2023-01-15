@@ -25,7 +25,6 @@
                                         </div>
                                         <p>{{ item.content }}</p>
                                     </div>
-
                                 </el-card>
                             </el-col>
                         </el-row>
@@ -65,32 +64,33 @@ function btnnext(val?: string) {
 <style scoped lang="less">
 .container {
     .publicFlex(center, none, none);
-
+    user-select: none;
     .newscard {
         .publicWH(100%, 100%);
         overflow: hidden;
 
         .el-card {
-            .publicWH(200px,200px);
-            border-radius: 20px;
+            .publicWH(200px, 200px);
+            border-radius: 10px;
 
             .newscard-content {
 
                 .newscard-content-title {
                     display: flex;
-                    .publicWH(100%, auto);
+                    .publicWH(100%, auto);    
+                    
                     h4 {
                         .publicWH(80%, auto);
                         .publicMP(0 0 0 10px, 10px 0 5px 0);
                         color: @pfontColor;
-                        .textEllipsis(auto,nowrap)
+                        .onelineEllipsis(auto);
                     }
 
                     span {
                         .publicWH(50%, auto);
                         .publicMP(0 10px 0 0px, 13px 0 0 0);
                         color: @sfontColor;
-                        .textEllipsis(12px,nowrap)
+                        .onelineEllipsis(12px)
                     }
                 }
 
@@ -100,8 +100,8 @@ function btnnext(val?: string) {
                     .publicWH(87%, auto);
                     .publicMP(4px 10px, 0);
                     color: @sfontColor;
-                    .textEllipsis(12px,nowrap);
-                    letter-spacing:1px;
+                    .onelineEllipsis(12px);
+                    letter-spacing: 1px;
                 }
             }
         }

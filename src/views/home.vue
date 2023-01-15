@@ -21,9 +21,7 @@
     <div class="main-container-2">
         <div class="card-container">
             <div class="newscard-container">
-                <div ref="main1" :style="showEmerge">
-                    <NewsCard></NewsCard>
-                </div>
+                <NewsCard></NewsCard>
                 <ArtCard></ArtCard>
             </div>
             <div class="userinfocard-container">
@@ -51,18 +49,6 @@ import UseEmerge from '@/hooks/UseEmerge'
 
 const store = useStore()
 const fixed = UseScroll()
-const main1 = ref()
-const showEmerge = UseEmerge(main1)
-
-// let Y1 = 0
-// let radio = 0.05
-
-// window.onload= () =>{
-//     positionY.value = Y1 = main1.value.offsetTop * radio
-// }
-
-
-
 </script>
 
 <style scoped lang="less">
@@ -137,19 +123,7 @@ const showEmerge = UseEmerge(main1)
         .userinfocard-container {
             .publicWH(300px, 350px);
             .publicMP(0 0 0 20px, 0);
-
         }
     }
-}
-
-
-.wrapanimate {
-    opacity: 0;
-}
-
-.wrapanimated {
-    // .rightSlideIn(1.5s, ease)
-    transition: all 1s ease;
-    opacity: 1 !important;
 }
 </style>

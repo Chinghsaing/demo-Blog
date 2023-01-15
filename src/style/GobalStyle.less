@@ -10,8 +10,9 @@
 @pfontColor: #3c3c3c;
 @sfontColor: #666666;
 
-@defaultHv: #e4e4e4;
-
+@defaultHv: #e7e7e7;
+@defaultAct: #efefef;
+@defalutTextHv:#b6b6b6;
 //公共样式
 .publicWH(@w, @h) {
     width: @w;
@@ -37,12 +38,25 @@
     justify-content: @jt;
 }
 
-.textEllipsis(@size,@warp) {
+
+.onelineEllipsis(@size) {
+    font-size: @size;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+}
+
+.morelinesEllipsis(@size, @lines) {
     font-size: @size;
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: @warp;
+    display: -webkit-box;
+    -webkit-line-clamp: @lines;
+    -webkit-box-orient: vertical;
+    word-break: break-word;
 }
+
 
 .leftSlideIn(@time, @ease) {
     animation-name: leftSlideIn;
@@ -61,11 +75,13 @@
     animation-duration: @time;
     animation-timing-function: @ease;
 }
-.opacityAmt(@time, @ease){
+
+.opacityAmt(@time, @ease) {
     animation-name: opacityAmt;
     animation-duration: @time;
     animation-timing-function: @ease;
 }
+
 .arrowAnimation() {
     animation-name: arrowAnimation;
     animation-duration: 1s;
@@ -109,7 +125,8 @@
     from {
         opacity: 0;
     }
-    to{
+
+    to {
         opacity: 1;
     }
 }
