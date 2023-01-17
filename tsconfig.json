@@ -17,6 +17,12 @@
       "@/*":["src/*"]
     },
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "src/hooks/UseScroll.ts"],
+"include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "src/hooks/UseScrollFixed.tsed.ts"
+],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

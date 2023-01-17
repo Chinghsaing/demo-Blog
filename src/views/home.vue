@@ -1,6 +1,9 @@
 <template>
     <div class="main-container-1">
-        <NavBar></NavBar>
+        <el-affix style="width:100%;height: 10%;transition:all .5s linear" v-Fixed>
+            <NavBar></NavBar>
+        </el-affix>
+
         <div class="center-box-container">
             <div class="title-box-container">
                 <div class="title-box">
@@ -21,12 +24,15 @@
     <div class="main-container-2">
         <div class="card-container">
             <div class="newscard-container">
-                <NewsCard></NewsCard>
+                <NewsCard class="newscard"></NewsCard>
                 <ArtCard></ArtCard>
             </div>
             <div class="userinfocard-container">
-                <UserInfoCard class="UserInfoCard" :style="fixed == true ? 'position: fixed;top: 0;' : ''">
-                </UserInfoCard>
+                <el-affix :offset="92">
+                    <UserInfoCard>
+                    </UserInfoCard>
+                </el-affix>
+
             </div>
         </div>
 
@@ -40,15 +46,12 @@ import NewsCard from '@/components/NewsCard.vue'
 import UserInfoCard from '@/components/UserInfoCard.vue'
 import ArtCard from '@/components/ArtCard.vue'
 
-import { ref, onMounted } from 'vue'
-
 import { useStore } from '@/store/HomeState'
 
-import UseScroll from '@/hooks/UseScroll'
-import UseEmerge from '@/hooks/UseEmerge'
 
+    
 const store = useStore()
-const fixed = UseScroll()
+
 </script>
 
 <style scoped lang="less">
@@ -60,7 +63,7 @@ const fixed = UseScroll()
     background: url('@/assets/images/background.jpg') no-repeat center;
     background-size: 100% 100%;
     overflow: hidden;
-
+    position: relative;
     .center-box-container {
         .publicWH(100%, 85%);
         .publicFlex(center, none, center);
@@ -123,6 +126,70 @@ const fixed = UseScroll()
         .userinfocard-container {
             .publicWH(300px, 350px);
             .publicMP(0 0 0 20px, 0);
+        }
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .userinfocard-container {
+        display: block !important;
+    }
+}
+
+@media only screen and (min-width: 850px) and(max-width: 1439px) {
+    .userinfocard-container {
+        display: none !important;
+    }
+
+    .newscard-container {
+        width: fit-content !important;
+    }
+
+    .card-container {
+        margin: 0 !important;
+    }
+}
+
+@media only screen and(min-width: 770px) and(max-width: 850px) {
+    .userinfocard-container {
+        display: none !important;
+    }
+
+    .newscard-container {
+        width: fit-content !important;
+    }
+
+    .newscard {
+        display: none !important;
+    }
+
+    .main-container-2 {
+        padding: 0 !important;
+
+        .card-container {
+            margin: 0 !important;
+        }
+    }
+}
+
+@media only screen and(max-width: 770px) {
+    .userinfocard-container {
+        display: none !important;
+    }
+
+    .newscard-container {
+        width: fit-content !important;
+    }
+
+    .newscard {
+        display: none !important;
+    }
+
+    .main-container-2 {
+        padding: 0 !important;
+
+        .card-container {
+            margin: 0 !important;
         }
     }
 }

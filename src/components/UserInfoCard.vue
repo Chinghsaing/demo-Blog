@@ -1,6 +1,5 @@
 <template>
-    <div class="userinfocard"  
-    ref="main1">
+    <div class="userinfocard" v-Emerge>
         <el-card shadow="always" :body-style="{ padding: '20px' }" style="border-radius: 10px;">
             <div class="main-container">
                 <el-avatar icon="el-icon-user-solid" size="large" shape="circle" :src="img" fit="fill"></el-avatar>
@@ -39,6 +38,7 @@
 
 <script setup lang="ts">
 const img = new URL(`@/assets/images/news/4.jpg`, import.meta.url).href
+console.log();
 
 </script>
 
@@ -91,5 +91,7 @@ const img = new URL(`@/assets/images/news/4.jpg`, import.meta.url).href
         }
     }
 }
+
+
 
 </style>

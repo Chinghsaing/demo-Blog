@@ -58,11 +58,10 @@ const data: dataType = reactive({
 
 <style scoped lang="less">
 .logo-box-container {
-    .publicWH(100%, 0);
+    .publicWH(100%, 100%);
     .publicMP(0, 0 5% 0 5%);
     .publicFlex(center, none, space-between);
     box-sizing: border-box;
-
     .logo-box {
         .publicWH(fit-content, fit-content);
         color: @defaultFont;
@@ -92,6 +91,16 @@ const data: dataType = reactive({
             &:active {
                 background-color: @defaultCR;
             }
+        }
+    }
+}
+
+@media only screen and(max-width: 670px) {
+    .logo-box-container{
+        flex-direction: column !important;
+
+        h2{
+            margin: 5px 0 0 0;
         }
     }
 }

@@ -1,11 +1,11 @@
 <template>
-    <div class="container">
+    <div class="container" v-Emerge>
         <div class="arrowboth">
             <el-button type="primary" size="default" @click="btnnext()" :icon="ArrowLeft" circle color="#F7F9FA"
                 style="--el-button-border-color:#3c3c3c;--el-button-hover-bg-color:transparent;--el-button-hover-border-color:#3c3c3c"></el-button>
         </div>
 
-        <div class="newscard">
+        <div class="newscard" v-Emerge>
             <el-carousel height="201.6px" direction="horizontal" :initial-index="0" :autoplay="false" :interval="3000"
                 :loop="true" trigger="hover" indicator-position="outside" arrow="never" ref="focus">
                 <el-carousel-item v-for="mainitem in store.$state.newslist" :key="mainitem.key">
@@ -34,7 +34,7 @@
 
         </div>
 
-        <div class="arrowboth" style="margin-left: 6px;">
+        <div class="arrowboth" style="margin-left: 6px;" v-Emerge>
             <el-button type="primary" size="default" @click="btnnext('right')" :icon="ArrowRight" circle color="#F7F9FA"
                 style="--el-button-border-color:#3c3c3c;--el-button-hover-bg-color:transparent;--el-button-hover-border-color:#3c3c3c"></el-button>
         </div>
