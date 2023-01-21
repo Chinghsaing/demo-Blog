@@ -5,24 +5,24 @@
             <h2>{{ data.title }}</h2>
         </div>
         <div class="buttom-group">
-            <el-button type="primary" style="--el-button-hover-bg-color:transparent" size="large" @click=""
-                color="transparent" icon="User">{{
+            <el-button type="primary" style="--el-button-hover-bg-color:transparent" size="large" @click="signstore.$state.view = true"
+                color="transparent" :icon="data.buttonIcon.button_1_icon">{{
                     data.buttonText.button_1
                 }}</el-button>
             <el-button type="primary" style="--el-button-hover-bg-color:transparent" size="large" @click=""
-                color="transparent" icon="User">{{
+                color="transparent" :icon="data.buttonIcon.button_2_icon">{{
                     data.buttonText.button_2
                 }}</el-button>
             <el-button type="primary" style="--el-button-hover-bg-color:transparent" size="large" @click=""
-                color="transparent" icon="User">{{
+                color="transparent" :icon="data.buttonIcon.button_3_icon">{{
                     data.buttonText.button_3
                 }}</el-button>
             <el-button type="primary" style="--el-button-hover-bg-color:transparent" size="large" @click=""
-                color="transparent" icon="User">{{
+                color="transparent" :icon="data.buttonIcon.button_4_icon">{{
                     data.buttonText.button_4
                 }}</el-button>
             <el-button type="primary" style="--el-button-hover-bg-color:transparent" size="large" @click=""
-                color="transparent" icon="User">{{
+                color="transparent" :icon="data.buttonIcon.button_5_icon">{{
     data.buttonText.button_5
                 }}</el-button>
         </div>
@@ -32,33 +32,24 @@
 
 <script setup lang="ts">
 import { useStore } from "@/store/HomeState"
+import { useStore as useSignStore} from "@/store/SignState"
 import { reactive } from 'vue'
 const store = useStore()
-//接口
-interface dataType {
-    logoUrl: string
-    title: string
-    buttonText: objType
-}
-
-interface objType {
-    button_1: string
-    button_2: string
-    button_3: string
-    button_4: string
-    button_5: string
-}
+const signstore = useSignStore()
 //数据
-const data: dataType = reactive({
+const data = reactive({
     logoUrl: store.$state.NavBarData.logoUrl,
     title: store.$state.NavBarData.title,
-    buttonText: store.$state.NavBarData.buttonText
+    buttonText: store.$state.NavBarData.buttonText,
+    buttonIcon: store.$state.NavBarData.buttonIcon,
 })
+
+
 </script>
 
 <style scoped lang="less">
 .logo-box-container {
-    .publicWH(100%, 100%);
+    .publicWH(100%, 58px);
     .publicMP(0, 0 5% 0 5%);
     .publicFlex(center, none, space-between);
     box-sizing: border-box;
@@ -82,7 +73,7 @@ const data: dataType = reactive({
             font-weight: bold;
             border: none;
             .publicMP(0 0 0 12px, 1px 6px);
-
+            color: @defaultFont;
             &:hover {
                 background-color: @defaultCR;
                 border-bottom: 4px solid @defaultFont;
@@ -98,9 +89,22 @@ const data: dataType = reactive({
 @media only screen and(max-width: 670px) {
     .logo-box-container{
         flex-direction: column !important;
-
+        justify-content: space-around !important;
         h2{
-            margin: 5px 0 0 0;
+            font-size: 16px;
+            margin: 0px 0 0 0;
+        }
+        img{
+            .publicWH(16px,16px) !important
+        }
+        .el-button{
+            font-size: 12px !important;
+            height: 20px !important;
+
+            &:hover {
+                background-color: @defaultCR !important;
+                border-bottom: 2px solid @defaultFont !important;
+            }
         }
     }
 }

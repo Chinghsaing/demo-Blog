@@ -8,7 +8,7 @@
                 </div>
                 <div class="right-content-container">
                     <div class="right-content-top-container">
-                        <span>{{ item.artTitle }}</span>
+                        <span @click="goDetail(item.id)">{{ item.artTitle }}</span>
                         <p>{{ item.artContent }}</p>
                     </div>
                     <div class="right-content-bottom-container">
@@ -54,8 +54,13 @@
 
 <script setup lang="ts">
 import { useStore } from '@/store/ArtState';
-
+import { useRouter } from 'vue-router'
 const store = useStore()
+const router = useRouter()
+
+function goDetail(id: number) {
+    router.push({ name: 'article', params: { id } })
+}
 </script>
 
 <style scoped lang="less">
@@ -68,6 +73,7 @@ const store = useStore()
     .card-container {
         .publicWH(100%, 100%);
         display: flex;
+
         .right-content-container {
             .publicFlex(none, none, space-between);
             .publicMP(0, 30px);
@@ -174,6 +180,7 @@ const store = useStore()
 
         .card-container {
             flex-direction: column !important;
+
             .right-content-container {
                 padding: 20px !important;
                 box-sizing: border-box;

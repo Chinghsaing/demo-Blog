@@ -1,19 +1,64 @@
 import { defineStore } from 'pinia'
 
+interface stateType {
+    NavBarData: navBarType
+    TextAmtData: textAmtDataType
+    TextAmtChangeData: textAmtChangeDataType
+}
+interface navBarType {
+    logoUrl: string
+    title: string
+    buttonText: buttonTextType
+    buttonIcon: buttonIconType
+}
+interface buttonTextType {
+    button_1: string
+    button_2: string
+    button_3: string
+    button_4: string
+    button_5: string
+}
+interface buttonIconType {
+    button_1_icon: string
+    button_2_icon: string
+    button_3_icon: string
+    button_4_icon: string
+    button_5_icon: string
+}
+interface textAmtDataType {
+    words: []
+    str: string
+    letters: []
+    order: number
+    status: boolean
+}
+interface textAmtChangeDataType {
+    str_1: string
+    str_2: string
+    str_3: string
+    str_4: string
+}
 export const useStore = defineStore({
     id: "HomeState",
 
-    state: () => ({
+    state: (): stateType => ({
         //NavBar组件数据
         NavBarData: {
             logoUrl: new URL(`@/assets/images/logo.png`, import.meta.url).href,
             title: 'Lemon Blog',
             buttonText: {
-                button_1: '标题',
+                button_1: '登录',
                 button_2: '标题',
                 button_3: '标题',
-                button_4: '标题',
-                button_5: '标题',
+                button_4: '首页',
+                button_5: '搜索',
+            },
+            buttonIcon: {
+                button_1_icon: 'User',
+                button_2_icon: 'Share',
+                button_3_icon: 'Share',
+                button_4_icon: 'House',
+                button_5_icon: 'Search',
             }
         },
         //TextAmt组件数据

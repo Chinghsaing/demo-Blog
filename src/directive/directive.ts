@@ -13,16 +13,24 @@ export const directive = (app:any) => {
         }
         window.addEventListener("scroll", ElementEmerge)
     })
-    app.directive('Fixed',(el:any)=>{ 
-        el.firstElementChild.style.height = ''
+    app.directive('Fixed',(el:any)=>{   
         function Fixed() {
             let elHeight = el.getBoundingClientRect().height
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
             let clientHeight = document.body.clientHeight
-            if(scrollTop>clientHeight - elHeight-15){
-                el.firstElementChild.style.backgroundColor = 'rgba(0,0,0)'
+            let button = el.firstElementChild.firstElementChild.children[1].children
+            if(scrollTop>window.innerHeight - elHeight){
+                el.firstElementChild.style.backgroundColor = 'rgb(236,159,221)'
+                el.firstElementChild.firstElementChild.children[0].children[1].style.color = '#fff'
+                for(let i = 0;i<=button.length-1;i++){
+                    button[i].style.color = '#fff'
+                }
             }else{
                 el.firstElementChild.style.backgroundColor = ''
+                el.firstElementChild.firstElementChild.children[0].children[1].style.color = ''
+                for(let i = 0;i<=button.length-1;i++){
+                    button[i].style.color = ''
+                }
             }
         }
         window.addEventListener('scroll', Fixed)

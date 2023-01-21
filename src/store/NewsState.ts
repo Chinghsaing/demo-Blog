@@ -1,9 +1,24 @@
 import { defineStore } from 'pinia'
 
+interface stateType {
+    newslist: newsListType[]
+}
+interface newsListType {
+    key: number
+    list: listType[]
+}
+interface listType {
+    id: number
+    title: string
+    date: string
+    content: string
+    img: string
+}
+
 export const useStore = defineStore({
     id: "NewsState",
 
-    state: () => ({
+    state: (): stateType => ({
         newslist: [
             {
                 key: 0,

@@ -10,7 +10,6 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import { directive } from './directive/directive'
 
 const pinia = createPinia()
-
 const app = createApp(App)
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)

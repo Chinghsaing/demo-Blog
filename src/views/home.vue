@@ -1,9 +1,8 @@
 <template>
     <div class="main-container-1">
-        <el-affix style="width:100%;height: 10%;transition:all .5s linear" v-Fixed>
+        <el-affix style="width:100%;height: 58px;" v-Fixed>
             <NavBar></NavBar>
         </el-affix>
-
         <div class="center-box-container">
             <div class="title-box-container">
                 <div class="title-box">
@@ -20,6 +19,9 @@
                 <ArrowDown />
             </el-icon>
         </div>
+        <div>
+            <Sign></Sign>
+        </div>
     </div>
     <div class="main-container-2">
         <div class="card-container">
@@ -28,14 +30,12 @@
                 <ArtCard></ArtCard>
             </div>
             <div class="userinfocard-container">
-                <el-affix :offset="92">
+                <el-affix :offset="78">
                     <UserInfoCard>
                     </UserInfoCard>
                 </el-affix>
-
             </div>
         </div>
-
     </div>
 </template>
 
@@ -45,11 +45,12 @@ import TextAmt from '@/components/TextAmt.vue'
 import NewsCard from '@/components/NewsCard.vue'
 import UserInfoCard from '@/components/UserInfoCard.vue'
 import ArtCard from '@/components/ArtCard.vue'
+import Sign from '@/components/Sign.vue'
 
 import { useStore } from '@/store/HomeState'
 
 
-    
+
 const store = useStore()
 
 </script>
@@ -57,13 +58,11 @@ const store = useStore()
 <style scoped lang="less">
 //样式
 .main-container-1 {
-    .publicFlex(center, none, center);
-    .publicWH(100%, 100%);
+    .publicFlex(center, none, space-between);
+    .publicWH(100%, 100vh);
     flex-direction: column;
-    background: url('@/assets/images/background.jpg') no-repeat center;
-    background-size: 100% 100%;
     overflow: hidden;
-    position: relative;
+
     .center-box-container {
         .publicWH(100%, 85%);
         .publicFlex(center, none, center);
@@ -104,23 +103,26 @@ const store = useStore()
 
     .arrow {
         .arrowAnimation();
+        margin-bottom: 50px;
+        color: @defaultFont;
     }
 }
 
 .main-container-2 {
     .publicFlex(none, none, none);
     box-sizing: border-box;
-    .publicWH(100%, 100%);
+    .publicWH(100%, auto);
     .publicMP(0, 0 5% 0 5%);
+    background-color: @defaultBG;
 
     .card-container {
         position: relative;
         .publicFlex(none, none, center);
         .publicWH(100%, auto);
-        .publicMP(20px, none);
+        .publicMP(70px 20px 20px 20px, none);
 
         .newscard-container {
-            .publicWH(55%, 201.6px);
+            .publicWH(55%, auto);
         }
 
         .userinfocard-container {

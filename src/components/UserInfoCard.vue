@@ -44,7 +44,6 @@ console.log();
 
 <style scoped lang="less">
 .el-card {
-    background-color: @defaultFont;
     .publicWH(300px, 350px);
 
     .main-container {

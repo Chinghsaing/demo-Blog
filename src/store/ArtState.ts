@@ -1,9 +1,22 @@
 import { defineStore } from "pinia";
 
+//定义数据类型
+interface stateType {
+    ArtData: DataType[]
+}
+interface DataType {
+    id: number
+    artImages: string
+    artTitle: string
+    artContent: string
+    athuorImages: string
+    athuorName: string
+    artDate: string
+}
 export const useStore = defineStore({
     id: "ArtState",
 
-    state: () => ({
+    state: (): stateType => ({
         ArtData: [
             {
                 id: 1,
@@ -31,7 +44,7 @@ export const useStore = defineStore({
                 athuorImages: new URL(`@/assets/images/news/4.jpg`, import.meta.url).href,
                 athuorName: 'Mishuroki',
                 artDate: '2023/1/16',
-            }, 
+            },
             {
                 id: 4,
                 artImages: new URL(`@/assets/images/news/4.jpg`, import.meta.url).href,
@@ -40,7 +53,7 @@ export const useStore = defineStore({
                 athuorImages: new URL(`@/assets/images/news/4.jpg`, import.meta.url).href,
                 athuorName: 'Mishuroki',
                 artDate: '2023/1/16',
-            }, 
+            },
             {
                 id: 5,
                 artImages: new URL(`@/assets/images/news/5.jpg`, import.meta.url).href,
@@ -49,7 +62,7 @@ export const useStore = defineStore({
                 athuorImages: new URL(`@/assets/images/news/4.jpg`, import.meta.url).href,
                 athuorName: 'Mishuroki',
                 artDate: '2023/1/16',
-            }, 
+            },
             {
                 id: 6,
                 artImages: new URL(`@/assets/images/news/6.jpg`, import.meta.url).href,
