@@ -34,7 +34,8 @@
                                 </el-form-item>
                                 <el-form-item>
                                     <el-col :span="10" :offset="0">
-                                        <el-link class="signin-box" :underline="false" href="javascript:;" @click="submitSignUpForm(signInFormRef)">
+                                        <el-link class="signin-box" :underline="false" href="javascript:;"
+                                            @click="submitSignInForm(signInFormRef)">
                                             <div>
                                                 <h2>登录</h2>
                                             </div>
@@ -123,6 +124,9 @@
 <script setup lang="ts">
 import { useStore } from "@/store/SignState"
 import { ref, reactive } from 'vue'
+import axios from '@/api/axios';
+import { ElMessage } from "element-plus";
+
 const store = useStore()
 
 const actname = ref('SignIn')
@@ -189,9 +193,9 @@ const validateSignUpCheckPassword = (rule: any, value: any, callback: any) => {
 }
 const signUpRule = reactive({
     username: [{ required: true, validator: validateSignUpUsername, trigger: 'blur' },
-    { min: 6, max: 12, message: '用户名需要 6 到 12 个字符!', trigger: 'blur' }],
+    { min: 1, max: 1, message: '用户名需要 6 到 12 个字符!', trigger: 'blur' }],
     password: [{ required: true, validator: validateSignUpPassword, trigger: 'blur' },
-    { min: 8, max: 12, message: '密码需要 8 到 12 个字符!', trigger: 'blur' }],
+    { min: 1, max: 1, message: '密码需要 8 到 12 个字符!', trigger: 'blur' }],
     checkPassword: [{ required: true, validator: validateSignUpCheckPassword, trigger: 'blur' }]
 })
 const signInRule = reactive({
@@ -205,10 +209,22 @@ const submitSignUpForm = (formEl: any) => {
     if (!formEl) return
     formEl.validate((valid: any) => {
         if (valid) {
-            console.log('ok')
-            formEl.resetFields()
+            axios.post('/api/signup', {
+                username: signUpData.username,
+                password: signUpData.password,
+                checkpassword: signUpData.checkPassword,
+            })
+                .then(res => {
+                    if (res.status == 200) {
+                        ElMessage.warning('注册成功!')
+                        formEl.resetFields()
+                    }
+                })
+                .catch(err => {
+                    ElMessage.warning('与服务器的通信出现了未知错误!')
+                })
+            
         } else {
-            console.log('error')
             return false
         }
     })
@@ -218,10 +234,20 @@ const submitSignInForm = (formEl: any) => {
     if (!formEl) return
     formEl.validate((valid: any) => {
         if (valid) {
-            console.log('ok')
-            formEl.resetFields()
+            axios.post('/api/signup', {
+                username: signInData.username,
+                password: signInData.password
+            })
+                .then(res => {
+                    if (res.status == 200) {
+                        ElMessage.warning('登录成功!')
+                        formEl.resetFields()
+                    }
+                })
+                .catch(err => {
+                    ElMessage.warning('与服务器的通信出现了未知错误!')
+                })
         } else {
-            console.log('error')
             return false
         }
     })

@@ -19,9 +19,6 @@
                 <ArrowDown />
             </el-icon>
         </div>
-        <div>
-            <Sign></Sign>
-        </div>
     </div>
     <div class="main-container-2">
         <div class="card-container">
@@ -41,11 +38,10 @@
 
 <script setup lang="ts" >
 import NavBar from '@/components/NavBar.vue'
-import TextAmt from '@/components/TextAmt.vue'
-import NewsCard from '@/components/NewsCard.vue'
-import UserInfoCard from '@/components/UserInfoCard.vue'
-import ArtCard from '@/components/ArtCard.vue'
-import Sign from '@/components/Sign.vue'
+import TextAmt from '@/components/Home/TextAmt.vue'
+import NewsCard from '@/components/Home/NewsCard.vue'
+import UserInfoCard from '@/components/Home/UserInfoCard.vue'
+import ArtCard from '@/components/Home/ArtCard.vue'
 
 import { useStore } from '@/store/HomeState'
 

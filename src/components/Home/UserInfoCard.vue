@@ -2,9 +2,9 @@
     <div class="userinfocard" v-Emerge>
         <el-card shadow="always" :body-style="{ padding: '20px' }" style="border-radius: 10px;">
             <div class="main-container">
-                <el-avatar icon="el-icon-user-solid" size="large" shape="circle" :src="img" fit="fill"></el-avatar>
-                <span class="name">Mishuroki</span>
-                <p class="name-tag">Happy everyday</p>
+                <el-avatar icon="el-icon-user-solid" size="large" shape="circle" :src="UserInfoData.avatar" fit="fill"></el-avatar>
+                <span class="name">{{UserInfoData.name}}</span>
+                <p class="name-tag">{{UserInfoData.tag}}</p>
                 <div style="display:flex;margin-top: 20px;">
                     <div class="select">
                         <el-badge :value="10" :max="99" :is-dot="false" :hidden="false">
@@ -12,7 +12,7 @@
                                 style="--el-button-hover-bg-color:transparent;" round color="transparent">文章</el-button>
                         </el-badge>
 
-                        <p class="select-num">10</p>
+                        <p class="select-num">{{UserInfoData.article}}</p>
                     </div>
                     <div class="select">
                         <el-badge :value="3" :max="99" :is-dot="false" :hidden="false">
@@ -20,15 +20,15 @@
                                 style="--el-button-hover-bg-color:transparent;" round color="transparent">关注</el-button>
                         </el-badge>
 
-                        <p class="select-num">5</p>
+                        <p class="select-num">{{UserInfoData.follows}}</p>
                     </div>
                     <div class="select">
                         <el-badge :value="5" :max="99" :is-dot="false" :hidden="false">
                             <el-button type="primary" size="default" @click=""
-                                style="--el-button-hover-bg-color:transparent;" round color="transparent">消息</el-button>
+                                style="--el-button-hover-bg-color:transparent;" round color="transparent">喜欢</el-button>
                         </el-badge>
 
-                        <p class="select-num">2</p>
+                        <p class="select-num">{{UserInfoData.follower}}</p>
                     </div>
                 </div>
             </div>
@@ -37,9 +37,18 @@
 </template>
 
 <script setup lang="ts">
-const img = new URL(`@/assets/images/news/4.jpg`, import.meta.url).href
+import { useStore } from '@/store/UserInfoState'
+const store = useStore()
 console.log();
 
+const UserInfoData = {
+    name:store.$state.UserInfoData[0].userName,
+    tag:store.$state.UserInfoData[0].userNameTag,
+    avatar:store.$state.UserInfoData[0].userAvatar,
+    article:store.$state.UserInfoData[0].userArticle,
+    follows:store.$state.UserInfoData[0].userFollows,
+    follower:store.$state.UserInfoData[0].userFollower
+}
 </script>
 
 <style scoped lang="less">
@@ -53,6 +62,8 @@ console.log();
         .el-avatar {
             .publicMP(20px 0 0 0, 0px);
             .publicWH(100px, 100px);
+            border: 4px solid rgb(245,108,108);
+            box-shadow: 0 0px 30px rgba(251, 20, 20, 0.4);
         }
 
         .name {
