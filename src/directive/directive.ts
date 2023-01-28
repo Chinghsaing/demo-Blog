@@ -21,6 +21,7 @@ export const directive = (app:any) => {
             let button = el.firstElementChild.firstElementChild.children[1].children
             if(scrollTop>window.innerHeight - elHeight){
                 el.firstElementChild.style.backgroundColor = 'rgb(236,159,221)'
+                el.firstElementChild.firstElementChild.children[1].firstElementChild.firstElementChild.style.backgroundColor = 'rgb(236,159,221)'
                 el.firstElementChild.firstElementChild.children[0].children[1].style.color = '#fff'
                 for(let i = 0;i<=button.length-1;i++){
                     button[i].style.color = '#fff'
@@ -28,6 +29,7 @@ export const directive = (app:any) => {
             }else{
                 el.firstElementChild.style.backgroundColor = ''
                 el.firstElementChild.firstElementChild.children[0].children[1].style.color = ''
+                el.firstElementChild.firstElementChild.children[1].firstElementChild.firstElementChild.style.backgroundColor = ''
                 for(let i = 0;i<=button.length-1;i++){
                     button[i].style.color = ''
                 }

@@ -4,16 +4,11 @@ export const useStore = defineStore({
     id: "UserInfoState",
 
     state: () => ({
-        UserInfoData: [
-            {
-                userId: 1,
-                userAvatar: new URL(`@/assets/images/news/7.jpg`, import.meta.url).href,
-                userName: '零食真好吃',
-                userNameTag: 'Good Morning!',
-                userArticle: '6',
-                userFollower: '2066',
-                userFollows: '5'
-        }
-    ]
+        userName: '请登录!',
+        userNameTag: '',
+        userAvatar: 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png',
+        userFollows: '0',
+        userLike: '0',
+        userArticle: '0',
     })
 })

@@ -27,7 +27,7 @@
                 <ArtCard></ArtCard>
             </div>
             <div class="userinfocard-container">
-                <el-affix :offset="78">
+                <el-affix :offset="78" z-index="50">
                     <UserInfoCard>
                     </UserInfoCard>
                 </el-affix>
@@ -52,6 +52,9 @@ const store = useStore()
 </script>
 
 <style scoped lang="less">
+:deep(.el-affix--fixed){
+    z-index: 99;
+}
 //样式
 .main-container-1 {
     .publicFlex(center, none, space-between);

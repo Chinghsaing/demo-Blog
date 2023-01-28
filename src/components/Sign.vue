@@ -1,6 +1,6 @@
 <template>
     <div>
-        <el-dialog v-model="store.$state.view" width="50%" :lock-scroll="false" :show-close="false">
+        <el-dialog v-model="store.$state.showSignView" width="50%" :lock-scroll="false" :show-close="false">
             <div class="img-box">
                 <el-image :src="img" fit="cover" :lazy="false"
                     style="width: 100%;height: 100%;border-top-left-radius: 10px;border-bottom-left-radius: 10px;"></el-image>
@@ -124,11 +124,13 @@
 <script setup lang="ts">
 import { useStore } from "@/store/SignState"
 import { ref, reactive } from 'vue'
-import axios from '@/api/axios';
-import { ElMessage } from "element-plus";
-
+import axios from '@/api/axios'
+import { ElMessage } from "element-plus"
+import { useStore as useSignStore } from "@/store/SignState"
+import { useStore as useUserInfoStore } from "@/store/UserInfoState";
 const store = useStore()
-
+const signStore = useSignStore()
+const userInfoStore = useUserInfoStore()
 const actname = ref('SignIn')
 const img = new URL(`@/assets/images/background4.png`, import.meta.url).href
 
@@ -161,12 +163,13 @@ const validateSignInPassword = (rule: any, value: any, callback: any) => {
     }
 }
 const validateSignUpUsername = (rule: any, value: any, callback: any) => {
+    let userReg = /^[a-zA-Z0-9]{6,12}$/
     if (value === '') {
         callback(new Error('请输入用户名!'))
     }
     else {
-        if (value === '6') {
-            callback(new Error('用户名已存在!'))
+        if (!userReg.test(value)) {
+            callback(new Error('不能包含中文和特殊字符!'))
         } else {
             callback()
         }
@@ -174,10 +177,16 @@ const validateSignUpUsername = (rule: any, value: any, callback: any) => {
     }
 }
 const validateSignUpPassword = (rule: any, value: any, callback: any) => {
+    let pwsReg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,12}$/
     if (value === '') {
         callback(new Error('请输入密码!'))
     }
     else {
+        if (!pwsReg.test(value)) {
+            callback(new Error('必须由字母和数字组成！'))
+        } else {
+            callback()
+        }
         callback()
     }
 }
@@ -193,9 +202,9 @@ const validateSignUpCheckPassword = (rule: any, value: any, callback: any) => {
 }
 const signUpRule = reactive({
     username: [{ required: true, validator: validateSignUpUsername, trigger: 'blur' },
-    { min: 1, max: 1, message: '用户名需要 6 到 12 个字符!', trigger: 'blur' }],
+    { min: 6, max: 12, message: '用户名需要 6 到 12 个字符!', trigger: 'blur' }],
     password: [{ required: true, validator: validateSignUpPassword, trigger: 'blur' },
-    { min: 1, max: 1, message: '密码需要 8 到 12 个字符!', trigger: 'blur' }],
+    { min: 8, max: 12, message: '密码需要 8 到 12 个字符!', trigger: 'blur' }],
     checkPassword: [{ required: true, validator: validateSignUpCheckPassword, trigger: 'blur' }]
 })
 const signInRule = reactive({
@@ -209,21 +218,25 @@ const submitSignUpForm = (formEl: any) => {
     if (!formEl) return
     formEl.validate((valid: any) => {
         if (valid) {
-            axios.post('/api/signup', {
+            axios.post('/api/reg', {
                 username: signUpData.username,
                 password: signUpData.password,
                 checkpassword: signUpData.checkPassword,
             })
                 .then(res => {
                     if (res.status == 200) {
-                        ElMessage.warning('注册成功!')
-                        formEl.resetFields()
+                        if (res.data.res_code === 100) {
+                            ElMessage.warning('注册成功!')
+                            formEl.resetFields()
+                        } else {
+                            ElMessage.warning('注册失败!')
+                        }
                     }
                 })
                 .catch(err => {
                     ElMessage.warning('与服务器的通信出现了未知错误!')
                 })
-            
+
         } else {
             return false
         }
@@ -234,14 +247,31 @@ const submitSignInForm = (formEl: any) => {
     if (!formEl) return
     formEl.validate((valid: any) => {
         if (valid) {
-            axios.post('/api/signup', {
+            axios.post('/api/log', {
                 username: signInData.username,
                 password: signInData.password
             })
                 .then(res => {
                     if (res.status == 200) {
-                        ElMessage.warning('登录成功!')
-                        formEl.resetFields()
+                        if (res.data.res_code === 200) {
+                            signStore.$state.showUserName = true
+                            signStore.$state.username = signInData.username
+                            signStore.$state.showSignView = false
+                            signStore.$state.showUserCradInfo = true
+                            
+                            userInfoStore.$state.userName = res.data.res_data[0].username
+                            userInfoStore.$state.userNameTag = res.data.res_data[0].nametag
+                            userInfoStore.$state.userArticle = res.data.res_data[0].article.length
+                            userInfoStore.$state.userFollows = res.data.res_data[0].follows
+                            userInfoStore.$state.userLike = res.data.res_data[0].like
+                            userInfoStore.$state.userAvatar = res.data.res_data[0].avatar
+                            ElMessage.warning('登录成功!')
+                            formEl.resetFields()
+                        } else if (res.data.res_code == 202) {
+                            ElMessage.warning('用户名或者密码错误')
+                        } else {
+                            ElMessage.warning('登录失败')
+                        }
                     }
                 })
                 .catch(err => {
@@ -308,6 +338,7 @@ const submitSignInForm = (formEl: any) => {
     background-color: @defaultBG;
     box-shadow: none;
     border-radius: 10px;
+    z-index: 200;
 }
 
 // //样式穿透需要拥有根节点才可以生效
@@ -383,6 +414,26 @@ const submitSignInForm = (formEl: any) => {
                 }
             }
         }
+    }
+}
+
+@media only screen and(min-width: 670px) and(max-width: 1200px) {
+    .img-box {
+        display: none !important;
+    }
+
+    .el-tabs {
+        .publicWH(100%, 100%) !important;
+    }
+}
+
+@media only screen and(max-width: 670px) {
+    .img-box {
+        display: none !important;
+    }
+
+    .el-tabs {
+        .publicWH(100%, 100%) !important;
     }
 }
 </style>

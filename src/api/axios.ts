@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { ElLoading,ElMessage } from 'element-plus'
 
-axios.defaults.baseURL = 'http://127.0.0.1:8080'
+axios.defaults.baseURL = 'http://127.0.0.1'
 axios.defaults.timeout = 20000
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 
