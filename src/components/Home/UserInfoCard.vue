@@ -45,7 +45,6 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
 import { useStore } from '@/store/UserInfoState'
 import { useStore as useSignStore } from "@/store/SignState"
 const store = useStore()

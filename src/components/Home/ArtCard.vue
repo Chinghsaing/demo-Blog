@@ -1,26 +1,26 @@
 <template>
-    <div v-for="item in store.$state.ArtData" :key="item.id" v-Emerge>
+    <div v-for="item in store.$state.ArtData" :key="item.artId" v-Emerge>
         <el-card shadow="always" :body-style="{ padding: '0px' }">
-            <div class="card-container" :style="item.id % 2 ? '' : 'flex-direction:row-reverse'">
+            <div class="card-container" :style="item.artId % 2 ? '' : 'flex-direction:row-reverse'">
                 <div>
                     <el-image :src="item.artImages" fit="cover" :lazy="true"
                         style="width: 250px;height: 220px;"></el-image>
                 </div>
                 <div class="right-content-container">
                     <div class="right-content-top-container">
-                        <span @click="goDetail(item.id)">{{ item.artTitle }}</span>
+                        <span @click="goDetail(item.artId)">{{ item.artTitle }}</span>
                         <p>{{ item.artContent }}</p>
                     </div>
                     <div class="right-content-bottom-container">
                         <div class="athuor-container">
-                            <el-avatar icon="el-icon-user-solid" size="default" shape="circle" :src="item.athuorImages"
+                            <el-avatar icon="el-icon-user-solid" size="default" shape="circle" :src="item.author.avatar"
                                 fit="fill"></el-avatar>
                             <div class="athuor-name-container">
                                 <div style="margin-left: 10px;">
                                     <el-link :underline="false" href="" target="_blank">
-                                        <span>{{ item.athuorName }}</span>
+                                        <span>{{ item.author.username}}</span>
                                     </el-link>
-                                    <p>{{ item.artDate }}</p>
+                                    <p>{{ item.date }}</p>
                                 </div>
                             </div>
                         </div>
@@ -57,7 +57,6 @@ import { useStore } from '@/store/ArtState';
 import { useRouter } from 'vue-router'
 const store = useStore()
 const router = useRouter()
-
 function goDetail(id: number) {
     router.push({ name: 'article', params: { id } })
 }

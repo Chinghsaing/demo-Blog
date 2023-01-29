@@ -3,8 +3,8 @@
         <el-card shadow="always" :body-style="{ padding: '20px' }" style="border-radius: 10px;">
             <div class="main-container">
                 <el-avatar icon="el-icon-user-solid" size="large" shape="circle" src="img" fit="fill"></el-avatar>
-                <span class="name">Mishuroki</span>
-                <p class="name-tag">Happy everyday</p>
+                <span class="name">{{ store.$state.ArtData[id-1].author.username }}</span>
+                <p class="name-tag">{{ store.$state.ArtData[id-1].author.nametag }}</p>
                 <div class="locate-box">
                     <el-icon size="18">
                         <Location />
@@ -15,17 +15,17 @@
                     <div class="select">
                         <el-button type="primary" size="default" @click=""
                             style="--el-button-hover-bg-color:transparent;" round color="transparent">文章</el-button>
-                        <p class="select-num">6</p>
+                        <p class="select-num">{{ store.$state.ArtData[id-1].author.article.length }}</p>
                     </div>
                     <div class="select">
                         <el-button type="primary" size="default" @click=""
                             style="--el-button-hover-bg-color:transparent;" round color="transparent">关注</el-button>
-                        <p class="select-num">6</p>
+                        <p class="select-num">{{ store.$state.ArtData[id-1].author.follows }}</p>
                     </div>
                     <div class="select">
                         <el-button type="primary" size="default" @click=""
                             style="--el-button-hover-bg-color:transparent;" round color="transparent">喜欢</el-button>
-                        <p class="select-num">6</p>
+                        <p class="select-num">{{ store.$state.ArtData[id-1].author.like }}</p>
                     </div>
                 </div>
                 <div class="button-box">
@@ -49,11 +49,15 @@
 
 <script setup lang="ts">
 import { useStore } from '@/store/ArtState';
+import { useStore as useSignStore } from "@/store/SignState";
+import { useRoute } from 'vue-router'
 const store = useStore()
+const signstore = useSignStore()
+const route = useRoute()
 
-const authorInfo = {
+const id:number =  Number(route.params.id)
 
-}
+
 </script>
 
 <style scoped lang="less">

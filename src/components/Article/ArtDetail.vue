@@ -15,13 +15,19 @@
 </template>
 
 <script setup lang="ts">
+import { useStore } from '@/store/ArtState';
+import { useRoute } from 'vue-router'
+const store = useStore()
+const route = useRoute()
 
+const id: number = Number(route.params.id)
 </script>
 
 <style scoped lang="less">
 .el-card {
     .publicWH(100%, auto);
-    p{
+
+    p {
         color: @pfontColor;
         font-size: 16px;
     }

@@ -50,6 +50,7 @@
 </template>
 
 <script setup lang="ts">
+import { reactive } from 'vue'
 import { useRoute } from 'vue-router'
 import { useStore } from '@/store/ArtState'
 import NavBar from '@/components/NavBar.vue'
@@ -61,11 +62,11 @@ const route = useRoute()
 
 const id = Number(route.params.id)
 
-const articleInfo = {
+const articleInfo = reactive({
     artTitle: store.$state.ArtData[id - 1].artTitle,
     artImages: store.$state.ArtData[id - 1].artImages,
-    artDate: store.$state.ArtData[id - 1].artDate,
-}
+    artDate: store.$state.ArtData[id - 1].date,
+})
 document.body.scrollTop = 0 
 </script>
 
