@@ -18,11 +18,11 @@ function closeLoading() {
     loading.close()
 }
 axios.interceptors.request.use(
-    config => {
+    config => { 
         openLoading()
         return config
     },
-    error => {
+    error => {   
         closeLoading()
         return Promise.reject(error.data)
     }

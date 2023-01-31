@@ -1,12 +1,12 @@
 //公共颜色
 //  //默认字体颜色
-@defaultFont: rgb(90,113,178);
+@defaultFont: rgb(90, 113, 178);
 @defaultFonHV: rgb(119, 144, 211);
 @defaultFont2: #fff;
 //  //默认透明颜色
 @defaultCR: transparent;
 // //默认背景颜色
-@defaultTitle: rgb(236,159,221);
+@defaultTitle: rgb(236, 159, 221);
 @defaultBG: rgb(244, 231, 210);
 // //默认黑色字体颜色 主
 // //默认黑色字体颜色 次
@@ -15,10 +15,11 @@
 
 @defaultHv: #e7e7e7;
 @defaultAct: #efefef;
-@defalutTextHv:#b6b6b6;
+@defalutTextHv: #b6b6b6;
 //错误提示框
-@defaultErrorBorder:rgb(236,159,221);
-@defaultError:rgb(232, 93, 204);
+@defaultErrorBorder: rgb(236, 159, 221);
+@defaultError: rgb(232, 93, 204);
+
 //公共样式
 .publicWH(@w, @h) {
     width: @w;
@@ -44,6 +45,12 @@
     justify-content: @jt;
 }
 
+.publicPos(@top, @left, @z) {
+    position: absolute;
+    top: @top;
+    left: @left;
+    z-index: @z;
+}
 
 .onelineEllipsis(@size) {
     font-size: @size;

@@ -143,7 +143,7 @@ const store = useStore()
     }
 
     .newscard-container {
-        width: fit-content !important;
+        width: 100% !important;
     }
 
     .card-container {
@@ -157,7 +157,7 @@ const store = useStore()
     }
 
     .newscard-container {
-        width: fit-content !important;
+        width: 100% !important;
     }
 
     .newscard {
@@ -179,7 +179,7 @@ const store = useStore()
     }
 
     .newscard-container {
-        width: fit-content !important;
+        width: 100% !important;
     }
 
     .newscard {

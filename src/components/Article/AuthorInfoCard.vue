@@ -2,7 +2,7 @@
     <div class="userinfocard" v-Emerge>
         <el-card shadow="always" :body-style="{ padding: '20px' }" style="border-radius: 10px;">
             <div class="main-container">
-                <el-avatar icon="el-icon-user-solid" size="large" shape="circle" src="img" fit="fill"></el-avatar>
+                <el-avatar icon="el-icon-user-solid" size="large" shape="circle" :src="store.$state.ArtData[id-1].author.avatar" fit="fill"></el-avatar>
                 <span class="name">{{ store.$state.ArtData[id-1].author.username }}</span>
                 <p class="name-tag">{{ store.$state.ArtData[id-1].author.nametag }}</p>
                 <div class="locate-box">

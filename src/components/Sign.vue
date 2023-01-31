@@ -224,17 +224,17 @@ const submitSignUpForm = (formEl: any) => {
                 checkpassword: signUpData.checkPassword,
             })
                 .then(res => {
-                    if (res.status == 200) {
+                    if (res.status === 200) {
                         if (res.data.res_code === 100) {
-                            ElMessage.warning('注册成功!')
+                            ElMessage.success('注册成功!')
                             formEl.resetFields()
                         } else {
-                            ElMessage.warning('注册失败!')
+                            ElMessage.warning('注册失败!错误原因:'+ res.data.res_code)
                         }
                     }
                 })
                 .catch(err => {
-                    ElMessage.warning('与服务器的通信出现了未知错误!')
+                    ElMessage.error('与服务器的通信出现了未知错误!')
                 })
 
         } else {
@@ -252,30 +252,32 @@ const submitSignInForm = (formEl: any) => {
                 password: signInData.password
             })
                 .then(res => {
-                    if (res.status == 200) {
+                    if (res.status === 200) {
                         if (res.data.res_code === 200) {
                             signStore.$state.showUserName = true
                             signStore.$state.username = signInData.username
                             signStore.$state.showSignView = false
                             signStore.$state.showUserCradInfo = true
+                            signStore.$state.isLogin = true
                             
+                            userInfoStore.$state.uid = res.data.res_data[0].uid
                             userInfoStore.$state.userName = res.data.res_data[0].username
                             userInfoStore.$state.userNameTag = res.data.res_data[0].nametag
                             userInfoStore.$state.userArticle = res.data.res_data[0].article.length
                             userInfoStore.$state.userFollows = res.data.res_data[0].follows
                             userInfoStore.$state.userLike = res.data.res_data[0].like
                             userInfoStore.$state.userAvatar = res.data.res_data[0].avatar
-                            ElMessage.warning('登录成功!')
+                            ElMessage.success('登录成功!')
                             formEl.resetFields()
-                        } else if (res.data.res_code == 202) {
-                            ElMessage.warning('用户名或者密码错误')
+                        } else if (res.data.res_code === 202) {
+                            ElMessage.warning('用户名或密码错误!')
                         } else {
-                            ElMessage.warning('登录失败')
+                            ElMessage.warning('登录失败!错误原因:'+ res.data.res_code)
                         }
                     }
                 })
                 .catch(err => {
-                    ElMessage.warning('与服务器的通信出现了未知错误!')
+                    ElMessage.error('与服务器的通信出现了未知错误!')
                 })
         } else {
             return false

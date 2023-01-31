@@ -15,24 +15,32 @@
                             </div>
                             <span style="margin: 10px;">|</span>
                             <div>
-                                <el-icon><Clock /></el-icon>
+                                <el-icon>
+                                    <Clock />
+                                </el-icon>
                                 <span>更新于{{ articleInfo.artDate }}</span>
                             </div>
                             <span style="margin: 10px;">|</span>
                             <div>
-                                <el-icon><Comment /></el-icon>
+                                <el-icon>
+                                    <Comment />
+                                </el-icon>
                                 <span>评论数6</span>
                             </div>
                             <span style="margin: 10px;">|</span>
                             <div>
-                                <el-icon><StarFilled /></el-icon>
+                                <el-icon>
+                                    <StarFilled />
+                                </el-icon>
                                 <span>收藏量9</span>
                             </div>
                             <span style="margin: 10px;">|</span>
                             <div>
-                                <el-icon><View /></el-icon>
+                                <el-icon>
+                                    <View />
+                                </el-icon>
                                 <span>阅读量999+</span>
-                            </div>  
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -100,7 +108,8 @@ document.body.scrollTop = 0
                     .detail-box {
                         .publicFlex(none, none, center);
                         color: @defaultFont2;
-                        div{
+
+                        div {
                             .publicFlex(center, none, center);
                         }
                     }
@@ -110,15 +119,15 @@ document.body.scrollTop = 0
     }
 
     .content-container {
-        .publicFlex(none,none,center);
+        .publicFlex(none, none, center);
         flex-direction: row-reverse;
         .publicWH(100%, 1000px);
         background-color: @defaultBG;
 
 
-        .artdetail-container{
-            .publicMP(20px 20px 0 0 ,0);
-            .publicWH(55%,auto)
+        .artdetail-container {
+            .publicMP(20px 20px 0 0, 0);
+            .publicWH(55%, auto)
         }
     }
 }

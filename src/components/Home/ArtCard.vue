@@ -14,7 +14,7 @@
                     <div class="right-content-bottom-container">
                         <div class="athuor-container">
                             <el-avatar icon="el-icon-user-solid" size="default" shape="circle" :src="item.author.avatar"
-                                fit="fill"></el-avatar>
+                                fit="cover"></el-avatar>
                             <div class="athuor-name-container">
                                 <div style="margin-left: 10px;">
                                     <el-link :underline="false" href="" target="_blank">

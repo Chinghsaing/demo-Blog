@@ -5,7 +5,7 @@
             <h2 :style="TextColor">{{ data.title }}</h2>
         </div>
         <div class="buttom-group">
-            <div v-if="signstore.$state.showUserName" class="user-box">
+            <div v-if="signstore.$state.showUserName" class="user-box" :style="TextColor">
                 <ul>
                     <li class="li1"><span>{{ signstore.$state.username }}</span></li>
                     <li class="li2">注销</li>
