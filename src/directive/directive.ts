@@ -37,4 +37,7 @@ export const directive = (app:any) => {
         }
         window.addEventListener('scroll', Fixed)
     })
+    app.directive('focus',(el:any)=>{
+        el.querySelector('input').focus()
+    })
 }

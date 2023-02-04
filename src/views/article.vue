@@ -47,7 +47,7 @@
             </div>
         </div>
         <div class="content-container">
-            <div>
+            <div style="margin-top: 20px;">
                 <AuthorInfoCard></AuthorInfoCard>
             </div>
             <div class="artdetail-container">
@@ -121,13 +121,13 @@ document.body.scrollTop = 0
     .content-container {
         .publicFlex(none, none, center);
         flex-direction: row-reverse;
-        .publicWH(100%, 1000px);
+        .publicWH(100%, auto);
         background-color: @defaultBG;
 
 
         .artdetail-container {
             .publicMP(20px 20px 0 0, 0);
-            .publicWH(55%, auto)
+            .publicWH(55%, auto);
         }
     }
 }

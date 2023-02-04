@@ -4,6 +4,7 @@ import axios from '@/api/axios'
 //定义数据类型
 interface stateType {
     ArtData: DataType[]
+    EditTemp: string
 }
 interface authorType {
     avatar: string
@@ -12,6 +13,7 @@ interface authorType {
     nametag: string
     uid: number
     username: string
+    nickname: string
     article:[]
 }
 interface DataType {
@@ -26,7 +28,8 @@ export const useStore = defineStore({
     id: "ArtState",
 
     state: (): stateType => ({
-        ArtData: []
+        ArtData: [],
+        EditTemp:'',
     }),
     actions: {
         getArticleList() {

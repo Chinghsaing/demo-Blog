@@ -10,9 +10,12 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.10",
+    "@tinymce/tinymce-vue": "^4.0.7",
+    "@types/tinymce": "^4.6.5",
     "axios": "^1.2.3",
     "element-plus": "^2.2.28",
     "pinia": "^2.0.28",
+    "tinymce": "^6.3.1",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6"
   },

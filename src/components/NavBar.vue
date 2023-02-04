@@ -5,18 +5,18 @@
             <h2 :style="TextColor">{{ data.title }}</h2>
         </div>
         <div class="buttom-group">
-            <div v-if="signstore.$state.showUserName" class="user-box" :style="TextColor">
+            <div v-if="signstore.$state.isLogin" class="user-box" :style="TextColor">
                 <ul>
-                    <li class="li1"><span>{{ signstore.$state.username }}</span></li>
-                    <li class="li2">注销</li>
+                    <li class="li1"><span>{{ userstore.$state.userName }}</span></li>
+                    <li class="li2" @click="logOut">注销</li>
                     <li class="li2">注销</li>
                     <li class="li2">注销</li>
                     <li class="li2">注销</li>
                 </ul>
             </div>
-            <el-button v-if="!signstore.$state.showUserName" type="primary" style="--el-button-hover-bg-color:transparent" size="large"
-                @click="signstore.$state.showSignView = true" color="transparent" :icon="data.buttonIcon.button_1_icon"
-                :style="TextColor">{{
+            <el-button v-if="!signstore.$state.isLogin" type="primary" style="--el-button-hover-bg-color:transparent"
+                size="large" @click="signstore.$state.showSignView = true" color="transparent"
+                :icon="data.buttonIcon.button_1_icon" :style="TextColor">{{
                     data.buttonText.button_1
                 }}</el-button>
             <el-button type="primary" style="--el-button-hover-bg-color:transparent" size="large" @click=""
@@ -46,6 +46,7 @@
 <script setup lang="ts">
 import { useStore } from "@/store/HomeState"
 import { useStore as useSignStore } from "@/store/SignState"
+import { useStore as useInfoStore } from "@/store/UserInfoState"
 import { reactive, toRefs } from 'vue'
 import { useRouter } from 'vue-router'
 import Sign from "./Sign.vue";
@@ -55,9 +56,9 @@ const props = defineProps({
     TextColor: String,
 })
 
-const { BackColor } = toRefs(props)
 const store = useStore()
 const signstore = useSignStore()
+const userstore = useInfoStore()
 //数据
 const data = reactive({
     logoUrl: store.$state.NavBarData.logoUrl,
@@ -66,7 +67,17 @@ const data = reactive({
     buttonIcon: store.$state.NavBarData.buttonIcon,
 })
 
-
+function logOut() {
+    localStorage.removeItem('username')
+    localStorage.removeItem('nickname')
+    localStorage.removeItem('nametag')
+    localStorage.removeItem('article')
+    localStorage.removeItem('follows')
+    localStorage.removeItem('like')
+    localStorage.removeItem('avatar')
+    localStorage.removeItem('token')
+    signstore.$state.isLogin = false
+}
 </script>
 
 <style scoped lang="less">

@@ -1,26 +1,43 @@
-import { createRouter , createWebHashHistory , RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import home from '@/views/Home.vue'
 import article from '@/views/Article.vue'
 import admin from '@/views/Admin.vue'
-const routes:Array<RouteRecordRaw> = [
+import editarticle from '@/views/EditArticle.vue'
+import { ElMessage } from 'element-plus'
+const routes: Array<RouteRecordRaw> = [
     {
-        path:'/',
-        component:home,
+        path: '/',
+        name: 'home',
+        component: home,
     },
     {
-        path:'/home/article/:id',
-        name:'article',
-        component:article,
-    }, 
+        path: '/home/article/:id',
+        name: 'article',
+        component: article,
+    },
     {
-        path:'/admin',
-        name:'admin',
-        component:admin,
-    },   
+        path: '/admin',
+        name: 'admin',
+        component: admin,
+    },
+    {
+        path: '/edit',
+        name: 'editarticle',
+        component: editarticle,
+        beforeEnter(to, from, next) {
+            let token = localStorage.getItem('token')
+            if (token) {
+                next();
+            } else {
+                ElMessage.error('请先登录!')
+                next({ name: 'home' })
+            }
+        }
+    },
 ]
 
 const router = createRouter({
-    history:createWebHashHistory(),
+    history: createWebHashHistory(),
     routes
 })
 

@@ -9,7 +9,7 @@
                 <div class="right-content-container">
                     <div class="right-content-top-container">
                         <span @click="goDetail(item.artId)">{{ item.artTitle }}</span>
-                        <p>{{ item.artContent }}</p>
+                        <p>{{ delHtmlTag(item.artContent) }}</p>
                     </div>
                     <div class="right-content-bottom-container">
                         <div class="athuor-container">
@@ -18,8 +18,9 @@
                             <div class="athuor-name-container">
                                 <div style="margin-left: 10px;">
                                     <el-link :underline="false" href="" target="_blank">
-                                        <span>{{ item.author.username}}</span>
+                                        <span class="maintitle">{{ item.author.nickname }}</span>
                                     </el-link>
+                                    <span class="subtitle">@{{ item.author.username }}</span>
                                     <p>{{ item.date }}</p>
                                 </div>
                             </div>
@@ -59,6 +60,9 @@ const store = useStore()
 const router = useRouter()
 function goDetail(id: number) {
     router.push({ name: 'article', params: { id } })
+}
+function delHtmlTag(str: string) {
+    return  str.replace(/<[^>]+>/g, '').replaceAll('&nbsp;', '')
 }
 </script>
 
@@ -118,7 +122,7 @@ function goDetail(id: number) {
                     .publicFlex(center, none, space-between);
 
                     .athuor-name-container {
-                        span {
+                        .maintitle {
                             .publicMP(0px, 0px);
                             font-weight: bold;
                             color: @pfontColor;
@@ -132,6 +136,12 @@ function goDetail(id: number) {
                             &:active {
                                 color: @defaultAct;
                             }
+                        }
+
+                        .subtitle {
+                            .publicMP(0 0 0 5px, 0px);
+                            font-size: 12px;
+                            color: @defalutTextHv;
                         }
 
                         p {
@@ -172,13 +182,37 @@ function goDetail(id: number) {
     }
 }
 
-@media only screen and(max-width: 450px) {
+@media only screen and(max-width: 770px) {
     .el-card {
-        width: 250px !important;
+        width: 100% !important;
         height: 100% !important;
 
         .card-container {
             flex-direction: column !important;
+
+            .el-image {
+                width: 100% !important;
+            }
+
+            .right-content-container {
+                padding: 20px !important;
+                box-sizing: border-box;
+            }
+        }
+    }
+}
+
+@media only screen and(max-width: 450px) {
+    .el-card {
+        width: 100% !important;
+        height: 100% !important;
+
+        .card-container {
+            flex-direction: column !important;
+
+            .el-image {
+                width: 100% !important;
+            }
 
             .right-content-container {
                 padding: 20px !important;
