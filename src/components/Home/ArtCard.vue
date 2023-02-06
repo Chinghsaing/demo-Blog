@@ -89,10 +89,11 @@ function delHtmlTag(str: string) {
                 display: flex;
                 flex-direction: column;
 
-                span {
-                    .publicMP(0px, 0px);
-                    .publicWH(100%, 50%);
-                    .morelinesEllipsis(20px, 2);
+                span {  
+                    .publicMP(10px 0, 0px);
+                    .publicWH(100%, auto);
+                    // .morelinesEllipsis(20px, 2);
+                    .onelineEllipsis(20px);
                     color: @pfontColor;
                     font-weight: bold;
                     transition: all .2s ease;
@@ -108,7 +109,7 @@ function delHtmlTag(str: string) {
 
                 p {
                     .publicMP(5px 0px, 0px);
-                    .publicWH(100%, 50%);
+                    .publicWH(100%, 45%);
                     color: @sfontColor;
                     .morelinesEllipsis(14px, 3);
                 }

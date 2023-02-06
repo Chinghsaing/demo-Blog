@@ -1,7 +1,7 @@
 <template>
     <div>
-        <el-card shadow="always" :body-style="{ padding: '20px' }">
-            <div v-html="store.$state.ArtData[id-1].artContent">
+        <el-card shadow="never" :body-style="{ padding: '50px' }">
+            <div v-html="store.$state.ArtData[id - 1].artContent">
             </div>
         </el-card>
     </div>
@@ -20,7 +20,7 @@ const id: number = Number(route.params.id)
 <style scoped lang="less">
 .el-card {
     .publicWH(100%, auto);
-    border-radius: 10px;
+    border: none;
     p {
         color: @pfontColor;
         font-size: 18px;

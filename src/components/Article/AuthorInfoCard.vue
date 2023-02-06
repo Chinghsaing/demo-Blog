@@ -122,12 +122,12 @@ const id:number =  Number(route.params.id)
             margin-top: 20px;
             .publicFlex(none, none, center);
             .publicWH(100%, 100%);
-            background-color: rgb(241, 129, 219);
+            background-color: @buttonColor;
             border-radius: 20px;
             box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.2);
 
             &:hover {
-                background-color: @defaultTitle;
+                background-color: @buttonHV;
             }
 
             h2 {

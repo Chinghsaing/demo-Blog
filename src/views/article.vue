@@ -1,24 +1,25 @@
 <template>
-    <div class="contaniner">
-        <div class="top-container" :style="{ 'background-image': 'url(' + articleInfo.artImages + ')' }">
+    <div class="contaniner" v-if="store.$state.getDataSuccess">
+        <div class="top-container"
+            :style="{ 'background-image': 'url(' + store.$state.ArtData[id - 1].artImages + ')' }">
             <div class="top-container-mask">
                 <NavBar TextColor="color:#fff"></NavBar>
                 <div class="title-container">
                     <div class="title-box">
-                        <h1>{{ articleInfo.artTitle }}</h1>
+                        <h1>{{ store.$state.ArtData[id - 1].artTitle }}</h1>
                         <div class="detail-box">
                             <div>
                                 <el-icon>
                                     <Document />
                                 </el-icon>
-                                <span>发表于{{ articleInfo.artDate }}</span>
+                                <span>发表于{{ store.$state.ArtData[id - 1].date }}</span>
                             </div>
                             <span style="margin: 10px;">|</span>
                             <div>
                                 <el-icon>
                                     <Clock />
                                 </el-icon>
-                                <span>更新于{{ articleInfo.artDate }}</span>
+                                <span>更新于{{ store.$state.ArtData[id - 1].date }}</span>
                             </div>
                             <span style="margin: 10px;">|</span>
                             <div>
@@ -51,31 +52,38 @@
                 <AuthorInfoCard></AuthorInfoCard>
             </div>
             <div class="artdetail-container">
+                <div style="padding: 20px;">
+                    <img class="title-icon" :src="logoUrl">
+                    <img class="title-icon" :src="logoUrl">
+                    <img class="title-icon" :src="logoUrl">
+                </div>
                 <ArtDetail></ArtDetail>
+                <Comments></Comments>
+                <div style="display: flex;justify-content: center;flex-direction: column;align-items: center;">
+                    <CommentCard></CommentCard>
+                    <CommentCard></CommentCard>
+                    <CommentCard></CommentCard>
+                    <CommentCard></CommentCard>
+                </div>
             </div>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
 import { useRoute } from 'vue-router'
 import { useStore } from '@/store/ArtState'
 import NavBar from '@/components/NavBar.vue'
 import AuthorInfoCard from '@/components/Article/AuthorInfoCard.vue'
 import ArtDetail from '@/components/Article/ArtDetail.vue'
-
+import Comments from '@/components/Article/Comments.vue'
+import CommentCard from '@/components/Article/CommentCard.vue'
 const store = useStore()
 const route = useRoute()
-
 const id = Number(route.params.id)
+const logoUrl = new URL(`@/assets/images/logo.png`, import.meta.url).href
+document.body.scrollTop = 0
 
-const articleInfo = reactive({
-    artTitle: store.$state.ArtData[id - 1].artTitle,
-    artImages: store.$state.ArtData[id - 1].artImages,
-    artDate: store.$state.ArtData[id - 1].date,
-})
-document.body.scrollTop = 0 
 </script>
 
 <style scoped lang="less">
@@ -128,6 +136,12 @@ document.body.scrollTop = 0
         .artdetail-container {
             .publicMP(20px 20px 0 0, 0);
             .publicWH(55%, auto);
+            background-color: #fff;
+            border-radius: 10px;
+
+            .title-icon {
+                .publicWH(32px, 32px)
+            }
         }
     }
 }

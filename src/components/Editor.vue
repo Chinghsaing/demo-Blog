@@ -64,12 +64,12 @@ onMounted(() => {
     color: @pfontColor;
 
     &:hover {
-        background: rgb(249, 215, 242);
+        background: @editorBG;
     }
 }
 
 :deep(.tox .tox-tbtn--enabled, .tox .tox-tbtn--enabled:hover) {
-    background: rgb(249, 215, 242);
+    background: @editorBG;
 }
 
 :deep(.tox .tox-tbtn svg) {

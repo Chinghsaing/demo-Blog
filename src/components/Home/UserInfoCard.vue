@@ -97,7 +97,7 @@ const signstore = useSignStore()
 let tagEdit = ref(false)
 let nicknameEdit = ref(false)
 //定义原nickname和tag
-let oriNickname = ''
+let oriNickname= ''
 let oriTag = ''
 //实现请求
 function avatarUpdate(upload: any) {
@@ -177,15 +177,11 @@ function tagblurUpdate() {
     if (oriTag !== newTag) {
         if (!tagLengthReg.test(newTag)) {
             ElMessage.error('签名长度须在1到16个字符!')
-            oriTag = store.$state.userNameTag
+            store.$state.userNameTag = oriTag
         } else {
             axios.post('/user/usertag', newTag )
                 .then(res => {
-                    if (res.data.res_code === 600) {
-                        ElMessage.success('更改签名成功!')
-                    } else {
-                        ElMessage.warning(res.data.res_message)
-                    }
+                    ElMessage.success('更改签名成功!')
                 })
                 .catch(err => {
                     ElMessage.error('与服务器的通信出现了未知错误!')
@@ -360,12 +356,12 @@ function tagblurUpdate() {
         margin: 45px 0px;
         .publicFlex(none, none, center);
         .publicWH(100%, 100%);
-        background-color: rgb(241, 129, 219);
+        background-color: @buttonColor;
         border-radius: 20px;
         box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.2);
         transition: all .2s ease;
         &:hover {
-            background-color: @defaultTitle;
+            background-color: @buttonHV;
         }
 
         h2 {

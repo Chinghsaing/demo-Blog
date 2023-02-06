@@ -14,6 +14,10 @@ const routes: Array<RouteRecordRaw> = [
         path: '/home/article/:id',
         name: 'article',
         component: article,
+        beforeEnter(to,from,next){
+            document.body.scrollTop = 0
+            next()
+        }
     },
     {
         path: '/admin',
@@ -38,7 +42,7 @@ const routes: Array<RouteRecordRaw> = [
 
 const router = createRouter({
     history: createWebHashHistory(),
-    routes
+    routes,
 })
 
 export default router

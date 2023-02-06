@@ -257,7 +257,6 @@ const submitSignInForm = (formEl: any) => {
                         signStore.$state.showSignView = false
                         signStore.$state.isLogin = true
                         userInfoStore.getUserInfo(res.data.res_data[0])
-                        console.log(res.data.res_data[0]);
                         
                         localStorage.setItem('token', res.data.token)                  
                         ElMessage.success('登录成功!')

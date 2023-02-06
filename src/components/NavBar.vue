@@ -68,6 +68,7 @@ const data = reactive({
 })
 
 function logOut() {
+    userstore.$reset()
     localStorage.removeItem('username')
     localStorage.removeItem('nickname')
     localStorage.removeItem('nametag')

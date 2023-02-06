@@ -3,12 +3,28 @@
 </template>
 
 <script setup lang="ts">
-import { useStore } from '@/store/ArtState';
-import { useStore as userStore} from '@/store/UserInfoState';
+import axios from '@/api/axios'
+import { useStore } from '@/store/ArtState'
+import { useStore as userStore } from '@/store/UserInfoState'
+import { ElMessage } from 'element-plus';
 const store = useStore()
-const userstore =userStore()
+const userstore = userStore()
 function init() {
     store.getArticleList()
+    if (localStorage.getItem('token')) {
+        axios.post('/user/authorized')
+            .then(res => {
+                if (res.data.res_code === 0) {
+                    userstore.clearLocalInfo()
+                    ElMessage.error('登录已失效，请重新登录!')
+                } else {
+                    userstore.getLocalInfo()
+                }
+            })
+            .catch(err => {
+                userstore.getLocalInfo()
+            })
+    }
 }
 init()
 </script>
@@ -48,5 +64,15 @@ init()
 
 .el-message--error .el-message__content {
     color: @defaultError !important;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
 }
 </style>

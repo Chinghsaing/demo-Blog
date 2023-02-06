@@ -8,9 +8,9 @@
             <div class="submit-box">
                 <el-input v-model.trim="title" class="input" placeholder="文章标题" type="text" size="large" minlength="1"
                     autocomplete="off" style="--el-input-focus-border-color:rgb(236,159,221)"></el-input>
-                <el-upload ref="uploadRef" class="avatar-uploader" :show-file-list="false"
-                    :http-request="articleCoverUpload" :auto-upload="false" list-type="picture"
-                    :on-change="onChangeHandler">
+                <el-upload ref="uploadRef" class="avatar-uploader" :show-file-list="false" :http-request="articleUpload"
+                    :auto-upload="false" list-type="picture" :on-change="onChangeHandler"
+                    :before-upload="beforeCoverUpload" :file-list="checkFile">
                     <template #trigger>
                         <img v-if="imageUrl" :src="imageUrl" class="avatar" />
                         <el-icon v-else class="avatar-uploader-icon">
@@ -18,8 +18,8 @@
                         </el-icon>
                         <p>上传文章封面</p>
                     </template>
-                    <div class="button-box">
-                        <el-link :underline="false" href="javascript:;" @click="submit">
+                    <div class="button-box" @click="submit">
+                        <el-link :underline="false" href="javascript:;">
                             <div>
                                 <h2>发布</h2>
                             </div>
@@ -46,39 +46,65 @@ import { ref } from 'vue'
 import { useStore } from '@/store/ArtState';
 import { useStore as userStore } from '@/store/UserInfoState';
 import { getNowTime } from '@/hooks/hooks'
+import { ElMessage } from "element-plus";
 const imageUrl = ref('')
 const store = useStore()
 const userstore = userStore()
 const uploadRef = ref()
 const title = ref()
+let checkFile: any = []
 //实现请求
-function articleCoverUpload(upload: any) {
+function articleUpload(upload: any) {
     const formData = new FormData() //封装成formdata格式上传
     const content = store.$state.EditTemp //获取文章内容
     const articleTitle = title.value
+    const file = upload.file
     const time = getNowTime()
-    formData.append('articleCover', upload.file)
+    formData.append('articleCover', file)
     formData.append('articleTitle', articleTitle)
     formData.append('articleContent', content)
     formData.append('articleDate', time)
     axios.post('/user/artPost', formData)
         .then(res => {
-            console.log(res)
+            if (res.data.res_code === 300) {
+                ElMessage.success('文章发布成功!')
+            } else {
+                ElMessage.warning(res.data.res_message)
+            }
         })
         .catch(err => {
-            console.error(err);
+            ElMessage.error('与服务器的通信出现了未知错误!')
         })
+}
+//图片上传验证
+function beforeCoverUpload(rawFile: any) {
+    if (rawFile.type !== 'image/jpeg') {
+        ElMessage.warning('头像必须为JPG格式!')
+    } else if (rawFile.size / 1024 / 1024 / 1024 / 1024 / 1024 > 5) {
+        ElMessage.warning('头像大小不能超过5MB!')
+    }
 }
 //上传图片覆盖
 function onChangeHandler(file: any, fileList: any) {
+    checkFile.push({ name: "none", url: "none" })
     if (fileList.length > 1) {
-        fileList.splice(0, 1);
+        fileList.splice(0, 1)
     }
     imageUrl.value = file.url
 }
 //手动上传
 function submit() {
-    uploadRef.value.submit()
+    const content = store.$state.EditTemp //获取文章内容
+    const articleTitle = title.value
+    if (checkFile.length === 0) {
+        return ElMessage.warning('请上传文章封面!')
+    } else if (!articleTitle) {
+        return ElMessage.warning('文章标题不能为空!')
+    } else if (content === '') {
+        return ElMessage.warning('文章内容不能为空!')
+    } else {
+        uploadRef.value.submit()
+    }
 }
 </script>
 
@@ -133,8 +159,7 @@ function submit() {
 
             .avatar-uploader {
                 .avatar {
-                    width: 200px;
-                    height: 200px;
+                    .publicWH(200px, 200px);
                     display: block;
                     object-fit: cover;
                 }

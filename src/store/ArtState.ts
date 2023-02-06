@@ -5,6 +5,7 @@ import axios from '@/api/axios'
 interface stateType {
     ArtData: DataType[]
     EditTemp: string
+    getDataSuccess:boolean
 }
 interface authorType {
     avatar: string
@@ -14,7 +15,7 @@ interface authorType {
     uid: number
     username: string
     nickname: string
-    article:[]
+    article: []
 }
 interface DataType {
     artId: number
@@ -29,18 +30,20 @@ export const useStore = defineStore({
 
     state: (): stateType => ({
         ArtData: [],
-        EditTemp:'',
+        EditTemp: '',
+        getDataSuccess:false,
     }),
     actions: {
         getArticleList() {
             axios.get('/api/artlist')
                 .then(res => {
                     this.ArtData = res.data
+                    this.getDataSuccess = true
                 })
                 .catch(err => {
                     console.log(err);
-                    
-                    ElMessage.error('获取页面数据失败! 错误原因:'+err.message)
+
+                    ElMessage.error('获取页面数据失败! 错误原因:' + err.message)
                 })
         }
     }

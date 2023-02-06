@@ -1,54 +1,55 @@
 <template>
-    <div class="main-container-1">
-        <el-affix style="width:100%;height: 58px;" v-Fixed>
-            <NavBar></NavBar>
-        </el-affix>
-        <div class="center-box-container">
-            <div class="title-box-container">
-                <div class="title-box">
-                    <div class="title">
-                        <img :src="store.$state.NavBarData.logoUrl" alt="" srcset="">
-                        <h1>Lemon Blog</h1>
+    <div>
+        <div class="main-container-1">
+            <el-affix style="width:100%;height: 58px;" v-Fixed>
+                <NavBar></NavBar>
+            </el-affix>
+            <div class="center-box-container">
+                <div class="title-box-container">
+                    <div class="title-box">
+                        <div class="title">
+                            <img :src="store.$state.NavBarData.logoUrl" alt="" srcset="">
+                            <h1>Lemon Blog</h1>
+                        </div>
+                        <TextAmt class="TextAmt"></TextAmt>
                     </div>
-                    <TextAmt class="TextAmt"></TextAmt>
                 </div>
             </div>
-        </div>
-        <div>
-            <el-icon class="arrow" color="#fff" size="32">
-                <ArrowDown />
-            </el-icon>
-        </div>
-    </div>
-    <div class="main-container-2">
-        <div class="card-container">
-            <div class="newscard-container">
-                <NewsCard class="newscard"></NewsCard>
-                <el-card class="tips" shadow="always" :body-style="{ padding: '10px' }" style="border-radius: 10px;">
-                    <div style="display: flex;align-items: center;">
-                        <svg t="1675420277537" class="d-arrow" viewBox="0 0 1024 1024" version="1.1"
-                            xmlns="http://www.w3.org/2000/svg" p-id="6653" width="200" height="200">
-                            <path
-                                d="M792.5 446.6L512 727.1 231.5 446.6c-11.7-11.7-30.7-11.7-42.4 0s-11.7 30.7 0 42.4l301.8 301.7c5.9 5.9 13.5 8.8 21.2 8.8 7.7 0 15.4-2.9 21.2-8.8L835 489c11.7-11.7 11.7-30.7 0-42.4-11.8-11.7-30.8-11.7-42.5 0zM490.8 577.4c5.9 5.9 13.5 8.8 21.2 8.8 7.7 0 15.4-2.9 21.2-8.8L835 275.7c11.7-11.7 11.7-30.7 0-42.4s-30.7-11.7-42.4 0L512 513.8 231.5 233.3c-11.7-11.7-30.7-11.7-42.4 0s-11.7 30.7 0 42.4l301.7 301.7z"
-                                fill="#333333" p-id="6654"></path>
-                        </svg>
-                        <span style="margin: 0 5px;">快来发表你的第一篇文章吧!</span>
-                        <svg t="1675420277537" class="d-arrow" viewBox="0 0 1024 1024" version="1.1"
-                            xmlns="http://www.w3.org/2000/svg" p-id="6653" width="200" height="200">
-                            <path
-                                d="M792.5 446.6L512 727.1 231.5 446.6c-11.7-11.7-30.7-11.7-42.4 0s-11.7 30.7 0 42.4l301.8 301.7c5.9 5.9 13.5 8.8 21.2 8.8 7.7 0 15.4-2.9 21.2-8.8L835 489c11.7-11.7 11.7-30.7 0-42.4-11.8-11.7-30.8-11.7-42.5 0zM490.8 577.4c5.9 5.9 13.5 8.8 21.2 8.8 7.7 0 15.4-2.9 21.2-8.8L835 275.7c11.7-11.7 11.7-30.7 0-42.4s-30.7-11.7-42.4 0L512 513.8 231.5 233.3c-11.7-11.7-30.7-11.7-42.4 0s-11.7 30.7 0 42.4l301.7 301.7z"
-                                fill="#333333" p-id="6654"></path>
-                        </svg>
-                    </div>
-                </el-card>
-                <ArtCard></ArtCard>
+            <div>
+                <el-icon class="arrow" color="#fff" size="32">
+                    <ArrowDown />
+                </el-icon>
             </div>
-            <div class="userinfocard-container">
-                <el-affix :offset="78" z-index="50">
+        </div>
+        <div class="main-container-2">
+            <div class="card-container">
+                <div class="newscard-container">
+                    <NewsCard class="newscard"></NewsCard>
+                    <el-card class="tips" shadow="always" :body-style="{ padding: '10px' }"
+                        style="border-radius: 10px;">
+                        <div style="display: flex;align-items: center;">
+                            <svg t="1675420277537" class="d-arrow" viewBox="0 0 1024 1024" version="1.1"
+                                xmlns="http://www.w3.org/2000/svg" p-id="6653" width="200" height="200">
+                                <path
+                                    d="M792.5 446.6L512 727.1 231.5 446.6c-11.7-11.7-30.7-11.7-42.4 0s-11.7 30.7 0 42.4l301.8 301.7c5.9 5.9 13.5 8.8 21.2 8.8 7.7 0 15.4-2.9 21.2-8.8L835 489c11.7-11.7 11.7-30.7 0-42.4-11.8-11.7-30.8-11.7-42.5 0zM490.8 577.4c5.9 5.9 13.5 8.8 21.2 8.8 7.7 0 15.4-2.9 21.2-8.8L835 275.7c11.7-11.7 11.7-30.7 0-42.4s-30.7-11.7-42.4 0L512 513.8 231.5 233.3c-11.7-11.7-30.7-11.7-42.4 0s-11.7 30.7 0 42.4l301.7 301.7z"
+                                    fill="#333333" p-id="6654"></path>
+                            </svg>
+                            <span style="margin: 0 5px;">快来发表你的第一篇文章吧!</span>
+                            <svg t="1675420277537" class="d-arrow" viewBox="0 0 1024 1024" version="1.1"
+                                xmlns="http://www.w3.org/2000/svg" p-id="6653" width="200" height="200">
+                                <path
+                                    d="M792.5 446.6L512 727.1 231.5 446.6c-11.7-11.7-30.7-11.7-42.4 0s-11.7 30.7 0 42.4l301.8 301.7c5.9 5.9 13.5 8.8 21.2 8.8 7.7 0 15.4-2.9 21.2-8.8L835 489c11.7-11.7 11.7-30.7 0-42.4-11.8-11.7-30.8-11.7-42.5 0zM490.8 577.4c5.9 5.9 13.5 8.8 21.2 8.8 7.7 0 15.4-2.9 21.2-8.8L835 275.7c11.7-11.7 11.7-30.7 0-42.4s-30.7-11.7-42.4 0L512 513.8 231.5 233.3c-11.7-11.7-30.7-11.7-42.4 0s-11.7 30.7 0 42.4l301.7 301.7z"
+                                    fill="#333333" p-id="6654"></path>
+                            </svg>
+                        </div>
+                    </el-card>
+                    <ArtCard></ArtCard>
+                </div>
+                <div class="userinfocard-container">
                     <UserInfoCard>
                     </UserInfoCard>
                     <div v-if="signstore.$state.isLogin">
-                                           <el-card class="edit" shadow="always" :body-style="{ padding: '10px' }"
+                        <el-card class="edit" shadow="always" :body-style="{ padding: '10px' }"
                             style="border-radius: 10px;" @click="$router.push({ name: 'editarticle' })">
                             <div>
                                 <span>写文章</span>
@@ -58,7 +59,7 @@
                             </div>
                         </el-card>
                     </div>
-                </el-affix>
+                </div>
             </div>
         </div>
     </div>
@@ -88,6 +89,9 @@ const signstore = signStore()
     .publicWH(100%, 100vh);
     flex-direction: column;
     overflow: hidden;
+    background: url('@/assets/images/background6.png') no-repeat center;
+    background-size: cover;
+    background-attachment: fixed;
 
     .center-box-container {
         .publicWH(100%, 85%);
@@ -107,7 +111,6 @@ const signstore = signStore()
                 .title {
                     .publicWH(100%, auto);
                     .publicFlex(center, none, center);
-                    .leftSlideIn(1.5s, ease);
 
                     img {
                         .publicWH(64px, 64px)
@@ -118,10 +121,6 @@ const signstore = signStore()
                         color: @defaultFont;
                         font-size: 2.5em;
                     }
-                }
-
-                .TextAmt {
-                    .rightSlideIn(1.5s, ease)
                 }
             }
         }
