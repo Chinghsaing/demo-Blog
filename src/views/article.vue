@@ -48,22 +48,28 @@
             </div>
         </div>
         <div class="content-container">
-            <div style="margin-top: 20px;">
+            <div class="AuthorInfoCard" style="margin:20px 0 0 20px;">
                 <AuthorInfoCard></AuthorInfoCard>
             </div>
-            <div class="artdetail-container">
-                <div style="padding: 20px;">
-                    <img class="title-icon" :src="logoUrl">
-                    <img class="title-icon" :src="logoUrl">
-                    <img class="title-icon" :src="logoUrl">
+            <div style="width: 55%;">
+                <div class="artdetail-container">
+                    <div class="title-icon-box" style="padding: 20px;">
+                        <img class="title-icon" :src="logoUrl">
+                        <img class="title-icon" :src="logoUrl">
+                        <img class="title-icon" :src="logoUrl">
+                    </div>
+                    <div>
+                        <ArtDetail></ArtDetail>
+                    </div>
                 </div>
-                <ArtDetail></ArtDetail>
-                <Comments></Comments>
-                <div style="display: flex;justify-content: center;flex-direction: column;align-items: center;">
-                    <CommentCard></CommentCard>
-                    <CommentCard></CommentCard>
-                    <CommentCard></CommentCard>
-                    <CommentCard></CommentCard>
+                <div style="background-color: #fff;margin-top: 20px;border-radius: 10px;">
+                    <div>
+                        <Comments></Comments>
+                    </div>
+                    <div class="commentcard-box"
+                        style="display: flex;justify-content: center;flex-direction: column;align-items: center;">
+                        <CommentCard></CommentCard>
+                    </div>
                 </div>
             </div>
         </div>
@@ -72,7 +78,7 @@
 
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
-import { useStore } from '@/store/ArtState'
+import { useStore } from '@/store/ArticleState'
 import NavBar from '@/components/NavBar.vue'
 import AuthorInfoCard from '@/components/Article/AuthorInfoCard.vue'
 import ArtDetail from '@/components/Article/ArtDetail.vue'
@@ -134,8 +140,8 @@ document.body.scrollTop = 0
 
 
         .artdetail-container {
-            .publicMP(20px 20px 0 0, 0);
-            .publicWH(55%, auto);
+            .publicMP(20px 0 0 0, 0);
+            .publicWH(auto, auto);
             background-color: #fff;
             border-radius: 10px;
 

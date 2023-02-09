@@ -21,14 +21,14 @@
                 </div>
                 <div class="nickname-edit-box" style="display: flex;align-items: center;position: relative;">
                     <span v-if="!nicknameEdit" class="nickname" @click="clickNicknameEdit()"
-                        :class="signstore.$state.isLogin ? 'nicknamehover' : ''">{{ store.$state.userNickname}}</span>
+                        :class="signstore.$state.isLogin ? 'nicknamehover' : ''">{{ store.$state.userNickname }}</span>
                     <div class="icon" v-show="!nicknameEdit">
                         <el-icon size="28">
                             <EditPen />
                         </el-icon>
                     </div>
-                    <el-input v-if="nicknameEdit" v-model="store.$state.userNickname" :placeholder="store.$state.userNickname"
-                        v-focus @blur="nicknameblurUpdate()"></el-input>
+                    <el-input v-if="nicknameEdit" v-model="store.$state.userNickname"
+                        :placeholder="store.$state.userNickname" v-focus @blur="nicknameblurUpdate()"></el-input>
                 </div>
                 <div v-if="signstore.$state.isLogin" class="name-box">
                     <p class="name">{{ '@'+store.$state.userName }}</p>
@@ -70,8 +70,7 @@
                         <p class="select-num">{{ store.$state.userLike }}</p>
                     </div>
                 </div>
-                <div v-else class="button-box"
-                    @click="signstore.$state.showSignView = true">
+                <div v-else class="button-box" @click="signstore.$state.showSignView = true">
                     <el-link :underline="false" href="javascript:;">
                         <div>
                             <h2>登录 / 注册</h2>
@@ -97,7 +96,7 @@ const signstore = useSignStore()
 let tagEdit = ref(false)
 let nicknameEdit = ref(false)
 //定义原nickname和tag
-let oriNickname= ''
+let oriNickname = ''
 let oriTag = ''
 //实现请求
 function avatarUpdate(upload: any) {
@@ -105,16 +104,8 @@ function avatarUpdate(upload: any) {
     formData.append('avatar', upload.file)
 
     axios.post('/user/avatar', formData)
-        .then(res => {
-            if (res.data.res_code === 400) {
-                ElMessage.success('头像上传成功!')
-            } else {
-                ElMessage.warning(res.data.res_message)
-            }
-        })
-        .catch(err => {
-            ElMessage.error('与服务器的通信出现了未知错误!')
-        })
+        .then(res => {})
+        .catch(err => {})
 
 }
 //头像上传大小格式验证
@@ -152,19 +143,15 @@ function nicknameblurUpdate() {
             ElMessage.error('昵称不能包括特殊符号，且长度须在1至12位!')
             store.$state.userNickname = oriNickname
         } else {
-            axios.post('/user/nickname', newNickname)
+            axios.post('/user/nickname', {
+                newNickname: newNickname
+            })
                 .then(res => {
                     if (res.data.res_code === 500) {
-                        ElMessage.success('更改昵称成功!')
-                    } else {
-                        ElMessage.warning(res.data.res_message)
+                        localStorage.setItem('nickname', newNickname)
                     }
                 })
-                .catch(err => {
-                    console.log(err);
-                    
-                    ElMessage.error('与服务器的通信出现了未知错误!')
-                })
+                .catch(err => { })
         }
     } else {
         return
@@ -179,13 +166,16 @@ function tagblurUpdate() {
             ElMessage.error('签名长度须在1到16个字符!')
             store.$state.userNameTag = oriTag
         } else {
-            axios.post('/user/usertag', newTag )
+            axios.post('/user/usertag', {
+                newTag: newTag
+            })
                 .then(res => {
-                    ElMessage.success('更改签名成功!')
+                    if (res.data.res_code === 600) {
+                        localStorage.setItem('nametag', newTag)
+                    }
+
                 })
-                .catch(err => {
-                    ElMessage.error('与服务器的通信出现了未知错误!')
-                })
+                .catch(err => { })
         }
     } else {
         return
@@ -360,6 +350,7 @@ function tagblurUpdate() {
         border-radius: 20px;
         box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.2);
         transition: all .2s ease;
+
         &:hover {
             background-color: @buttonHV;
         }
@@ -374,5 +365,4 @@ function tagblurUpdate() {
 }
 
 //动态样式组
-
 </style>

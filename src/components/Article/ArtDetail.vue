@@ -1,6 +1,6 @@
 <template>
     <div>
-        <el-card shadow="never" :body-style="{ padding: '50px' }">
+        <el-card shadow="never" :body-style="{ padding: '50px',}">
             <div v-html="store.$state.ArtData[id - 1].artContent">
             </div>
         </el-card>
@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import { useStore } from '@/store/ArtState';
+import { useStore } from '@/store/ArticleState';
 import { useRoute } from 'vue-router'
 const store = useStore()
 const route = useRoute()
@@ -21,6 +21,7 @@ const id: number = Number(route.params.id)
 .el-card {
     .publicWH(100%, auto);
     border: none;
+    border-radius: 10px;
     p {
         color: @pfontColor;
         font-size: 18px;

@@ -54,7 +54,7 @@
 </template>
 
 <script setup lang="ts">
-import { useStore } from '@/store/ArtState';
+import { useStore } from '@/store/ArticleState';
 import { useRouter } from 'vue-router'
 const store = useStore()
 const router = useRouter()

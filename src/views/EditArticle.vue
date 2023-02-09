@@ -43,7 +43,7 @@ import axios from "@/api/axios";
 import Editor from "@/components/Editor.vue"
 import NavBar from "@/components/NavBar.vue";
 import { ref } from 'vue'
-import { useStore } from '@/store/ArtState';
+import { useStore } from '@/store/ArticleState';
 import { useStore as userStore } from '@/store/UserInfoState';
 import { getNowTime } from '@/hooks/hooks'
 import { ElMessage } from "element-plus";
@@ -65,16 +65,8 @@ function articleUpload(upload: any) {
     formData.append('articleContent', content)
     formData.append('articleDate', time)
     axios.post('/user/artPost', formData)
-        .then(res => {
-            if (res.data.res_code === 300) {
-                ElMessage.success('文章发布成功!')
-            } else {
-                ElMessage.warning(res.data.res_message)
-            }
-        })
-        .catch(err => {
-            ElMessage.error('与服务器的通信出现了未知错误!')
-        })
+        .then(res => {})
+        .catch(err => {})
 }
 //图片上传验证
 function beforeCoverUpload(rawFile: any) {

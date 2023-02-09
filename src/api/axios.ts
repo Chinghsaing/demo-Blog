@@ -1,5 +1,6 @@
 import axios from 'axios'
-import { ElLoading, ElMessage } from 'element-plus'
+import showMessage from '@/api/status'
+import {ElMessage } from 'element-plus'
 import router from '@/router/index.js'
 import { useStore as signStore } from '@/store/SignState'
 import { useStore as userInfoStore } from '@/store/UserInfoState'
@@ -11,17 +12,6 @@ axios.defaults.timeout = 20000
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 
 
-
-function openLoading() {
-    loading = ElLoading.service({
-        fullscreen: true,
-        background: 'rgba(244, 231, 210, .4)',
-        text: '加载中...',
-    })
-}
-function closeLoading() {
-    loading.close()
-}
 axios.interceptors.request.use(
     config => {
         if (localStorage.getItem('token')) {
@@ -41,10 +31,13 @@ axios.interceptors.response.use(
             signStore().isLogin = false
             userInfoStore().$reset()
             localStorage.removeItem('token')
+        }else{
+            showMessage(response.data.res_code)
         }
         return response
     },
     error => {
+        ElMessage.error('与服务器的通信出现了未知错误!')
         return Promise.reject(error)
     }
 )

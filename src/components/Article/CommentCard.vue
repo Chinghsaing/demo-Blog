@@ -1,29 +1,36 @@
 <template>
-    <div class="commentcard-container">
-        <div class="avatar-box">
-            <el-avatar shape="square" :size="50" :src="store.$state.userAvatar" />
-        </div>
-        <div class="main-box">
-            <div class="author-box">
-                <div style="display: flex;align-items: center">
-                    <span>Mishuroki</span>
-                    <p>@mishuroki</p>
+    <TransitionGroup name="fade">
+        <div class="commentcard-container" v-for="item in store.$state.comments" :key="item.cmtId">
+            <div class="avatar-box">
+                <el-avatar shape="square" :size="50" :src="item.user.avatar" />
+            </div>
+            <div class="main-box">
+                <div class="author-box">
+                    <div style="display: flex;align-items: center">
+                        <span>{{ item.user.nickname }}</span>
+                        <p>@{{ item.user.username }}</p>
+                    </div>
+                    <div class="date">
+                        <p>{{ item.date }}</p>
+                    </div>
                 </div>
-                <div>
-                    <date>2023/2/6</date>
+                <div class="content-box">
+                    <span>{{ item.content }}</span>
                 </div>
             </div>
-            <div class="content-box">
-                <span>写的真好!😘😘😘</span>
-            </div>
         </div>
-    </div>
+    </TransitionGroup>
 </template>
 
 <script setup lang="ts">
-import { useStore } from '@/store/UserInfoState';
+import { useStore } from '@/store/CommentState'
+import { useRoute } from 'vue-router'
 
 const store = useStore()
+const route = useRoute()
+const id = Number(route.params.id)
+
+store.getCommentList(id)
 </script>
 
 <style scoped lang="less">
@@ -33,6 +40,7 @@ const store = useStore()
     position: relative;
     .publicWH(700px, auto);
     background-color: #fff;
+
     .avatar-box {
         .publicPos(0, 0, 1);
     }
@@ -60,10 +68,12 @@ const store = useStore()
                 font-size: 14px;
             }
 
-            date {
-                margin-right: 25px;
-                color: @defalutTextHv;
-                font-size: 12px;
+            .date {
+                p {
+                    margin-right: 25px;
+                    color: @defalutTextHv;
+                    font-size: 12px;
+                }
             }
         }
 
@@ -72,8 +82,9 @@ const store = useStore()
             margin: 0 0 25px 0;
             .publicFlex(center, none, center);
             .publicWH(93%, auto);
-            background-color: rgb(240,240,240);
+            background-color: rgb(245, 245, 245);
             min-width: 93%;
+            flex-direction: column;
 
             span {
                 padding: 5px 0;
@@ -87,5 +98,15 @@ const store = useStore()
             }
         }
     }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
 }
 </style>

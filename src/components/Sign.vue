@@ -225,18 +225,11 @@ const submitSignUpForm = (formEl: any) => {
                 checkpassword: signUpData.checkPassword,
             })
                 .then(res => {
-                    if (res.status === 200) {
-                        if (res.data.res_code === 100) {
-                            ElMessage.success('注册成功!')
-                            formEl.resetFields()
-                        } else {
-                            ElMessage.warning(res.data.res_message)
-                        }
+                    if (res.data.res_code === 100) {
+                        formEl.resetFields()
                     }
                 })
-                .catch(err => {
-                    ElMessage.error('与服务器的通信出现了未知错误!')
-                })
+                .catch(err => { })
 
         } else {
             return false
@@ -257,18 +250,11 @@ const submitSignInForm = (formEl: any) => {
                         signStore.$state.showSignView = false
                         signStore.$state.isLogin = true
                         userInfoStore.getUserInfo(res.data.res_data[0])
-                        
-                        localStorage.setItem('token', res.data.token)                  
-                        ElMessage.success('登录成功!')
+                        localStorage.setItem('token', res.data.token)
                         formEl.resetFields()
                     }
-                    else {
-                        ElMessage.warning(res.data.res_message)
-                    }
                 })
-                .catch(err => {
-                    ElMessage.error('与服务器的通信出现了未知错误!')
-                })
+                .catch(err => { })
         } else {
             return false
         }

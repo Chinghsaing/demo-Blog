@@ -48,7 +48,7 @@
 </template>
 
 <script setup lang="ts">
-import { useStore } from '@/store/ArtState';
+import { useStore } from '@/store/ArticleState';
 import { useStore as useSignStore } from "@/store/SignState";
 import { useRoute } from 'vue-router'
 const store = useStore()

@@ -4,7 +4,7 @@
 
 <script setup lang="ts">
 import axios from '@/api/axios'
-import { useStore } from '@/store/ArtState'
+import { useStore } from '@/store/ArticleState'
 import { useStore as userStore } from '@/store/UserInfoState'
 import { ElMessage } from 'element-plus';
 const store = useStore()
@@ -22,7 +22,7 @@ function init() {
                 }
             })
             .catch(err => {
-                userstore.getLocalInfo()
+                userstore.clearLocalInfo()
             })
     }
 }

@@ -9,7 +9,7 @@
 import tinymce from 'tinymce';
 import Editor from '@tinymce/tinymce-vue';
 import { reactive, ref, onMounted } from "vue";
-import { useStore } from '@/store/ArtState';
+import { useStore } from '@/store/ArticleState';
 //导入插件
 import 'tinymce/models/dom'
 import 'tinymce/themes/silver'

@@ -3,7 +3,8 @@
         <div class="main-box">
             <div class="title-box">
                 <img class="title-icon" :src="logoUrl">
-                <span>评论区</span>
+                <img class="title-icon" :src="logoUrl">
+                <img class="title-icon" :src="logoUrl">
             </div>
             <div style="display: flex;">
                 <el-row style="width: 100%;">
@@ -16,7 +17,7 @@
                         <div class="content-box">
                             <div style="padding: 5px;">
                                 <div class="edit-placeholder">
-                                    <div ref="placeholder">发表友善评论~</div>
+                                    <div ref="placeholder">发一条友善评论~</div>
                                 </div>
                                 <div class="edit-box">
                                     <span contenteditable="true" ref="text" @input="inputHidePlaceHolder"
@@ -25,7 +26,7 @@
                             </div>
                             <div class="add-box" ref="add">
                                 <div style="width: 25px;height: 25px;">
-                                    <el-popover placement="bottom" title="Title" trigger="click" :width="300"
+                                    <el-popover placement="bottom" title="表情" trigger="click" :width="300"
                                         :hide-after="0" :show-after="0">
                                         <template #reference>
                                             <svg style="width: 100%;height: 100%;" t="1675685525244" class="icon"
@@ -46,10 +47,10 @@
                                         </div>
                                     </el-popover>
                                 </div>
-                                <div class="button-box">
-                                    <el-link :underline="false" href="javascript:;" @click="">
+                                <div class="button-box" @click="commentUpload()">
+                                    <el-link :underline="false" href="javascript:;">
                                         <div>
-                                            <h2>私信</h2>
+                                            <h2>发布</h2>
                                         </div>
                                     </el-link>
                                 </div>
@@ -64,17 +65,22 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useStore } from '@/store/ArtState'
+import axios from '@/api/axios'
+import { useStore } from '@/store/ArticleState'
+import { useStore as cmtStore } from '@/store/CommentState'
+import { useStore as userStore } from '@/store/UserInfoState'
 import { useRoute } from 'vue-router'
+import { getNowTime } from '@/hooks/hooks'
+import { ElMessage } from 'element-plus'
 const store = useStore()
+const cmtstore = cmtStore()
+const userstore = userStore()
 const route = useRoute()
-
 const text = ref()
 const placeholder = ref()
 const add = ref()
 const logoUrl = new URL(`@/assets/images/logo.png`, import.meta.url).href
 const id = Number(route.params.id)
-
 const emojis = [
     '😀', '😄', '😅', '🤣', '😂', '😉', '😊', '😍', '😘', '😜',
     '😝', '😏', '😒', '🙄', '😔', '😴', '😷', '🤮', '🥵', '😎',
@@ -82,6 +88,7 @@ const emojis = [
     '😺', '😹', '😻', '🤚', '💩', '👍', '👎', '👏', '🙏', '💪'
 ]
 let img = emojis.map(emoji => ({ text: emoji }))
+
 function inputHidePlaceHolder() {
     placeholder.value.style.display = 'none'
 }
@@ -93,6 +100,38 @@ function blurShowPlaceHolder() {
 function getEmoji(emoji: any) {
     placeholder.value.style.display = 'none'
     text.value.innerText = text.value.innerText + emoji
+}
+function commentUpload() {
+    const content = text.value.innerText
+    const date = getNowTime()
+    const artId = id
+    if (text.value.innerText === '') {
+        ElMessage.warning('评论内容不能为空!')
+    } else {
+        axios.post('/user/cmtpost', {
+            content,
+            date,
+            artId,
+        })
+            .then(res => {
+                ElMessage.success('发布评论成功!')
+                const comment = {
+                    artId: id,
+                    article: '',
+                    cmtId: 0,
+                    content: content,
+                    date: date,
+                    user: {
+                        avatar: userstore.$state.userAvatar,
+                        nickname: userstore.$state.userNickname,
+                        username: userstore.$state.userName,
+                    },
+
+                }
+                cmtstore.$state.comments.unshift(comment)
+            })
+            .catch(err => {})
+    }
 }
 </script>
 
@@ -114,7 +153,7 @@ function getEmoji(emoji: any) {
 
     .main-box {
         .title-box {
-            .publicMP(0 0 10px 0, 0);
+            .publicMP(0 0 20px 0, 0);
             .publicFlex(center, none, none);
 
             span {

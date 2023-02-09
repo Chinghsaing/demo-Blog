@@ -1,5 +1,5 @@
-import { defineStore } from "pinia";
-import { ElMessage } from "element-plus";
+import { defineStore } from "pinia"
+import { ElMessage } from "element-plus"
 import axios from '@/api/axios'
 //定义数据类型
 interface stateType {
@@ -26,7 +26,7 @@ interface DataType {
     date: string
 }
 export const useStore = defineStore({
-    id: "ArtState",
+    id: "ArticleState",
 
     state: (): stateType => ({
         ArtData: [],
@@ -40,11 +40,7 @@ export const useStore = defineStore({
                     this.ArtData = res.data
                     this.getDataSuccess = true
                 })
-                .catch(err => {
-                    console.log(err);
-
-                    ElMessage.error('获取页面数据失败! 错误原因:' + err.message)
-                })
+                .catch(err => {})
         }
     }
 })
