@@ -5,7 +5,7 @@
             <h2 :style="TextColor">{{ data.title }}</h2>
         </div>
         <div class="buttom-group">
-            <div v-if="signstore.$state.isLogin" class="user-box" :style="TextColor">
+            <!-- <div v-if="signstore.$state.isLogin" class="user-box" :style="TextColor">
                 <ul>
                     <li class="li1"><span>{{ userstore.$state.userName }}</span></li>
                     <li class="li2" @click="$router.push('/platform/account')" style="border-radius: 10px 10px 0 0;">个人</li>
@@ -13,10 +13,22 @@
                     <li class="li2">注销</li>
                     <li class="li2" style="border-radius:0 0 10px 10px;" @click="logOut">注销</li>
                 </ul>
-            </div>
-            <el-button v-if="!signstore.$state.isLogin" type="primary" style="--el-button-hover-bg-color:transparent"
-                size="large" @click="signstore.$state.showSignView = true" color="transparent"
-                :icon="data.buttonIcon.button_1_icon" :style="TextColor">{{
+            </div> -->
+            <el-popover v-if="signstore.$state.isLogin" placement="bottom" width="150" trigger="hover"
+                popper-class="userbox" :show-arrow="false" :hide-after="2">
+                <template #reference>
+                    <el-button class="name" type="primary" style="--el-button-hover-bg-color:transparent" size="large"
+                        @click="signstore.$state.showSignView = true" color="transparent" :style="TextColor">
+                        {{ userstore.$state.userName }}
+                    </el-button>
+                </template>
+                <ul>
+                    <li @click="$router.push('/platform/account')">个人</li>
+                    <li @click="logOut">注销</li>
+                </ul>
+            </el-popover>
+            <el-button v-else type="primary" style="--el-button-hover-bg-color:transparent" size="large" @click=""
+                color="transparent" :icon="data.buttonIcon.button_1_icon" :style="TextColor">{{
                     data.buttonText.button_1
                 }}</el-button>
             <el-button type="primary" style="--el-button-hover-bg-color:transparent" size="large" @click=""
@@ -47,7 +59,7 @@
 import { useStore } from "@/store/HomeState"
 import { useStore as useSignStore } from "@/store/SignState"
 import { useStore as useInfoStore } from "@/store/UserInfoState"
-import { reactive, toRefs } from 'vue'
+import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import Sign from "./Sign.vue";
 const router = useRouter()
@@ -104,56 +116,6 @@ function logOut() {
         .publicFlex(none, none, none);
         flex-direction: row-reverse;
 
-        .user-box {
-            position: relative;
-            .publicWH(68px, 40px);
-            margin: 0 0 0 12px;
-            font-size: 16px;
-            font-weight: bold;
-            color: @defaultFont;
-            padding: 0px 6px;
-
-            ul {
-                user-select: none;
-                .publicWH(80px, 38px);
-                position: absolute;
-                .publicMP(0px, 0px);
-                list-style: none;
-                overflow: hidden;
-                border-radius: 10px;
-                transition: all .5s ease;
-                &:hover {
-                    .publicWH(80px, auto);
-                }
-                &:hover .li2{
-                    background-color: #fff;
-                }
-
-                .li1 {
-                    .publicFlex(center, none, none);
-                    .publicWH(80px, 40px);
-                    &:hover {
-                        color: @defaultFonHV;
-                    }
-
-                    span {
-                        .onelineEllipsis(16px);
-                    }
-                }
-
-                .li2 {
-                    .publicFlex(center, none, center);
-                    .publicWH(80px, 38px);
-                    padding: 5px 0px;
-                    transition: all .5s ease;
-                    &:hover {
-                        color: @defaultFonHV;
-                        background-color: @defaultAct;
-                    }
-                }
-            }
-        }
-
         .el-button {
             font-size: 16px;
             font-weight: bold;
@@ -187,28 +149,6 @@ function logOut() {
             .publicWH(16px, 16px) !important
         }
 
-        .user-box {
-            .publicWH(50px, 24px) !important;
-
-            ul {
-                .publicWH(50px, 24px) !important;
-
-                &:hover {
-                    .publicWH(50px, auto) !important;
-                }
-
-                span {
-                    .publicWH(50px, 20px) !important;
-                    font-size: 12px !important;
-                }
-
-                li {
-                    .publicWH(50px, 24px) !important;
-                    font-size: 12px !important;
-                }
-            }
-        }
-
         .el-button {
             font-size: 12px !important;
             height: 20px !important;
@@ -216,6 +156,34 @@ function logOut() {
             &:hover {
                 background-color: @defaultCR !important;
                 border-bottom: 2px solid @defaultFont !important;
+            }
+        }
+    }
+}
+</style>
+<style lang="less">
+.userbox {
+    backdrop-filter: blur(5px) !important;
+    background-color: transparent !important;
+    .publicMP(0, 0) !important;
+    border-radius: 10px !important;
+
+    ul {
+        box-sizing: border-box;
+        .publicMP(0, 0);
+        list-style: none !important;
+        font-size: 14px;
+        font-weight: bold;
+        color: @defaultFont;
+
+        li {
+            user-select: none;
+            border-radius: 10px !important;
+            .publicFlex(center, none, center);
+            padding: 10px 10px;
+
+            &:hover {
+                background-color: rgba(93, 93, 93, 0.1);
             }
         }
     }

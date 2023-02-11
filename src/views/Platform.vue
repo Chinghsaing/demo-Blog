@@ -56,6 +56,9 @@ const store = useStore()
                     &:hover {
                         background-color: @buttonHV;
                     }
+                    &:focus {
+                        background-color: @buttonHV;
+                    }
                 }
             }
         }
