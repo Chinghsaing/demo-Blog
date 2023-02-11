@@ -47,7 +47,7 @@
                 <div v-if="signstore.$state.isLogin" style="display:flex;margin-top: 20px;">
                     <div class="select">
                         <el-badge :value="10" :max="99" :is-dot="false" :hidden="false">
-                            <el-button type="primary" size="default" @click="$router.push('/platform/myarticle')"
+                            <el-button type="primary" @click="$router.push('/platform/myarticle')"
                                 style="--el-button-hover-bg-color:transparent;" round color="transparent">文章</el-button>
                         </el-badge>
 
@@ -55,7 +55,7 @@
                     </div>
                     <div class="select">
                         <el-badge :value="3" :max="99" :is-dot="false" :hidden="false">
-                            <el-button type="primary" size="default" @click=""
+                            <el-button type="primary" @click=""
                                 style="--el-button-hover-bg-color:transparent;" round color="transparent">关注</el-button>
                         </el-badge>
 
@@ -63,7 +63,7 @@
                     </div>
                     <div class="select">
                         <el-badge :value="5" :max="99" :is-dot="false" :hidden="false">
-                            <el-button type="primary" size="default" @click=""
+                            <el-button type="primary" @click=""
                                 style="--el-button-hover-bg-color:transparent;" round color="transparent">喜欢</el-button>
                         </el-badge>
 
@@ -273,7 +273,7 @@ function tagblurUpdate() {
             .name {
                 margin: 0;
                 padding: 0;
-                color: @defalutTextHv;
+                color: @defaultTextHv;
                 font-size: 12px;
             }
         }

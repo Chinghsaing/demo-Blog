@@ -23,3 +23,5 @@ export const articleList = () => getWithoutParams('/api/artlist')
 export const getUser = () => getWithoutParams('/user/getuser')
 //获取用户个人文章
 export const userArticle = () => getWithoutParams('/user/userarticle')
+//删除文章及其评论
+export const articleDelete = (params: any) => post('/user/artdelete', params)

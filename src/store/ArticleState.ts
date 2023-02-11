@@ -1,9 +1,8 @@
 import { defineStore } from "pinia"
-import { articleList,userArticle } from '@/api/api'
+import { articleList } from '@/api/api'
 //定义数据类型
 interface stateType {
     ArtData: ArtDataType[]
-    ArtUser: ArtUserType[]
     EditTemp: string
     getDataSuccess: boolean
 }
@@ -25,19 +24,11 @@ interface ArtDataType {
     author: authorType
     date: string
 }
-interface ArtUserType{
-    artId: number
-    artImages: string
-    artTitle: string
-    artContent: string
-    date: string
-}
 export const useStore = defineStore({
     id: "ArticleState",
 
     state: (): stateType => ({
         ArtData: [],
-        ArtUser:[],
         EditTemp: '',
         getDataSuccess: false,
     }),
@@ -48,10 +39,5 @@ export const useStore = defineStore({
                 this.getDataSuccess = true
             })
         },
-        getUserArticleList(){
-            userArticle().then((res:any) => {
-                this.ArtUser = res
-            })
-        }
     }
 })

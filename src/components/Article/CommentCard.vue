@@ -39,7 +39,7 @@ store.getCommentList(id)
     .publicFlex(center, none, center);
     position: relative;
     .publicWH(700px, auto);
-    background-color: #fff;
+    background-color: @buttonWhite;
 
     .avatar-box {
         .publicPos(0, 0, 1);
@@ -64,14 +64,14 @@ store.getCommentList(id)
 
             p {
                 margin-left: 5px;
-                color: @defalutTextHv;
+                color: @defaultTextHv;
                 font-size: 14px;
             }
 
             .date {
                 p {
                     margin-right: 25px;
-                    color: @defalutTextHv;
+                    color: @defaultTextHv;
                     font-size: 12px;
                 }
             }

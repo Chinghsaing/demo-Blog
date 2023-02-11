@@ -2,7 +2,7 @@
     <div class="userinfocard" v-Emerge>
         <el-card shadow="always" :body-style="{ padding: '20px' }">
             <div class="main-container">
-                <el-avatar icon="el-icon-user-solid" size="large" shape="circle" :src="store.$state.ArtData[id-1].author.avatar" fit="fill"></el-avatar>
+                <el-avatar icon="el-icon-user-solid" shape="circle" :src="store.$state.ArtData[id-1].author.avatar" fit="fill"></el-avatar>
                 <span class="name">{{ store.$state.ArtData[id-1].author.username }}</span>
                 <p class="name-tag">{{ store.$state.ArtData[id-1].author.nametag }}</p>
                 <div class="locate-box">
@@ -13,17 +13,17 @@
                 </div>
                 <div style="display:flex;margin-top: 20px;">
                     <div class="select">
-                        <el-button type="primary" size="default" @click=""
+                        <el-button type="primary" @click=""
                             style="--el-button-hover-bg-color:transparent;" round color="transparent">文章</el-button>
                         <p class="select-num">{{ store.$state.ArtData[id-1].author.article.length }}</p>
                     </div>
                     <div class="select">
-                        <el-button type="primary" size="default" @click=""
+                        <el-button type="primary" @click=""
                             style="--el-button-hover-bg-color:transparent;" round color="transparent">关注</el-button>
                         <p class="select-num">{{ store.$state.ArtData[id-1].author.follows }}</p>
                     </div>
                     <div class="select">
-                        <el-button type="primary" size="default" @click=""
+                        <el-button type="primary" @click=""
                             style="--el-button-hover-bg-color:transparent;" round color="transparent">喜欢</el-button>
                         <p class="select-num">{{ store.$state.ArtData[id-1].author.like }}</p>
                     </div>

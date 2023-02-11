@@ -23,6 +23,9 @@ function showMessage(code: number) {
         case 700:
             ElMessage.success('评论发布成功!')
             break
+        case 800:
+            ElMessage.success('删除文章成功!')
+            break
         case 101:
             ElMessage.warning('用户名密码不能为空!')
             break

@@ -191,11 +191,11 @@ const signstore = signStore()
                 }
 
                 &:hover span {
-                    color: @defalutTextHv;
+                    color: @defaultTextHv;
                 }
 
                 &:hover .el-icon {
-                    color: @defalutTextHv;
+                    color: @defaultTextHv;
                 }
             }
         }

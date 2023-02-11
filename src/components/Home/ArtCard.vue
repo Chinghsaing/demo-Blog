@@ -13,7 +13,7 @@
                     </div>
                     <div class="right-content-bottom-container">
                         <div class="athuor-container">
-                            <el-avatar icon="el-icon-user-solid" size="default" shape="circle" :src="item.author.avatar"
+                            <el-avatar icon="el-icon-user-solid" shape="circle" :src="item.author.avatar"
                                 fit="cover"></el-avatar>
                             <div class="athuor-name-container">
                                 <div style="margin-left: 10px;">
@@ -26,9 +26,9 @@
                             </div>
                         </div>
                         <div class="share-container">
-                            <el-button type="info" size="default" @click="" icon="Share" color="#fff"
+                            <el-button type="info" @click="" icon="Share" color="#fff"
                                 circle></el-button>
-                            <el-button type="primary" size="default" @click="" circle>
+                            <el-button type="primary" @click="" circle>
                                 <svg t="1673785497731" class="icon" viewBox="0 0 1024 1024" version="1.1"
                                     xmlns="http://www.w3.org/2000/svg" p-id="2527" width="20" height="20">
                                     <path
@@ -36,7 +36,7 @@
                                         p-id="2528" fill="#ffffff"></path>
                                 </svg>
                             </el-button>
-                            <el-button type="success" size="default" @click="" circle>
+                            <el-button type="success" @click="" circle>
                                 <svg t="1673785926866" class="icon" viewBox="0 0 1024 1024" version="1.1"
                                     xmlns="http://www.w3.org/2000/svg" p-id="3524" width="20" height="20">
                                     <path
@@ -44,7 +44,7 @@
                                         fill="#ffffff" p-id="3525"></path>
                                 </svg>
                             </el-button>
-                            <el-button type="warning" size="default" @click="" icon="Link" circle></el-button>
+                            <el-button type="warning" @click="" icon="Link" circle></el-button>
                         </div>
                     </div>
                 </div>
@@ -97,7 +97,7 @@ function goDetail(id: number) {
                     transition: all .2s ease;
 
                     &:hover {
-                        color: @defalutTextHv;
+                        color: @defaultTextHv;
                     }
 
                     &:active {
@@ -129,7 +129,7 @@ function goDetail(id: number) {
                             transition: all .2s ease;
 
                             &:hover {
-                                color: @defalutTextHv;
+                                color: @defaultTextHv;
                             }
 
                             &:active {
@@ -140,7 +140,7 @@ function goDetail(id: number) {
                         .subtitle {
                             .publicMP(0 0 0 5px, 0px);
                             font-size: 12px;
-                            color: @defalutTextHv;
+                            color: @defaultTextHv;
                         }
 
                         p {

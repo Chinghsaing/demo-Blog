@@ -100,13 +100,13 @@ function submit() {
 
 <style scoped lang="less">
 :deep(.avatar-uploader .el-upload) {
-    border: 1px dashed #fff;
+    border: 1px dashed @buttonWhite;
     border-radius: 10px;
     cursor: pointer;
     position: relative;
     overflow: hidden;
     transition: var(--el-transition-duration-fast);
-    background-color: #fff;
+    background-color: @buttonWhite;
     flex-direction: column;
 }
 
@@ -155,12 +155,12 @@ function submit() {
                 }
 
                 p {
-                    color: @defalutTextHv;
+                    color: @defaultTextHv;
                     text-align: center;
                     .publicWH(100%, auto);
                     .publicMP(0, 0);
-                    border-top: 1px dashed @defalutTextHv;
-                    background-color: #fff;
+                    border-top: 1px dashed @defaultTextHv;
+                    background-color: @buttonWhite;
                 }
             }
 
@@ -168,7 +168,7 @@ function submit() {
                 margin-top: 20px;
                 .publicFlex(none, none, center);
                 .publicWH(100%, 34px);
-                background-color: rgb(241, 129, 219);
+                background-color: @buttonColor;
                 border-radius: 20px;
                 box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.2);
 

@@ -113,7 +113,7 @@ function commentUpload() {
             date: date,
             artId: artId,
         }).then((res: any) => {
-            if (res.res_code === 700) {
+            if (res.code === 700) {
                 const comment = {
                     artId: id,
                     article: '',
@@ -168,7 +168,7 @@ function commentUpload() {
 
         .content-box {
             width: 100%;
-            border: 1px solid @defalutTextHv;
+            border: 1px solid @defaultTextHv;
             border-radius: 10px;
             position: relative;
             padding: 0 10px;
@@ -180,7 +180,7 @@ function commentUpload() {
                 position: absolute;
                 min-height: 32px;
                 min-width: 100%;
-                color: @defalutTextHv;
+                color: @defaultTextHv;
                 .publicFlex(center, none, none);
 
                 div {
@@ -208,7 +208,7 @@ function commentUpload() {
 
             .add-box {
                 .publicMP(0, 5px);
-                // border-top: 1px solid @defalutTextHv;
+                // border-top: 1px solid @defaultTextHv;
                 .publicFlex(center, none, space-between);
 
                 .button-box {

@@ -11,7 +11,7 @@
                     <li class="li2" @click="$router.push('/platform/account')" style="border-radius: 10px 10px 0 0;">个人</li>
                     <li class="li2">注销</li>
                     <li class="li2">注销</li>
-                    <li class="li2" @click="logOut">注销</li>
+                    <li class="li2" style="border-radius:0 0 10px 10px;" @click="logOut">注销</li>
                 </ul>
             </div>
             <el-button v-if="!signstore.$state.isLogin" type="primary" style="--el-button-hover-bg-color:transparent"
