@@ -39,7 +39,7 @@
 </template>
 
 <script setup lang="ts">
-import axios from "@/api/axios";
+import { articlePost } from "@/api/api";
 import Editor from "@/components/Editor.vue"
 import NavBar from "@/components/NavBar.vue";
 import { ref } from 'vue'
@@ -64,9 +64,7 @@ function articleUpload(upload: any) {
     formData.append('articleTitle', articleTitle)
     formData.append('articleContent', content)
     formData.append('articleDate', time)
-    axios.post('/user/artPost', formData)
-        .then(res => {})
-        .catch(err => {})
+    articlePost(formData)
 }
 //图片上传验证
 function beforeCoverUpload(rawFile: any) {
@@ -175,7 +173,7 @@ function submit() {
                 box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.2);
 
                 &:hover {
-                    background-color: @defaultTitle;
+                    background-color: @buttonHV;
                 }
 
                 h2 {

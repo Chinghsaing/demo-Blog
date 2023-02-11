@@ -8,3 +8,7 @@ export const getNowTime = () => {
     let nowtime = y + "-" + mt + "-" + day + " " + h + ":" + m
     return nowtime
 }
+
+export const delHtmlTag = (str: string) => {
+    return str.replace(/<[^>]+>/g, '').replaceAll('&nbsp;', '')
+}

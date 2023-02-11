@@ -32,8 +32,8 @@ const init = reactive({
     width: 1200,
     resize: false,
     statusbar: false,
-    skin_url: '/tinymce/skins/ui/oxide',
-    emoticons_database_url: '/tinymce/emojis.js',
+    skin_url: 'tinymce/skins/ui/oxide',
+    emoticons_database_url: 'tinymce/emojis.js',
     branding: false,
     nonbreaking_force_tab: true,
 

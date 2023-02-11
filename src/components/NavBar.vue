@@ -8,10 +8,10 @@
             <div v-if="signstore.$state.isLogin" class="user-box" :style="TextColor">
                 <ul>
                     <li class="li1"><span>{{ userstore.$state.userName }}</span></li>
+                    <li class="li2" @click="$router.push('/platform/account')" style="border-radius: 10px 10px 0 0;">个人</li>
+                    <li class="li2">注销</li>
+                    <li class="li2">注销</li>
                     <li class="li2" @click="logOut">注销</li>
-                    <li class="li2">注销</li>
-                    <li class="li2">注销</li>
-                    <li class="li2">注销</li>
                 </ul>
             </div>
             <el-button v-if="!signstore.$state.isLogin" type="primary" style="--el-button-hover-bg-color:transparent"
@@ -115,21 +115,23 @@ function logOut() {
 
             ul {
                 user-select: none;
-                .publicWH(68px, 38px);
+                .publicWH(80px, 38px);
                 position: absolute;
                 .publicMP(0px, 0px);
                 list-style: none;
                 overflow: hidden;
                 border-radius: 10px;
-
+                transition: all .5s ease;
                 &:hover {
-                    .publicWH(68px, auto);
+                    .publicWH(80px, auto);
+                }
+                &:hover .li2{
+                    background-color: #fff;
                 }
 
                 .li1 {
                     .publicFlex(center, none, none);
                     .publicWH(80px, 40px);
-
                     &:hover {
                         color: @defaultFonHV;
                     }
@@ -141,11 +143,12 @@ function logOut() {
 
                 .li2 {
                     .publicFlex(center, none, center);
-                    .publicWH(68px, 38px);
+                    .publicWH(80px, 38px);
                     padding: 5px 0px;
-
+                    transition: all .5s ease;
                     &:hover {
                         color: @defaultFonHV;
+                        background-color: @defaultAct;
                     }
                 }
             }

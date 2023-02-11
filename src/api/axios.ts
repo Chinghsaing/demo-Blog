@@ -1,6 +1,6 @@
 import axios from 'axios'
 import showMessage from '@/api/status'
-import {ElMessage } from 'element-plus'
+import { ElMessage } from 'element-plus'
 import router from '@/router/index.js'
 import { useStore as signStore } from '@/store/SignState'
 import { useStore as userInfoStore } from '@/store/UserInfoState'
@@ -26,13 +26,15 @@ axios.interceptors.request.use(
 
 axios.interceptors.response.use(
     response => {
-        if (response.data.res_code === 0) {
+        if (response.data.code === 0) {
             router.replace('/')
             signStore().isLogin = false
+            signStore().showSignView = true
             userInfoStore().$reset()
             localStorage.removeItem('token')
-        }else{
-            showMessage(response.data.res_code)
+            ElMessage.error('请先登录!')
+        } else {
+            showMessage(response.data.code)
         }
         return response
     },
@@ -41,4 +43,51 @@ axios.interceptors.response.use(
         return Promise.reject(error)
     }
 )
+
+export function get(url: string, params: any) {
+    return new Promise((resolve, reject) => {
+        axios.get(url, {
+            params: params
+        })
+            .then(res => {
+                resolve(res.data)
+            })
+            .catch(err => {
+                reject(err.data)
+            })
+    })
+}
+export function getWithoutParams(url: string) {
+    return new Promise((resolve, reject) => {
+        axios.get(url)
+            .then(res => {
+                resolve(res.data)
+            })
+            .catch(err => {
+                reject(err.data)
+            })
+    })
+}
+export function post(url: string, params: any) {
+    return new Promise((resolve, reject) => {
+        axios.post(url, params)
+            .then(res => {
+                resolve(res.data)
+            })
+            .catch(err => {
+                reject(err.data)
+            })
+    })
+}
+export function postWithoutParams(url: string) {
+    return new Promise((resolve, reject) => {
+        axios.post(url)
+            .then(res => {
+                resolve(res.data)
+            })
+            .catch(err => {
+                reject(err.data)
+            })
+    })
+}
 export default axios

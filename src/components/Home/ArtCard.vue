@@ -54,15 +54,13 @@
 </template>
 
 <script setup lang="ts">
-import { useStore } from '@/store/ArticleState';
+import { useStore } from '@/store/ArticleState'
 import { useRouter } from 'vue-router'
+import { delHtmlTag } from '@/hooks/hooks'
 const store = useStore()
 const router = useRouter()
 function goDetail(id: number) {
     router.push({ name: 'article', params: { id } })
-}
-function delHtmlTag(str: string) {
-    return  str.replace(/<[^>]+>/g, '').replaceAll('&nbsp;', '')
 }
 </script>
 

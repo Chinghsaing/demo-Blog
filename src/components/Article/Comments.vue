@@ -65,7 +65,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import axios from '@/api/axios'
+import { commentPost } from '@/api/api'
 import { useStore } from '@/store/ArticleState'
 import { useStore as cmtStore } from '@/store/CommentState'
 import { useStore as userStore } from '@/store/UserInfoState'
@@ -108,13 +108,12 @@ function commentUpload() {
     if (text.value.innerText === '') {
         ElMessage.warning('评论内容不能为空!')
     } else {
-        axios.post('/user/cmtpost', {
-            content,
-            date,
-            artId,
-        })
-            .then(res => {
-                ElMessage.success('发布评论成功!')
+        commentPost({
+            content: content,
+            date: date,
+            artId: artId,
+        }).then((res: any) => {
+            if (res.res_code === 700) {
                 const comment = {
                     artId: id,
                     article: '',
@@ -129,8 +128,8 @@ function commentUpload() {
 
                 }
                 cmtstore.$state.comments.unshift(comment)
-            })
-            .catch(err => {})
+            }
+        })
     }
 }
 </script>

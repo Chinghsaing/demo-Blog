@@ -47,7 +47,7 @@
                 <div v-if="signstore.$state.isLogin" style="display:flex;margin-top: 20px;">
                     <div class="select">
                         <el-badge :value="10" :max="99" :is-dot="false" :hidden="false">
-                            <el-button type="primary" size="default" @click=""
+                            <el-button type="primary" size="default" @click="$router.push('/platform/myarticle')"
                                 style="--el-button-hover-bg-color:transparent;" round color="transparent">文章</el-button>
                         </el-badge>
 
@@ -84,11 +84,11 @@
 
 <script setup lang="ts">
 //导入模块
-import axios from '@/api/axios';
+import { userAvatarUpdate, userNicknameUpdate, userNameTagUpdate } from '@/api/api'
 import { ElMessage } from 'element-plus'
 import { useStore } from '@/store/UserInfoState'
 import { useStore as useSignStore } from "@/store/SignState"
-import { ref, reactive } from 'vue';
+import { ref } from 'vue'
 //声明仓库
 const store = useStore()
 const signstore = useSignStore()
@@ -102,11 +102,7 @@ let oriTag = ''
 function avatarUpdate(upload: any) {
     const formData = new FormData() //封装成formdata格式上传
     formData.append('avatar', upload.file)
-
-    axios.post('/user/avatar', formData)
-        .then(res => {})
-        .catch(err => {})
-
+    userAvatarUpdate(formData)
 }
 //头像上传大小格式验证
 function beforeavatarUpdate(rawFile: any) {
@@ -143,15 +139,13 @@ function nicknameblurUpdate() {
             ElMessage.error('昵称不能包括特殊符号，且长度须在1至12位!')
             store.$state.userNickname = oriNickname
         } else {
-            axios.post('/user/nickname', {
+            userNicknameUpdate({
                 newNickname: newNickname
+            }).then((res: any) => {
+                if (res.code === 500) {
+                    localStorage.setItem('nickname', newNickname)
+                }
             })
-                .then(res => {
-                    if (res.data.res_code === 500) {
-                        localStorage.setItem('nickname', newNickname)
-                    }
-                })
-                .catch(err => { })
         }
     } else {
         return
@@ -166,16 +160,13 @@ function tagblurUpdate() {
             ElMessage.error('签名长度须在1到16个字符!')
             store.$state.userNameTag = oriTag
         } else {
-            axios.post('/user/usertag', {
+            userNameTagUpdate({
                 newTag: newTag
+            }).then((res: any) => {
+                if (res.code === 600) {
+                    localStorage.setItem('nametag', newTag)
+                }
             })
-                .then(res => {
-                    if (res.data.res_code === 600) {
-                        localStorage.setItem('nametag', newTag)
-                    }
-
-                })
-                .catch(err => { })
         }
     } else {
         return

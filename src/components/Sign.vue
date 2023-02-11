@@ -124,11 +124,9 @@
 <script setup lang="ts">
 import { useStore } from "@/store/SignState"
 import { ref, reactive } from 'vue'
-import axios from '@/api/axios'
-import { ElMessage } from "element-plus"
+import { signIn, signUp } from '@/api/api'
 import { useStore as useSignStore } from "@/store/SignState"
 import { useStore as useUserInfoStore } from "@/store/UserInfoState";
-import { set } from "lodash"
 const store = useStore()
 const signStore = useSignStore()
 const userInfoStore = useUserInfoStore()
@@ -219,18 +217,15 @@ const submitSignUpForm = (formEl: any) => {
     if (!formEl) return
     formEl.validate((valid: any) => {
         if (valid) {
-            axios.post('/api/reg', {
+            signUp({
                 username: signUpData.username,
                 password: signUpData.password,
                 checkpassword: signUpData.checkPassword,
+            }).then((res: any) => {
+                if (res.code === 100) {
+                    formEl.resetFields()
+                }
             })
-                .then(res => {
-                    if (res.data.res_code === 100) {
-                        formEl.resetFields()
-                    }
-                })
-                .catch(err => { })
-
         } else {
             return false
         }
@@ -241,20 +236,18 @@ const submitSignInForm = (formEl: any) => {
     if (!formEl) return
     formEl.validate((valid: any) => {
         if (valid) {
-            axios.post('/api/log', {
+            signIn({
                 username: signInData.username,
                 password: signInData.password
+            }).then((res: any) => {
+                if (res.code === 200) {
+                    signStore.$state.showSignView = false
+                    signStore.$state.isLogin = true
+                    userInfoStore.getUserInfo(res.data[0])
+                    localStorage.setItem('token', res.token)
+                    formEl.resetFields()
+                }
             })
-                .then(res => {
-                    if (res.data.res_code === 200) {
-                        signStore.$state.showSignView = false
-                        signStore.$state.isLogin = true
-                        userInfoStore.getUserInfo(res.data.res_data[0])
-                        localStorage.setItem('token', res.data.token)
-                        formEl.resetFields()
-                    }
-                })
-                .catch(err => { })
         } else {
             return false
         }

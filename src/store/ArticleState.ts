@@ -1,11 +1,11 @@
 import { defineStore } from "pinia"
-import { ElMessage } from "element-plus"
-import axios from '@/api/axios'
+import { articleList,userArticle } from '@/api/api'
 //定义数据类型
 interface stateType {
-    ArtData: DataType[]
+    ArtData: ArtDataType[]
+    ArtUser: ArtUserType[]
     EditTemp: string
-    getDataSuccess:boolean
+    getDataSuccess: boolean
 }
 interface authorType {
     avatar: string
@@ -17,7 +17,7 @@ interface authorType {
     nickname: string
     article: []
 }
-interface DataType {
+interface ArtDataType {
     artId: number
     artImages: string
     artTitle: string
@@ -25,22 +25,33 @@ interface DataType {
     author: authorType
     date: string
 }
+interface ArtUserType{
+    artId: number
+    artImages: string
+    artTitle: string
+    artContent: string
+    date: string
+}
 export const useStore = defineStore({
     id: "ArticleState",
 
     state: (): stateType => ({
         ArtData: [],
+        ArtUser:[],
         EditTemp: '',
-        getDataSuccess:false,
+        getDataSuccess: false,
     }),
     actions: {
         getArticleList() {
-            axios.get('/api/artlist')
-                .then(res => {
-                    this.ArtData = res.data
-                    this.getDataSuccess = true
-                })
-                .catch(err => {})
+            articleList().then((res: any) => {
+                this.ArtData = res
+                this.getDataSuccess = true
+            })
+        },
+        getUserArticleList(){
+            userArticle().then((res:any) => {
+                this.ArtUser = res
+            })
         }
     }
 })

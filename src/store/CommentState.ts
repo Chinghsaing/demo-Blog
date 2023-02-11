@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
-import axios from '@/api/axios'
-import { ElMessage } from "element-plus"
+import { commentList } from '@/api/api'
 interface stateType {
     comments: DataType[]
 }
@@ -23,11 +22,11 @@ export const useStore = defineStore({
     }),
     actions: {
         getCommentList(id: any) {
-            axios.get('/api/cmtlist?id=' + id)
-                .then(res => {
-                    this.comments = res.data
-                })
-                .catch(err => {})
+            commentList({
+                'id':id
+            }).then((res: any) => {
+                this.comments = res
+            })
         }
     }
 })

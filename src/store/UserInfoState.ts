@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { useStore as signStore } from './SignState'
-import axios from '@/api/axios';
+import { getUser } from '@/api/api';
 export const useStore = defineStore({
     id: "UserInfoState",
 
@@ -34,24 +34,19 @@ export const useStore = defineStore({
             localStorage.setItem('avatar', info.avatar)
         },
         getLocalInfo() {
-            axios.get('/user/getuser')
-                .then(res => {
-                    localStorage.setItem('article', res.data.article.length)
-                    localStorage.setItem('follows', res.data.follows)
-                    localStorage.setItem('like', res.data.like)
-
-                    this.userName = localStorage.getItem('username') as string
-                    this.userNickname = localStorage.getItem('nickname') as string
-                    this.userNameTag = localStorage.getItem('nametag') as string
-                    this.userArticle = localStorage.getItem('article') as string
-                    this.userFollows = localStorage.getItem('follows') as string
-                    this.userLike = localStorage.getItem('like') as string
-                    this.userAvatar = localStorage.getItem('avatar') as string
-
-                    signStore().$state.isLogin = true
-                })
-                .catch(err => {
-                })
+            getUser().then((res: any) => {
+                localStorage.setItem('article', res.article.length)
+                localStorage.setItem('follows', res.follows)
+                localStorage.setItem('like', res.like)
+                this.userName = localStorage.getItem('username') as string
+                this.userNickname = localStorage.getItem('nickname') as string
+                this.userNameTag = localStorage.getItem('nametag') as string
+                this.userArticle = localStorage.getItem('article') as string
+                this.userFollows = localStorage.getItem('follows') as string
+                this.userLike = localStorage.getItem('like') as string
+                this.userAvatar = localStorage.getItem('avatar') as string
+                signStore().$state.isLogin = true
+            })
         },
         clearLocalInfo() {
             this.$reset()

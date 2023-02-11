@@ -3,27 +3,23 @@
 </template>
 
 <script setup lang="ts">
-import axios from '@/api/axios'
+import { authorized } from '@/api/api'
 import { useStore } from '@/store/ArticleState'
 import { useStore as userStore } from '@/store/UserInfoState'
-import { ElMessage } from 'element-plus';
 const store = useStore()
 const userstore = userStore()
 function init() {
     store.getArticleList()
     if (localStorage.getItem('token')) {
-        axios.post('/user/authorized')
-            .then(res => {
-                if (res.data.res_code === 0) {
-                    userstore.clearLocalInfo()
-                    ElMessage.error('登录已失效，请重新登录!')
-                } else {
-                    userstore.getLocalInfo()
-                }
-            })
-            .catch(err => {
+        authorized().then((res: any) => {
+            if (res.code === 0) {
                 userstore.clearLocalInfo()
-            })
+            } else {
+                userstore.getLocalInfo()
+            }
+        }).catch(err => {
+            userstore.clearLocalInfo()
+        })
     }
 }
 init()
