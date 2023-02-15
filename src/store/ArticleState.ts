@@ -4,6 +4,7 @@ import { articleList } from '@/api/api'
 interface stateType {
     ArtData: ArtDataType[]
     EditTemp: string
+    CataLog:any[]
     getDataSuccess: boolean
 }
 interface authorType {
@@ -30,6 +31,7 @@ export const useStore = defineStore({
     state: (): stateType => ({
         ArtData: [],
         EditTemp: '',
+        CataLog:[],
         getDataSuccess: false,
     }),
     actions: {

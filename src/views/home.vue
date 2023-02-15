@@ -62,6 +62,7 @@
                 </div>
             </div>
         </div>
+        <Copyright></Copyright>
     </div>
 </template>
 
@@ -71,7 +72,7 @@ import TextAmt from '@/components/Home/TextAmt.vue'
 import NewsCard from '@/components/Home/NewsCard.vue'
 import UserInfoCard from '@/components/Home/UserInfoCard.vue'
 import ArtCard from '@/components/Home/ArtCard.vue'
-
+import Copyright from '@/components/Copyright.vue'
 import { useStore } from '@/store/HomeState'
 import { useStore as signStore } from '@/store/SignState'
 const store = useStore()
@@ -138,8 +139,8 @@ const signstore = signStore()
     box-sizing: border-box;
     .publicWH(100%, auto);
     .publicMP(0, 0 5% 0 5%);
-    background-color: @defaultBG;
-
+    background-color: rgba(244, 231, 210,.1);
+    backdrop-filter: blur(8px);
     .card-container {
         position: relative;
         .publicFlex(none, none, center);

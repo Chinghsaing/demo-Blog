@@ -1,11 +1,6 @@
 <template>
     <div class="comments-container">
         <div class="main-box">
-            <div class="title-box">
-                <img class="title-icon" :src="logoUrl">
-                <img class="title-icon" :src="logoUrl">
-                <img class="title-icon" :src="logoUrl">
-            </div>
             <div style="display: flex;">
                 <el-row style="width: 100%;">
                     <el-col :span="2">
@@ -39,7 +34,7 @@
                                         </template>
                                         <div>
                                             <ul style="list-style: none;padding: 0;">
-                                                <li v-for="(item, index) in img " :key="index"
+                                                <li v-for="(item, index) in emoji " :key="index"
                                                     @click="getEmoji(item.text)">
                                                     {{ item.text }}
                                                 </li>
@@ -70,7 +65,7 @@ import { useStore } from '@/store/ArticleState'
 import { useStore as cmtStore } from '@/store/CommentState'
 import { useStore as userStore } from '@/store/UserInfoState'
 import { useRoute } from 'vue-router'
-import { getNowTime } from '@/hooks/hooks'
+import { getNowTime,emojis } from '@/hooks/hooks'
 import { ElMessage } from 'element-plus'
 const store = useStore()
 const cmtstore = cmtStore()
@@ -81,13 +76,7 @@ const placeholder = ref()
 const add = ref()
 const logoUrl = new URL(`@/assets/images/logo.png`, import.meta.url).href
 const id = Number(route.params.id)
-const emojis = [
-    '😀', '😄', '😅', '🤣', '😂', '😉', '😊', '😍', '😘', '😜',
-    '😝', '😏', '😒', '🙄', '😔', '😴', '😷', '🤮', '🥵', '😎',
-    '😮', '😰', '😭', '😱', '😩', '😡', '💀', '👽', '🤓', '🥳',
-    '😺', '😹', '😻', '🤚', '💩', '👍', '👎', '👏', '🙏', '💪'
-]
-let img = emojis.map(emoji => ({ text: emoji }))
+const emoji = emojis()
 
 function inputHidePlaceHolder() {
     placeholder.value.style.display = 'none'
@@ -125,7 +114,6 @@ function commentUpload() {
                         nickname: userstore.$state.userNickname,
                         username: userstore.$state.userName,
                     },
-
                 }
                 cmtstore.$state.comments.unshift(comment)
             }
@@ -153,7 +141,7 @@ function commentUpload() {
     .main-box {
         .title-box {
             .publicMP(0 0 20px 0, 0);
-            .publicFlex(center, none, none);
+            .publicFlex(center, none, space-between);
 
             span {
                 font-weight: bold;
@@ -208,7 +196,6 @@ function commentUpload() {
 
             .add-box {
                 .publicMP(0, 5px);
-                // border-top: 1px solid @defaultTextHv;
                 .publicFlex(center, none, space-between);
 
                 .button-box {

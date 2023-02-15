@@ -26,6 +26,7 @@
 @buttonWhite:#fff;
 @buttonHV:rgb(232, 115, 209);
 @editorBG:rgb(249, 215, 242);
+@defaultLike:#f56c6c;
 //公共样式
 .publicWH(@w, @h) {
     width: @w;
@@ -94,7 +95,11 @@
     animation-duration: @time;
     animation-timing-function: @ease;
 }
-
+.bottomSlideIn(@time, @ease){
+    animation-name: topSlideIn;
+    animation-duration: @time;
+    animation-timing-function: @ease;
+}
 .opacityAmt(@time, @ease) {
     animation-name: opacityAmt;
     animation-duration: @time;
@@ -140,6 +145,15 @@
     }
 }
 
+@keyframes bottomSlideIn {
+    from {
+        margin-bottom: 100%;
+    }
+
+    to {
+        margin-bottom: 0%;
+    }
+}
 @keyframes opacityAmt {
     from {
         opacity: 0;

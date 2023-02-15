@@ -4,9 +4,16 @@ interface stateType {
     comments: DataType[]
 }
 interface userType {
+    uid:string
     avatar: string
     nickname: string
     username: string
+}
+interface replyType {
+    user:userType
+    toUser:userType
+    replyContent:string
+    date:string
 }
 interface DataType {
     artId: number
@@ -14,6 +21,7 @@ interface DataType {
     content: string
     user: userType
     date: string
+    replycmt?:replyType[]
 }
 export const useStore = defineStore({
     id: "CommentState",

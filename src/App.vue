@@ -1,5 +1,9 @@
 <template>
-    <router-view></router-view>
+    <router-view v-slot="{ Component }">
+        <transition name="fade" mode="default">
+            <component :is="Component" />
+        </transition>
+    </router-view>
 </template>
 
 <script setup lang="ts">

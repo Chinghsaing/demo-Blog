@@ -5,20 +5,11 @@
             <h2 :style="TextColor">{{ data.title }}</h2>
         </div>
         <div class="buttom-group">
-            <!-- <div v-if="signstore.$state.isLogin" class="user-box" :style="TextColor">
-                <ul>
-                    <li class="li1"><span>{{ userstore.$state.userName }}</span></li>
-                    <li class="li2" @click="$router.push('/platform/account')" style="border-radius: 10px 10px 0 0;">个人</li>
-                    <li class="li2">注销</li>
-                    <li class="li2">注销</li>
-                    <li class="li2" style="border-radius:0 0 10px 10px;" @click="logOut">注销</li>
-                </ul>
-            </div> -->
             <el-popover v-if="signstore.$state.isLogin" placement="bottom" width="150" trigger="hover"
                 popper-class="userbox" :show-arrow="false" :hide-after="2">
                 <template #reference>
                     <el-button class="name" type="primary" style="--el-button-hover-bg-color:transparent" size="large"
-                        @click="signstore.$state.showSignView = true" color="transparent" :style="TextColor">
+                        @click="" color="transparent" :style="TextColor">
                         {{ userstore.$state.userName }}
                     </el-button>
                 </template>
@@ -27,7 +18,7 @@
                     <li @click="logOut">注销</li>
                 </ul>
             </el-popover>
-            <el-button v-else type="primary" style="--el-button-hover-bg-color:transparent" size="large" @click=""
+            <el-button v-else type="primary" style="--el-button-hover-bg-color:transparent" size="large" @click="signstore.$state.showSignView = true"
                 color="transparent" :icon="data.buttonIcon.button_1_icon" :style="TextColor">{{
                     data.buttonText.button_1
                 }}</el-button>
@@ -99,7 +90,7 @@ function logOut() {
     .publicMP(0, 0 5% 0 5%);
     .publicFlex(center, none, space-between);
     box-sizing: border-box;
-
+    
     .logo-box {
         .publicWH(fit-content, fit-content);
         color: @defaultFont;
@@ -122,7 +113,6 @@ function logOut() {
             border: none;
             .publicMP(0 0 0 12px, 1px 6px);
             color: @defaultFont;
-
             &:hover {
                 background-color: @defaultCR;
                 border-bottom: 4px solid @defaultFont;

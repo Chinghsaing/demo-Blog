@@ -35,6 +35,7 @@
                 </el-upload>
             </div>
         </div>
+        <Copyright class="copyright"></Copyright>
     </div>
 </template>
 
@@ -47,6 +48,7 @@ import { useStore } from '@/store/ArticleState';
 import { useStore as userStore } from '@/store/UserInfoState';
 import { getNowTime } from '@/hooks/hooks'
 import { ElMessage } from "element-plus";
+import Copyright from '@/components/Copyright.vue'
 const imageUrl = ref('')
 const store = useStore()
 const userstore = userStore()
@@ -132,14 +134,15 @@ function submit() {
 }
 
 .edit-container {
-    .publicWH(100%, 100vh);
-    background-color: @defaultBG;
-
+    position: relative;
+    .publicWH(100%, calc(100vh));
+    background-color: rgba(244, 231, 210,.1);
+    backdrop-filter: blur(8px);
     .editor-box {
-        .publicMP(40px auto 0 auto, 0);
+        .publicMP(20px auto 20px auto,  0 );
         .publicFlex(none, none, center);
         .publicWH(80%, 80%);
-
+        .opacityAmt(2s, ease);
         .submit-box {
             .publicMP(0 0 0 20px, 0);
 
@@ -184,6 +187,11 @@ function submit() {
                 }
             }
         }
+    }
+    .copyright{
+        position: absolute;
+        bottom: 0;
+        z-index: 999;
     }
 }
 </style>

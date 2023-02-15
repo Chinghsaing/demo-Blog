@@ -90,7 +90,6 @@ function goDetail(id: number) {
                 span {  
                     .publicMP(10px 0, 0px);
                     .publicWH(100%, auto);
-                    // .morelinesEllipsis(20px, 2);
                     .onelineEllipsis(20px);
                     color: @pfontColor;
                     font-weight: bold;
