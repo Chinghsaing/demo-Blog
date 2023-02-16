@@ -30,7 +30,7 @@
                                                 d="M675.328 117.717333A425.429333 425.429333 0 0 0 512 85.333333C276.352 85.333333 85.333333 276.352 85.333333 512s191.018667 426.666667 426.666667 426.666667 426.666667-191.018667 426.666667-426.666667c0-56.746667-11.093333-112-32.384-163.328a21.333333 21.333333 0 0 0-39.402667 16.341333A382.762667 382.762667 0 0 1 896 512c0 212.074667-171.925333 384-384 384S128 724.074667 128 512 299.925333 128 512 128c51.114667 0 100.8 9.984 146.986667 29.12a21.333333 21.333333 0 0 0 16.341333-39.402667z m48.384 532.928A234.538667 234.538667 0 0 1 520.405333 768a234.538667 234.538667 0 0 1-203.264-117.333333 21.333333 21.333333 0 0 0-36.949333 21.333333 277.184 277.184 0 0 0 240.213333 138.666667c100.16 0 190.997333-53.546667 240.213334-138.666667a21.333333 21.333333 0 0 0-36.906667-21.333333zM341.333333 426.624c0-23.552 18.944-42.624 42.666667-42.624 23.573333 0 42.666667 19.157333 42.666667 42.624v42.752A42.538667 42.538667 0 0 1 384 512c-23.573333 0-42.666667-19.157333-42.666667-42.624v-42.752z m256 0c0-23.552 18.944-42.624 42.666667-42.624 23.573333 0 42.666667 19.157333 42.666667 42.624v42.752A42.538667 42.538667 0 0 1 640 512c-23.573333 0-42.666667-19.157333-42.666667-42.624v-42.752z"
                                                 fill="#3D3D3D" p-id="3085"></path>
                                         </svg>
-                                        <div class="button-box" @click="replyUpload(index,item.user.uid,item.cmtId)">
+                                        <div class="button-box" @click="replyUpload(index, item.user.uid, item.cmtId)">
                                             <el-link :underline="false" href="javascript:;">
                                                 <div>
                                                     <h2>回复</h2>
@@ -59,16 +59,17 @@
                 <Replycard :replycmt="item.replycmt" :cmtId="item.cmtId"></Replycard>
             </div>
         </div>
-    </TransitionGroup>
+</TransitionGroup>
 </template>
 
 <script setup lang="ts">
 import { commentReply } from '@/api/api'
 import { useStore } from '@/store/CommentState'
 import { useRoute } from 'vue-router'
-import { emojis,getNowTime } from '@/hooks/hooks'
+import { emojis, getNowTime } from '@/hooks/hooks'
 import { ref } from 'vue'
 import Replycard from '@/components/Article/ReplyCard.vue'
+import { ElMessage } from 'element-plus'
 const store = useStore()
 const route = useRoute()
 const id = Number(route.params.id)
@@ -77,10 +78,15 @@ const text = ref()
 function getEmoji(emoji: any, spanId: any) {
     text.value[Number(spanId)].innerText = text.value[Number(spanId)].innerText + emoji
 }
-function replyUpload(index:number,toUserId:string,cmtId:number){
+function replyUpload(index: number, toUserId: string, cmtId: number) {
     const replyContent = text.value[Number(index)].innerText
     const date = getNowTime()
-    commentReply({ toUserId, replyContent, date, cmtId  })
+    if (replyContent === '') {
+        return ElMessage.warning('评论内容不能为空!')
+    } else {
+        commentReply({ toUserId, replyContent, date, cmtId })
+    }
+
 }
 store.getCommentList(id)
 
@@ -106,6 +112,7 @@ store.getCommentList(id)
     .publicWH(700px, auto);
     background-color: transparent;
     flex-direction: column;
+
     .avatar-box {
         .publicPos(0, 0, 1);
     }
@@ -114,6 +121,7 @@ store.getCommentList(id)
         .publicFlex(center, none, center);
         flex-direction: column;
         .publicWH(100%, auto);
+
         .author-box {
             .publicMP(0, 0 0 0 60px);
             .publicWH(100%, 25px);
@@ -156,7 +164,7 @@ store.getCommentList(id)
 
         .content-box {
             border-radius: 10px;
-            margin:0;
+            margin: 0;
             .publicFlex(center, none, center);
             .publicWH(93%, auto);
             background-color: rgb(245, 245, 245);

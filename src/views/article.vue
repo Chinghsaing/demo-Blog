@@ -19,7 +19,7 @@
                                 <el-icon>
                                     <Comment />
                                 </el-icon>
-                                <span>评论数{{cmtstore.$state.comments.length}}</span>
+                                <span>评论数{{ cmtstore.$state.comments.length }}</span>
                             </div>
                             <span style="margin: 10px;">|</span>
                             <div>
@@ -41,7 +41,7 @@
             </div>
         </div>
         <div class="content-container">
-            <div style="width: 65%;">
+            <div style="width: 60%;">
                 <div class="artdetail-container">
                     <div class="title-icon-box" style="padding: 20px;display: flex;justify-content: space-between">
                         <div>
@@ -76,11 +76,6 @@
                         </svg>
                         <span>觉得不错，可以点个喜欢!</span>
                     </div>
-                    <div class="author-box">
-                        <div class="center-box">
-                            <AuthorInfoCard></AuthorInfoCard>
-                        </div>
-                    </div>
                     <div class="comment-box">
                         <div>
                             <div class="title-icon-group">
@@ -109,6 +104,12 @@
                     </div>
                 </div>
             </div>
+            <div class="author-box">
+                <AuthorInfoCard style="margin-bottom: 20px;"></AuthorInfoCard>
+                <el-affix position="top" :offset="20">
+                    <CateLog></CateLog>
+                </el-affix>
+            </div>
         </div>
         <Copyright></Copyright>
     </div>
@@ -124,6 +125,7 @@ import ArtDetail from '@/components/Article/ArtDetail.vue'
 import Comments from '@/components/Article/Comments.vue'
 import CommentCard from '@/components/Article/CommentCard.vue'
 import Copyright from '@/components/Copyright.vue'
+import CateLog from '@/components/Article/CateLog.vue'
 const store = useStore()
 const cmtstore = cmtStore()
 const route = useRoute()
@@ -185,13 +187,14 @@ document.body.scrollTop = 0
 
     .content-container {
         .publicFlex(none, none, center);
-        flex-direction: row-reverse;
+        flex-direction: reverse;
         .publicWH(100%, auto);
         background-color: @defaultBG;
         .bottomSlideIn(1s, ease);
         padding-bottom: 10px;
+        padding-top: 20px;
         .artdetail-container {
-            .publicMP(20px 0 0 0, 0);
+            .publicMP(0, 0);
             .publicWH(auto, auto);
             background-color: #fff;
             border-radius: 10px;
@@ -244,27 +247,26 @@ document.body.scrollTop = 0
                 }
             }
 
-            .author-box {
-                .publicWH(100%, auto);
-                flex-direction: column;
-                .publicFlex(none, none, center);
+            // .author-box {
+            //     .publicWH(100%, auto);
+            //     flex-direction: column;
+            //     .publicFlex(none, none, center);
 
-                .title-icon-group {
-                    .publicMP(0px, 0 20px);
-                    .publicFlex(none, none, space-between);
+            //     .title-icon-group {
+            //         .publicMP(0px, 0 20px);
+            //         .publicFlex(none, none, space-between);
 
-                    .title {
-                        .publicFlex(center, none, none);
-                        font-size: 18px;
-                        font-weight: bold;
-                    }
-                }
+            //         .title {
+            //             .publicFlex(center, none, none);
+            //             font-size: 18px;
+            //             font-weight: bold;
+            //         }
+            //     }
 
-                .center-box {
-                    .publicFlex(none, none, center);
-                }
-            }
-
+            //     .center-box {
+            //         .publicFlex(none, none, center);
+            //     }
+            // }      
             .comment-box {
                 .publicMP(30px 0 0 0, 0);
 
@@ -278,14 +280,16 @@ document.body.scrollTop = 0
                         font-weight: bold;
                     }
                 }
-                .coment-count{
+
+                .coment-count {
                     color: @defaultCancelText;
                     box-sizing: border-box;
                     padding: 0 40px;
                     font-weight: bold;
                 }
+
                 .commentcard-box {
-                    .publicMP(0,0 0 20px 0);
+                    .publicMP(0, 0 0 20px 0);
                     .publicFlex(center, none, center);
                     flex-direction: column;
                 }
@@ -297,6 +301,10 @@ document.body.scrollTop = 0
                 }
             }
 
+        }
+
+        .author-box {
+            margin-left: 20px;
         }
     }
 }

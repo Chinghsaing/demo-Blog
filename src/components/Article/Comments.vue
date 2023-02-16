@@ -136,8 +136,8 @@ function commentUpload() {
 }
 
 .comments-container {
-    .publicMP(0, 20px);
-
+    .publicMP(0 auto, 20px);
+    width: 85%;
     .main-box {
         .title-box {
             .publicMP(0 0 20px 0, 0);

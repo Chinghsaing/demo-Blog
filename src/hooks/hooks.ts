@@ -29,7 +29,7 @@ export const emojis = () => {
 export const getTitle = (ref: any) => {
     const store = useStore()
     const titleTag = ["H1", "H2", "H3"]
-    let titles:any[]=[]
+    let titles: any[] = []
     nextTick(() => {
         ref.value.childNodes.forEach((e: any, index: any) => {
             if (titleTag.includes(e.nodeName)) {
@@ -43,7 +43,27 @@ export const getTitle = (ref: any) => {
                     read: false
                 })
             }
-        })     
+        })
         store.$state.CataLog = titles
     })
+}
+export const getReading = () => {
+    const store = useStore()
+    //获取页面滚动值
+    var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+    //遍历小标题
+    for (let i = 0; i < store.$state.CataLog.length; i++) {
+        //获取小标题距离屏幕顶端的距离
+        var offsetTop = (document.querySelector("#" + store.$state.CataLog[i].id) as HTMLElement).offsetTop
+        //根据条件做出判断，我这里是当小标题和屏幕顶端的距离小于300且没有被标明在读时，就将其背景颜色改变。
+        if ((offsetTop - scrollTop) < 50 && (offsetTop - scrollTop) > 0 && store.$state.CataLog[i].read == false) {
+            store.$state.CataLog[i].read = true
+            //再将其他小标题背景色改成未读的背景色
+            for (let j = 0; j < store.$state.CataLog.length; j++) {
+                if (j != i) {
+                    store.$state.CataLog[j].read = false
+                }
+            }
+        }
+    }
 }

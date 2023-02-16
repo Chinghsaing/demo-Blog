@@ -45,25 +45,10 @@ init()
     background-color: #FDF6EC !important;
 }
 
-.el-message .el-message-icon--success {
-    color: @defaultFont !important;
-}
-
-.el-message--success .el-message__content {
-    color: @defaultFont !important;
-}
 
 //error
 .el-message--error {
     background-color: #FDF6EC !important;
-}
-
-.el-message .el-message-icon--error {
-    color: @defaultError !important;
-}
-
-.el-message--error .el-message__content {
-    color: @defaultError !important;
 }
 
 .fade-enter-active,

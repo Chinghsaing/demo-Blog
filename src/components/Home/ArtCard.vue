@@ -1,7 +1,7 @@
 <template>
-    <div v-for="item in store.$state.ArtData" :key="item.artId" v-Emerge>
+    <div v-for="item,index in store.$state.ArtData" :key="item.artId" v-Emerge>
         <el-card shadow="always" :body-style="{ padding: '0px' }">
-            <div class="card-container" :style="item.artId % 2 ? '' : 'flex-direction:row-reverse'">
+            <div class="card-container" :style="index % 2 ? 'flex-direction:row-reverse' : ''">
                 <div>
                     <el-image :src="item.artImages" fit="cover" :lazy="true"
                         style="width: 250px;height: 220px;"></el-image>
