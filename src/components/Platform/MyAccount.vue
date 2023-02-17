@@ -1,5 +1,5 @@
 <template>
-    <div class="-container"></div>
+    <div class="account-container"></div>
 </template>
 
 <script setup lang="ts">

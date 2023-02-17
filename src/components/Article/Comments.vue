@@ -110,6 +110,7 @@ function commentUpload() {
                     content: content,
                     date: date,
                     user: {
+                        uid:'',
                         avatar: userstore.$state.userAvatar,
                         nickname: userstore.$state.userNickname,
                         username: userstore.$state.userName,

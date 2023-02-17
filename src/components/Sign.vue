@@ -243,7 +243,7 @@ const submitSignInForm = (formEl: any) => {
                 if (res.code === 200) {
                     signStore.$state.showSignView = false
                     signStore.$state.isLogin = true
-                    userInfoStore.getUserInfo(res.data[0])
+                    userInfoStore.getUserInfo(res.data)
                     localStorage.setItem('token', res.token)
                     formEl.resetFields()
                 }

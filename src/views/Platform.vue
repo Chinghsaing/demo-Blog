@@ -8,12 +8,15 @@
                 <el-menu router active-text-color="#ffd04b" background-color="rgb(236, 159, 221)" text-color="#fff"
                     :default-active="store.$state.menuActive">
                     <el-menu-item index="/platform/account">
+                        <el-icon><Tools /></el-icon>
                         <span>个人中心</span>
                     </el-menu-item>
                     <el-menu-item index="/platform/myarticle">
+                        <el-icon><Reading /></el-icon>
                         <span>我的文章</span>
                     </el-menu-item>
                     <el-menu-item index="/platform/mymessage">
+                        <el-icon><Comment /></el-icon>
                         <span>我的留言</span>
                     </el-menu-item>
                 </el-menu>

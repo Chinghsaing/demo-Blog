@@ -1,7 +1,6 @@
 <template>
     <div class="contaniner" v-if="store.$state.getDataSuccess">
-        <div class="top-container"
-            :style="{ 'background-image': 'url(' + store.$state.ArtData[id - 1].artImages + ')' }">
+        <div class="top-container" :style="{ 'background-image': 'url(' + store.$state.ArtData[id - 1].artImages + ')' }">
             <div class="top-container-mask">
                 <NavBar TextColor="color:#fff"></NavBar>
                 <div class="title-container">
@@ -64,10 +63,29 @@
                         }}</span>
                     </div>
                     <div class="art-link-box">
-                        <div>
-                            <span style="margin-right: 10px;">分享链接</span>
-                            <el-input v-model="link" prefix-icon="Link" readonly></el-input>
-                        </div>
+                        <ul>
+                            <li>
+                                <div>
+                                    <span style="margin-right: 10px;">分享链接</span>
+                                    <el-input v-model="link" prefix-icon="Link" readonly></el-input>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="cc" style="margin-top: 10px">
+                                    <span>许可协议</span>
+                                    <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
+                                        style="width: 18px;height: 18px;">
+                                        <svg t="1676632564926" class="cc-icon" viewBox="0 0 1024 1024" version="1.1"
+                                            xmlns="http://www.w3.org/2000/svg" p-id="6338" width="64" height="64">
+                                            <path
+                                                d="M345.714 704.571q87.429 0 146.857-59.428 8-10.286 1.715-20.572l-25.715-46.857q-3.428-7.428-13.714-9.714-9.143-1.143-15.428 6.286L437.143 576q-2.286 2.286-6.572 5.714t-10 7.429-13.428 8.286-16.286 7.714-19.143 5.428-21.428 2q-43.429 0-71.429-28.571t-28-72.571q0-43.429 27.429-71.715T348 411.43q21.143 0 40.857 8t28.857 16l9.143 8q6.286 6.285 14.857 5.714 9.143-1.143 13.715-8l30.285-44.572q7.429-11.428-1.143-22.285-1.714-2.286-6.285-6.857T461.143 354t-27.714-16-38.572-12.857-49.143-5.714q-84.571 0-140.571 55.142t-56 137.429q0 83.429 55.428 138t141.143 54.571z m360 0q87.429 0 146.857-59.428 8-10.286 2.286-20.572l-25.714-46.857q-4.572-8-14.286-9.714-9.143-1.143-15.428 6.286L797.143 576q-2.286 2.286-6.572 5.714t-10 7.429-13.428 8.286-16.286 7.714-19.143 5.428-21.428 2q-43.429 0-71.429-28.571t-28-72.571q0-43.429 27.429-71.715T708 411.43q21.143 0 40.857 8t28.857 16l9.143 8q6.286 6.285 14.857 5.714 9.143-1.143 13.715-8l30.285-44.572q7.429-11.428-1.143-22.285-1.714-2.286-6.285-6.857T821.143 354t-27.714-16-38.572-12.857-49.143-5.714q-84 0-140.285 55.142T509.143 512q0 83.429 55.428 138t141.143 54.571zM512 91.43q-85.714 0-163.429 33.428t-134 89.714-89.714 134T91.43 512t33.428 163.429 89.714 134 134 89.714T512 932.57t163.429-33.428 134-89.714 89.714-134T932.57 512t-33.428-163.429-89.714-134-134-89.714T512 91.43zM512 0q104 0 198.857 40.571t163.429 109.143 109.143 163.429T1024 512t-40.571 198.857-109.143 163.429-163.429 109.143T512 1024t-198.857-40.571-163.429-109.143T40.571 710.857 0 512t40.571-198.857 109.143-163.429T313.143 40.571 512 0z"
+                                                fill="#606266" p-id="6339"></path>
+                                        </svg>
+                                    </a>
+                                    <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA-4.0</a>
+                                </div>
+                            </li>
+                        </ul>
                         <svg t="1676211916210" class="icon" viewBox="0 0 1024 1024" version="1.1"
                             xmlns="http://www.w3.org/2000/svg" p-id="3704" width="64" height="64">
                             <path
@@ -193,6 +211,7 @@ document.body.scrollTop = 0
         .bottomSlideIn(1s, ease);
         padding-bottom: 10px;
         padding-top: 20px;
+
         .artdetail-container {
             .publicMP(0, 0);
             .publicWH(auto, auto);
@@ -222,51 +241,61 @@ document.body.scrollTop = 0
                 flex-direction: column;
                 align-items: center;
 
-                .el-input {
-                    .publicWH(400px, auto);
-                    font-size: 18px
-                }
+                ul {
+                    .publicWH(70%,auto);
+                    .publicMP(0,0px);
+                    .publicFlex(center, none, center);
+                    flex-direction: column;
+                    list-style: none;
+                    box-sizing: border-box;
+                    border-radius: 4px;
+                    border-left: 5px solid @defaultError;
+                    li{
+                        .publicWH(474px,32px);
+                    }
+                    .el-input {
+                        .publicWH(400px, auto);
+                        font-size: 18px
+                    }   
 
+                    .cc {
+                        .publicFlex(center, none, none);
+
+                        span {
+                            margin-right: 10px;
+                        }
+
+                        a {
+                            text-decoration: none;
+                            color: #606266;
+                        }
+
+                        .cc-icon {
+                            display: inline-block;
+                            .publicWH(18px, 18px);
+                        }
+                    }
+
+                    span {
+                        font-weight: bold;
+                        font-size: 16px;
+                    }
+                }
                 .icon {
-                    margin-top: 50px;
-                    .publicWH(50px, 50px);
-                    transition: all 1s ease;
+                        margin-top: 50px;
+                        .publicWH(50px, 50px);
+                        transition: all 1s ease;
 
-                    path {
-                        fill: @defaultLike;
+                        path {
+                            fill: @defaultLike;
+                        }
+
+                        &:hover {
+                            transform: rotate(360deg);
+                        }
                     }
-
-                    &:hover {
-                        transform: rotate(360deg);
-                    }
-                }
-
-                span {
-                    font-weight: bold;
-                    font-size: 16px;
-                }
             }
 
-            // .author-box {
-            //     .publicWH(100%, auto);
-            //     flex-direction: column;
-            //     .publicFlex(none, none, center);
-
-            //     .title-icon-group {
-            //         .publicMP(0px, 0 20px);
-            //         .publicFlex(none, none, space-between);
-
-            //         .title {
-            //             .publicFlex(center, none, none);
-            //             font-size: 18px;
-            //             font-weight: bold;
-            //         }
-            //     }
-
-            //     .center-box {
-            //         .publicFlex(none, none, center);
-            //     }
-            // }      
             .comment-box {
                 .publicMP(30px 0 0 0, 0);
 

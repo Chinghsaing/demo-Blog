@@ -48,15 +48,15 @@ export const useStore = defineStore({
             title: 'Lemon Blog',
             buttonText: {
                 button_1: '登录',
-                button_2: '标题',
-                button_3: '标题',
+                button_2: '留言板',
+                button_3: '文章',
                 button_4: '首页',
                 button_5: '搜索',
             },
             buttonIcon: {
                 button_1_icon: 'User',
-                button_2_icon: 'Share',
-                button_3_icon: 'Share',
+                button_2_icon: 'Comment',
+                button_3_icon: 'Management',
                 button_4_icon: 'House',
                 button_5_icon: 'Search',
             }

@@ -25,8 +25,7 @@
             <div class="card-container">
                 <div class="newscard-container">
                     <NewsCard class="newscard"></NewsCard>
-                    <el-card class="tips" shadow="always" :body-style="{ padding: '10px' }"
-                        style="border-radius: 10px;">
+                    <el-card class="tips" shadow="always" :body-style="{ padding: '10px' }" style="border-radius: 10px;">
                         <div style="display: flex;align-items: center;">
                             <svg t="1675420277537" class="d-arrow" viewBox="0 0 1024 1024" version="1.1"
                                 xmlns="http://www.w3.org/2000/svg" p-id="6653" width="200" height="200">
@@ -45,19 +44,24 @@
                     </el-card>
                     <ArtCard></ArtCard>
                 </div>
-                <div class="userinfocard-container">
-                    <UserInfoCard>
-                    </UserInfoCard>
-                    <div v-if="signstore.$state.isLogin">
-                        <el-card class="edit" shadow="always" :body-style="{ padding: '10px' }"
-                            style="border-radius: 10px;" @click="$router.push({ name: 'editarticle' })">
-                            <div>
-                                <span>写文章</span>
-                                <el-icon>
-                                    <Edit />
-                                </el-icon>
-                            </div>
-                        </el-card>
+                <div>
+                    <div class="userinfocard-container">
+                        <UserInfoCard>
+                        </UserInfoCard>
+                        <div v-if="signstore.$state.isLogin">
+                            <el-card class="edit" shadow="always" :body-style="{ padding: '10px' }"
+                                style="border-radius: 10px;" @click="$router.push({ name: 'editarticle' })">
+                                <div>
+                                    <span>写文章</span>
+                                    <el-icon>
+                                        <Edit />
+                                    </el-icon>
+                                </div>
+                            </el-card>
+                        </div>
+                    </div>
+                    <div class="notice-container">
+                        <Notice></Notice>
                     </div>
                 </div>
             </div>
@@ -73,6 +77,7 @@ import NewsCard from '@/components/Home/NewsCard.vue'
 import UserInfoCard from '@/components/Home/UserInfoCard.vue'
 import ArtCard from '@/components/Home/ArtCard.vue'
 import Copyright from '@/components/Copyright.vue'
+import Notice from '@/components/Notice.vue'
 import { useStore } from '@/store/HomeState'
 import { useStore as signStore } from '@/store/SignState'
 const store = useStore()
@@ -139,8 +144,10 @@ const signstore = signStore()
     box-sizing: border-box;
     .publicWH(100%, auto);
     .publicMP(0, 0 5% 0 5%);
-    background-color: rgba(244, 231, 210,.1);
+    background-color: rgba(244, 231, 210, .1);
     backdrop-filter: blur(8px);
+    min-height: 100vh;
+
     .card-container {
         position: relative;
         .publicFlex(none, none, center);
@@ -165,7 +172,7 @@ const signstore = signStore()
         }
 
         .userinfocard-container {
-            .publicWH(300px, 350px);
+            .publicWH(300px, auto);
             .publicMP(0 0 0 20px, 0);
 
             .edit {
@@ -199,6 +206,10 @@ const signstore = signStore()
                     color: @defaultTextHv;
                 }
             }
+        }
+
+        .notice-container {
+            .publicMP(20px 0 0 20px, 0);
         }
     }
 }
