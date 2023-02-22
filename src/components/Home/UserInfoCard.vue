@@ -4,11 +4,11 @@
             <div class="main-container">
                 <div class="avatar-box">
                     <el-avatar icon="el-icon-user-solid" size="large" shape="circle" :src="store.$state.userAvatar"
-                        fit="fill"></el-avatar>
+                        :key="store.$state.userAvatar" fit="fill"></el-avatar>
                     <div v-if="!signstore.$state.isLogin" class="border"></div>
-                    <el-upload v-if="signstore.$state.isLogin" style="width:0;height:0" name="avatar"
-                        :auto-upload="true" :multiple="false" :limit="1" :show-file-list="false" list-type="picture"
-                        :http-request="avatarUpdate" :before-upload="beforeavatarUpdate">
+                    <el-upload v-if="signstore.$state.isLogin" style="width:0;height:0" name="avatar" :auto-upload="true"
+                        :show-file-list="false" list-type="picture" :http-request="avatarUpdate"
+                        :before-upload="beforeavatarUpdate" :on-change="onChangeHandler">
                         <div class="border"></div>
                         <div class="mask-box">
                             <div class="mask"></div>
@@ -31,7 +31,7 @@
                         :placeholder="store.$state.userNickname" v-focus @blur="nicknameblurUpdate()"></el-input>
                 </div>
                 <div v-if="signstore.$state.isLogin" class="name-box">
-                    <p class="name">{{ '@'+store.$state.userName }}</p>
+                    <p class="name">{{ '@' + store.$state.userName }}</p>
                 </div>
                 <div class="tag-edit-box" style="display: flex;align-items: center;position: relative;">
                     <p v-if="!tagEdit" class="name-tag" @click="clickTagEdit()"
@@ -55,16 +55,16 @@
                     </div>
                     <div class="select">
                         <el-badge :value="3" :max="99" :is-dot="false" :hidden="false">
-                            <el-button type="primary" @click=""
-                                style="--el-button-hover-bg-color:transparent;" round color="transparent">关注</el-button>
+                            <el-button type="primary" @click="" style="--el-button-hover-bg-color:transparent;" round
+                                color="transparent">关注</el-button>
                         </el-badge>
 
                         <p class="select-num">{{ store.$state.userFollows }}</p>
                     </div>
                     <div class="select">
                         <el-badge :value="5" :max="99" :is-dot="false" :hidden="false">
-                            <el-button type="primary" @click=""
-                                style="--el-button-hover-bg-color:transparent;" round color="transparent">喜欢</el-button>
+                            <el-button type="primary" @click="" style="--el-button-hover-bg-color:transparent;" round
+                                color="transparent">喜欢</el-button>
                         </el-badge>
 
                         <p class="select-num">{{ store.$state.userLike }}</p>
@@ -88,6 +88,7 @@ import { userAvatarUpdate, userNicknameUpdate, userNameTagUpdate } from '@/api/a
 import { ElMessage } from 'element-plus'
 import { useStore } from '@/store/UserInfoState'
 import { useStore as useSignStore } from "@/store/SignState"
+import { getNowTime } from '@/hooks/hooks'
 import { ref } from 'vue'
 //声明仓库
 const store = useStore()
@@ -95,6 +96,8 @@ const signstore = useSignStore()
 //定义编辑开关
 let tagEdit = ref(false)
 let nicknameEdit = ref(false)
+//头像数组
+let checkFile: any = []
 //定义原nickname和tag
 let oriNickname = ''
 let oriTag = ''
@@ -102,14 +105,28 @@ let oriTag = ''
 function avatarUpdate(upload: any) {
     const formData = new FormData() //封装成formdata格式上传
     formData.append('avatar', upload.file)
-    userAvatarUpdate(formData)
+    userAvatarUpdate(formData).then((res: any) => {
+        if (res.code === 400) {
+            return store.$state.userAvatar = res.data + '?' + (new Date().getTime() / 1000)
+        }
+    })
 }
 //头像上传大小格式验证
 function beforeavatarUpdate(rawFile: any) {
     if (rawFile.type !== 'image/jpeg') {
         ElMessage.warning('头像必须为JPG格式!')
-    } else if (rawFile.size / 1024 / 1024 / 1024 / 1024 / 1024 > 5) {
-        ElMessage.warning('头像大小不能超过5MB!')
+        return false
+    } else if (rawFile.size / 1024 / 1024  > 2) {
+        ElMessage.warning('头像大小不能超过2MB!')
+        return false
+    }
+    return true
+}
+//多次上传头像覆盖
+function onChangeHandler(file: any, fileList: any) {
+    checkFile.push({ name: "none", url: "none" })
+    if (fileList.length > 1) {
+        fileList.splice(0, 1)
     }
 }
 //点击编辑事件

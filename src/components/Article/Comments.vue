@@ -115,6 +115,7 @@ function commentUpload() {
                         nickname: userstore.$state.userNickname,
                         username: userstore.$state.userName,
                     },
+                    replycmt:[]
                 }
                 cmtstore.$state.comments.unshift(comment)
             }

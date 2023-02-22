@@ -64,6 +64,7 @@ onMounted(() => {
             font-size: 40px;
             padding: 20px 0 0;
             color: @defaultError;
+            font-weight: bold;
         }
     }
 

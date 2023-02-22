@@ -21,7 +21,7 @@ interface DataType {
     content: string
     user: userType
     date: string
-    replycmt?:replyType[]
+    replycmt:replyType[]
 }
 export const useStore = defineStore({
     id: "CommentState",

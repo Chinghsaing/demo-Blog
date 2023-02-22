@@ -1,5 +1,6 @@
 <template>
-    <div v-for="item, index in props.replycmt" class="reply-container">
+     <TransitionGroup name="fade">
+    <div v-for="item, index in props.replycmt" class="reply-container" :key="index">
         <div class="avatar-box">
             <el-avatar shape="square" :size="35" :src="item.user.avatar" />
         </div>
@@ -29,7 +30,7 @@
                                             d="M675.328 117.717333A425.429333 425.429333 0 0 0 512 85.333333C276.352 85.333333 85.333333 276.352 85.333333 512s191.018667 426.666667 426.666667 426.666667 426.666667-191.018667 426.666667-426.666667c0-56.746667-11.093333-112-32.384-163.328a21.333333 21.333333 0 0 0-39.402667 16.341333A382.762667 382.762667 0 0 1 896 512c0 212.074667-171.925333 384-384 384S128 724.074667 128 512 299.925333 128 512 128c51.114667 0 100.8 9.984 146.986667 29.12a21.333333 21.333333 0 0 0 16.341333-39.402667z m48.384 532.928A234.538667 234.538667 0 0 1 520.405333 768a234.538667 234.538667 0 0 1-203.264-117.333333 21.333333 21.333333 0 0 0-36.949333 21.333333 277.184 277.184 0 0 0 240.213333 138.666667c100.16 0 190.997333-53.546667 240.213334-138.666667a21.333333 21.333333 0 0 0-36.906667-21.333333zM341.333333 426.624c0-23.552 18.944-42.624 42.666667-42.624 23.573333 0 42.666667 19.157333 42.666667 42.624v42.752A42.538667 42.538667 0 0 1 384 512c-23.573333 0-42.666667-19.157333-42.666667-42.624v-42.752z m256 0c0-23.552 18.944-42.624 42.666667-42.624 23.573333 0 42.666667 19.157333 42.666667 42.624v42.752A42.538667 42.538667 0 0 1 640 512c-23.573333 0-42.666667-19.157333-42.666667-42.624v-42.752z"
                                             fill="#3D3D3D" p-id="3085"></path>
                                     </svg>
-                                    <div class="button-box" @click="replyUpload(index, item.user.uid)">
+                                    <div class="button-box" @click="replyUpload(index, item.user.uid, item.toUser.nickname)">
                                         <el-link :underline="false" href="javascript:;">
                                             <div>
                                                 <h2>回复</h2>
@@ -54,11 +55,14 @@
                 <span>{{ item.replyContent }}</span>
             </div>
         </div>
-</div>
+    </div>
+</TransitionGroup>
 </template>
 
 <script setup lang="ts">
 import { commentReply } from '@/api/api'
+import { useStore } from '@/store/UserInfoState'
+import { useStore as cmtStore } from '@/store/CommentState'
 import { defineProps } from 'vue'
 import { emojis, getNowTime } from '@/hooks/hooks'
 import { ref } from 'vue'
@@ -67,7 +71,8 @@ interface PropsType {
     replycmt: any
     cmtId: number
 }
-
+const store = useStore()
+const cmtstore = cmtStore()
 const emoji = emojis()
 const text = ref()
 const props = withDefaults(defineProps<PropsType>(), {
@@ -78,14 +83,34 @@ const props = withDefaults(defineProps<PropsType>(), {
 function getEmoji(emoji: any, spanId: any) {
     text.value[Number(spanId)].innerText = text.value[Number(spanId)].innerText + emoji
 }
-function replyUpload(index: number, toUserId: number) {
+function replyUpload(index: number, toUserId: number,toUserNickname:string) {
     const replyContent = text.value[Number(index)].innerText
     const cmtId = props.cmtId
     const date = getNowTime()
     if (replyContent === '') {
         return ElMessage.warning('评论内容不能为空!')
     } else {
-        commentReply({ toUserId, replyContent, date, cmtId })
+        commentReply({ toUserId, replyContent, date, cmtId }).then((res: any) => {
+            if (res.code === 700) {
+                const replyComment = {
+                    user: {
+                        uid: '0',
+                        avatar: store.$state.userAvatar,
+                        nickname: store.$state.userNickname,
+                        username: store.$state.userName,
+                    },
+                    toUser: {
+                        uid: '0',
+                        avatar: store.$state.userAvatar,
+                        nickname: toUserNickname,
+                        username: toUserNickname,
+                    },
+                    replyContent: replyContent,
+                    date: date,
+                }
+                cmtstore.$state.comments[index].replycmt.unshift(replyComment)
+            }
+        })
     }
 }
 </script>
@@ -179,6 +204,15 @@ function replyUpload(index: number, toUserId: number) {
             }
         }
     }
+}
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
 }
 </style>
 <style lang="less">
