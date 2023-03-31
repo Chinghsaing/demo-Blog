@@ -33,7 +33,7 @@
                                     d="M792.5 446.6L512 727.1 231.5 446.6c-11.7-11.7-30.7-11.7-42.4 0s-11.7 30.7 0 42.4l301.8 301.7c5.9 5.9 13.5 8.8 21.2 8.8 7.7 0 15.4-2.9 21.2-8.8L835 489c11.7-11.7 11.7-30.7 0-42.4-11.8-11.7-30.8-11.7-42.5 0zM490.8 577.4c5.9 5.9 13.5 8.8 21.2 8.8 7.7 0 15.4-2.9 21.2-8.8L835 275.7c11.7-11.7 11.7-30.7 0-42.4s-30.7-11.7-42.4 0L512 513.8 231.5 233.3c-11.7-11.7-30.7-11.7-42.4 0s-11.7 30.7 0 42.4l301.7 301.7z"
                                     fill="#333333" p-id="6654"></path>
                             </svg>
-                            <span style="margin: 0 5px;">快来发表你的第一篇文章吧!</span>
+                            <span style="margin: 0 5px;" @click="$router.push({ name: 'editarticle' })">快来发表你的第一篇文章吧!</span>
                             <svg t="1675420277537" class="d-arrow" viewBox="0 0 1024 1024" version="1.1"
                                 xmlns="http://www.w3.org/2000/svg" p-id="6653" width="200" height="200">
                                 <path
@@ -232,6 +232,10 @@ const signstore = signStore()
         display: none !important;
     }
 
+    .notice-container {
+        display: none !important;
+    }
+
     .newscard-container {
         width: 80% !important;
     }
@@ -251,6 +255,10 @@ const signstore = signStore()
 
 @media only screen and(max-width: 770px) {
     .userinfocard-container {
+        display: none !important;
+    }
+
+    .notice-container {
         display: none !important;
     }
 

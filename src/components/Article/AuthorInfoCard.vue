@@ -2,9 +2,9 @@
     <div class="userinfocard" v-Emerge>
         <el-card shadow="always" :body-style="{ padding: '20px' }">
             <div class="main-container">
-                <el-avatar icon="el-icon-user-solid" shape="circle" :src="store.$state.ArtData[id-1].author.avatar" fit="fill"></el-avatar>
-                <span class="name">{{ store.$state.ArtData[id-1].author.username }}</span>
-                <p class="name-tag">{{ store.$state.ArtData[id-1].author.nametag }}</p>
+                <el-avatar icon="el-icon-user-solid" shape="circle" :src="detail.author.avatar" fit="fill"></el-avatar>
+                <span class="name">{{ detail.author.username }}</span>
+                <p class="name-tag">{{ detail.author.nametag }}</p>
                 <div class="locate-box">
                     <el-icon size="18">
                         <Location />
@@ -15,17 +15,17 @@
                     <div class="select">
                         <el-button type="primary" @click=""
                             style="--el-button-hover-bg-color:transparent;" round color="transparent">文章</el-button>
-                        <p class="select-num">{{ store.$state.ArtData[id-1].author.article.length }}</p>
+                        <p class="select-num">{{ detail.author.article.length }}</p>
                     </div>
                     <div class="select">
                         <el-button type="primary" @click=""
                             style="--el-button-hover-bg-color:transparent;" round color="transparent">关注</el-button>
-                        <p class="select-num">{{ store.$state.ArtData[id-1].author.follows }}</p>
+                        <p class="select-num">{{ detail.author.follows }}</p>
                     </div>
                     <div class="select">
                         <el-button type="primary" @click=""
                             style="--el-button-hover-bg-color:transparent;" round color="transparent">喜欢</el-button>
-                        <p class="select-num">{{ store.$state.ArtData[id-1].author.like }}</p>
+                        <p class="select-num">{{ detail.author.like }}</p>
                     </div>
                 </div>
                 <div class="button-box">
@@ -51,10 +51,28 @@
 import { useStore } from '@/store/ArticleState';
 import { useStore as useSignStore } from "@/store/SignState";
 import { useRoute } from 'vue-router'
+interface detail{
+    artId: number;
+    artImages: string;
+    artTitle: string;
+    artContent: string;
+    author: {
+        avatar: string;
+        follows: number;
+        like: number;
+        nametag: string;
+        uid: number;
+        username: string;
+        nickname: string;
+        article: [];
+    };
+    date: string;
+}
 const store = useStore()
 const signstore = useSignStore()
 const route = useRoute()
 const id:number =  Number(route.params.id)
+const detail = store.$state.ArtData.find(array => array.artId == id) as detail
 </script>
 
 <style scoped lang="less">

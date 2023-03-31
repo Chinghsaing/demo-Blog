@@ -4,6 +4,7 @@ import article from '@/views/Article.vue'
 import admin from '@/views/Admin.vue'
 import editarticle from '@/views/EditArticle.vue'
 import platform from '@/views/Platform.vue'
+import picwall from '@/views/PicWall.vue'
 import { ElMessage } from 'element-plus'
 import myarticle from '@/components/Platform/MyArticle.vue'
 import myaccount from '@/components/Platform/MyAccount.vue'
@@ -30,6 +31,11 @@ const routes: Array<RouteRecordRaw> = [
         path: '/admin',
         name: 'admin',
         component: admin,
+    },
+    {
+        path: '/picwall',
+        name: 'picwall',
+        component: picwall,
     },
     {
         path: '/edit',
