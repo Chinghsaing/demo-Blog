@@ -1,17 +1,17 @@
 <template>
     <div class="contaniner" v-if="store.$state.getDataSuccess">
-        <div class="top-container" :style="{ 'background-image': 'url(' + getDetail().artImages + ')' }">
+        <div class="top-container" :style="{ 'background-image': 'url(' + store.$state.ArtData[id - 1].artImages + ')' }">
             <div class="top-container-mask">
                 <NavBar TextColor="color:#fff"></NavBar>
                 <div class="title-container">
                     <div class="title-box">
-                        <h1>{{ getDetail().artTitle }}</h1>
+                        <h1>{{ store.$state.ArtData[id - 1].artTitle }}</h1>
                         <div class="detail-box">
                             <div>
                                 <el-icon>
                                     <Document />
                                 </el-icon>
-                                <span>发表于{{ getDetail().date }}</span>
+                                <span>发表于{{ store.$state.ArtData[id - 1].date }}</span>
                             </div>
                             <span style="margin: 10px;">|</span>
                             <div>
@@ -40,7 +40,7 @@
             </div>
         </div>
         <div class="content-container">
-            <div class="content-box">
+            <div style="width: 60%;">
                 <div class="artdetail-container">
                     <div class="title-icon-box" style="padding: 20px;display: flex;justify-content: space-between">
                         <div>
@@ -59,7 +59,7 @@
                     </div>
                     <div class="time-box">
                         <span>文章最后更新于 {{
-                            getDetail().date
+                            store.$state.ArtData[id - 1].date
                         }}</span>
                     </div>
                     <div class="art-link-box">
@@ -134,7 +134,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { useStore } from '@/store/ArticleState'
 import { useStore as cmtStore } from '@/store/CommentState'
@@ -145,35 +144,12 @@ import Comments from '@/components/Article/Comments.vue'
 import CommentCard from '@/components/Article/CommentCard.vue'
 import Copyright from '@/components/Copyright.vue'
 import CateLog from '@/components/Article/CateLog.vue'
-interface detail {
-    artId: number;
-    artImages: string;
-    artTitle: string;
-    artContent: string;
-    author: {
-        avatar: string;
-        follows: number;
-        like: number;
-        nametag: string;
-        uid: number;
-        username: string;
-        nickname: string;
-        article: [];
-    };
-    date: string;
-}
 const store = useStore()
 const cmtstore = cmtStore()
 const route = useRoute()
 const link = window.location.href
 const id = Number(route.params.id)
 const logoUrl = new URL(`@/assets/images/logo.png`, import.meta.url).href
-let lock = ref(false)
-function getDetail() {
-    const detail = store.$state.ArtData.find(array => array.artId == id) as detail
-    lock.value = true
-    return detail
-}
 document.body.scrollTop = 0
 
 </script>
@@ -217,12 +193,9 @@ document.body.scrollTop = 0
                     .detail-box {
                         .publicFlex(none, none, center);
                         color: @defaultFont2;
-                        
+
                         div {
                             .publicFlex(center, none, center);
-                            span{
-                                white-space: nowrap;
-                            }
                         }
                     }
                 }
@@ -239,82 +212,76 @@ document.body.scrollTop = 0
         padding-bottom: 10px;
         padding-top: 20px;
 
-        .content-box {
-            width: 60%;
+        .artdetail-container {
+            .publicMP(0, 0);
+            .publicWH(auto, auto);
+            background-color: #fff;
+            border-radius: 10px;
 
-            .artdetail-container {
-                .publicMP(0, 0);
-                .publicWH(auto, auto);
-                background-color: #fff;
-                border-radius: 10px;
+            .title-icon {
+                .publicWH(32px, 32px)
+            }
 
-                .title-icon {
-                    .publicWH(32px, 32px)
+            .art-box {
+                .publicMP(0px, 0 50px 50px 50px);
+            }
+
+            .time-box {
+                .publicMP(0px, 0 50px 10px 50px);
+
+                span {
+                    color: #666666;
+                    font-size: 12px;
                 }
+            }
 
-                .art-box {
-                    .publicMP(0px, 0 50px 50px 50px);
-                }
+            .art-link-box {
+                padding: 50px 0 50px 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
 
-                .time-box {
-                    .publicMP(0px, 0 50px 10px 50px);
-
-                    span {
-                        color: #666666;
-                        font-size: 12px;
-                    }
-                }
-
-                .art-link-box {
-                    padding: 50px 0 50px 0;
-                    display: flex;
+                ul {
+                    .publicWH(70%,auto);
+                    .publicMP(0,0px);
+                    .publicFlex(center, none, center);
                     flex-direction: column;
-                    align-items: center;
+                    list-style: none;
+                    box-sizing: border-box;
+                    border-radius: 4px;
+                    border-left: 5px solid @defaultError;
+                    li{
+                        .publicWH(474px,32px);
+                    }
+                    .el-input {
+                        .publicWH(400px, auto);
+                        font-size: 18px
+                    }   
 
-                    ul {
-                        .publicWH(70%, auto);
-                        .publicMP(0, 0px);
-                        .publicFlex(center, none, center);
-                        flex-direction: column;
-                        list-style: none;
-                        box-sizing: border-box;
-                        border-radius: 4px;
-                        border-left: 5px solid @defaultError;
-
-                        li {
-                            .publicWH(474px, 32px);
-                        }
-
-                        .el-input {
-                            .publicWH(400px, auto);
-                            font-size: 18px
-                        }
-
-                        .cc {
-                            .publicFlex(center, none, none);
-
-                            span {
-                                margin-right: 10px;
-                            }
-
-                            a {
-                                text-decoration: none;
-                                color: #606266;
-                            }
-
-                            .cc-icon {
-                                display: inline-block;
-                                .publicWH(18px, 18px);
-                            }
-                        }
+                    .cc {
+                        .publicFlex(center, none, none);
 
                         span {
-                            font-weight: bold;
-                            font-size: 16px;
+                            margin-right: 10px;
+                        }
+
+                        a {
+                            text-decoration: none;
+                            color: #606266;
+                        }
+
+                        .cc-icon {
+                            display: inline-block;
+                            .publicWH(18px, 18px);
                         }
                     }
 
-                    .icon {
+                    span {
+                        font-weight: bold;
+                        font-size: 16px;
+                    }
+                }
+                .icon {
                         margin-top: 50px;
                         .publicWH(50px, 50px);
                         transition: all 1s ease;
@@ -327,63 +294,46 @@ document.body.scrollTop = 0
                             transform: rotate(360deg);
                         }
                     }
-                }
+            }
 
-                .comment-box {
-                    .publicMP(30px 0 0 0, 0);
+            .comment-box {
+                .publicMP(30px 0 0 0, 0);
 
-                    .title-icon-group {
-                        .publicMP(0px, 0 20px);
-                        .publicFlex(none, none, space-between);
+                .title-icon-group {
+                    .publicMP(0px, 0 20px);
+                    .publicFlex(none, none, space-between);
 
-                        .title {
-                            .publicFlex(center, none, none);
-                            font-size: 18px;
-                            font-weight: bold;
-                        }
-                    }
-
-                    .coment-count {
-                        color: @defaultCancelText;
-                        box-sizing: border-box;
-                        padding: 0 40px;
+                    .title {
+                        .publicFlex(center, none, none);
+                        font-size: 18px;
                         font-weight: bold;
                     }
-
-                    .commentcard-box {
-                        .publicMP(0, 0 0 20px 0);
-                        .publicFlex(center, none, center);
-                        flex-direction: column;
-                    }
-
-                    .no-comment {
-                        .publicFlex(center, none, center);
-                        .publicWH(100%, 150px);
-                        color: @defaultTextHv;
-                    }
                 }
 
+                .coment-count {
+                    color: @defaultCancelText;
+                    box-sizing: border-box;
+                    padding: 0 40px;
+                    font-weight: bold;
+                }
+
+                .commentcard-box {
+                    .publicMP(0, 0 0 20px 0);
+                    .publicFlex(center, none, center);
+                    flex-direction: column;
+                }
+
+                .no-comment {
+                    .publicFlex(center, none, center);
+                    .publicWH(100%, 150px);
+                    color: @defaultTextHv;
+                }
             }
+
         }
 
         .author-box {
             margin-left: 20px;
-        }
-    }
-}
-
-@media only screen and(max-width: 900px) {
-    .content-box {
-        width: 95% !important;
-    }
-
-    .author-box {
-        display: none !important;
-    }
-    .detail-box {
-        flex-wrap: wrap;
-        span{
-            font-size: 12px;
         }
     }
 }

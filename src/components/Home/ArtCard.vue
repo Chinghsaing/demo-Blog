@@ -1,18 +1,15 @@
 <template>
-    <div v-for="item, index in store.$state.ArtData" :key="item.artId" v-Emerge>
+    <div v-for="item,index in store.$state.ArtData" :key="item.artId" v-Emerge>
         <el-card shadow="always" :body-style="{ padding: '0px' }">
             <div class="card-container" :style="index % 2 ? 'flex-direction:row-reverse' : ''">
                 <div>
-                    <el-image :src="item.artImages" fit="cover" :lazy="true" style="width: 250px;height: 220px;"></el-image>
+                    <el-image :src="item.artImages" fit="cover" :lazy="true"
+                        style="width: 250px;height: 220px;"></el-image>
                 </div>
                 <div class="right-content-container">
                     <div class="right-content-top-container">
                         <span @click="goDetail(item.artId)">{{ item.artTitle }}</span>
                         <p>{{ delHtmlTag(item.artContent) }}</p>
-                    </div>
-                    <div class="tag-container">
-                        <el-tag type="success" size="small" effect="dark" @close="">生活碎片</el-tag>
-                        <el-tag type="success" size="small" effect="dark" @close="">Vue.js</el-tag>
                     </div>
                     <div class="right-content-bottom-container">
                         <div class="athuor-container">
@@ -29,7 +26,8 @@
                             </div>
                         </div>
                         <div class="share-container">
-                            <el-button type="info" @click="" icon="Share" color="#fff" circle></el-button>
+                            <el-button type="info" @click="" icon="Share" color="#fff"
+                                circle></el-button>
                             <el-button type="primary" @click="" circle>
                                 <svg t="1673785497731" class="icon" viewBox="0 0 1024 1024" version="1.1"
                                     xmlns="http://www.w3.org/2000/svg" p-id="2527" width="20" height="20">
@@ -79,7 +77,7 @@ function goDetail(id: number) {
 
         .right-content-container {
             .publicFlex(none, none, space-between);
-            .publicMP(0, 15px 30px 20px 30px);
+            .publicMP(0, 30px);
             .publicWH(100%, auto);
             box-sizing: content-box;
             flex-direction: column;
@@ -89,7 +87,7 @@ function goDetail(id: number) {
                 display: flex;
                 flex-direction: column;
 
-                span {
+                span {  
                     .publicMP(10px 0, 0px);
                     .publicWH(100%, auto);
                     .onelineEllipsis(20px);
@@ -108,17 +106,9 @@ function goDetail(id: number) {
 
                 p {
                     .publicMP(5px 0px, 0px);
-                    .publicWH(100%, 50%);
+                    .publicWH(100%, 45%);
                     color: @sfontColor;
                     .morelinesEllipsis(14px, 3);
-                }
-            }
-
-            .tag-container {
-                margin-bottom: 10px;
-
-                .el-tag {
-                    margin-right: 10px;
                 }
             }
 

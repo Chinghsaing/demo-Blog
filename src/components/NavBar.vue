@@ -22,11 +22,6 @@
                 color="transparent" :icon="data.buttonIcon.button_1_icon" :style="TextColor">{{
                     data.buttonText.button_1
                 }}</el-button>
-                <el-button type="primary" style="--el-button-hover-bg-color:transparent" size="large"
-                @click="$router.push('/picwall')" color="transparent" :icon="data.buttonIcon.button_6_icon"
-                :style="TextColor">{{
-                    data.buttonText.button_6
-                }}</el-button>
             <el-button type="primary" style="--el-button-hover-bg-color:transparent" size="large" @click=""
                 color="transparent" :icon="data.buttonIcon.button_2_icon" :style="TextColor">{{
                     data.buttonText.button_2
@@ -144,10 +139,6 @@ function logOut() {
             .publicWH(16px, 16px) !important
         }
 
-        .buttom-group{
-            flex-wrap: wrap;
-            justify-content: center;
-        }
         .el-button {
             font-size: 12px !important;
             height: 20px !important;

@@ -9,48 +9,46 @@
                 <el-input v-model.trim="title" class="input" placeholder="文章标题" type="text" size="large" minlength="1"
                     autocomplete="off" style="--el-input-focus-border-color:rgb(236,159,221)"></el-input>
                 <el-upload ref="uploadRef" class="avatar-uploader" :show-file-list="false" :http-request="articleUpload"
-                    :auto-upload="false" list-type="picture" :on-change="onChangeHandler" :before-upload="beforeCoverUpload"
-                    :file-list="checkFile">
-                    <template #trigger>
-                        <img v-if="imageUrl" :src="imageUrl" class="avatar" />
-                        <el-icon v-else class="avatar-uploader-icon">
-                            <Plus />
-                        </el-icon>
-                        <p>上传文章封面</p>
-                    </template>
-                    <div class="button-box" @click="submit">
-                        <el-link :underline="false" href="javascript:;">
-                            <div>
-                                <h2>发布</h2>
-                            </div>
-                        </el-link>
-                    </div>
-                    <div class="button-box">
-                        <el-link :underline="false" href="javascript:;" @click="">
-                            <div>
-                                <h2>清空</h2>
-                            </div>
-                        </el-link>
-                    </div>
-                </el-upload>
+                        :auto-upload="false" list-type="picture" :on-change="onChangeHandler" :before-upload="beforeCoverUpload"
+                        :file-list="checkFile">
+                        <template #trigger>
+                            <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+                            <el-icon v-else class="avatar-uploader-icon">
+                                <Plus />
+                            </el-icon>
+                            <p>上传文章封面</p>
+                        </template>
+                        <div class="button-box" @click="submit">
+                            <el-link :underline="false" href="javascript:;">
+                                <div>
+                                    <h2>发布</h2>
+                                </div>
+                            </el-link>
+                        </div>
+                        <div class="button-box">
+                            <el-link :underline="false" href="javascript:;" @click="">
+                                <div>
+                                    <h2>清空</h2>
+                                </div>
+                            </el-link>
+                        </div>
+                    </el-upload>
+                </div>
             </div>
+            <Copyright class="copyright"></Copyright>
         </div>
-        <Copyright class="copyright"></Copyright>
-    </div>
 </template>
 
 <script setup lang="ts">
-import { articlePost } from "@/api/api"
+import { articlePost } from "@/api/api";
 import Editor from "@/components/Editor.vue"
-import NavBar from "@/components/NavBar.vue"
+import NavBar from "@/components/NavBar.vue";
 import { ref } from 'vue'
-import { useStore } from '@/store/ArticleState'
-import { useStore as userStore } from '@/store/UserInfoState'
+import { useStore } from '@/store/ArticleState';
+import { useStore as userStore } from '@/store/UserInfoState';
 import { getNowTime } from '@/hooks/hooks'
-import { ElMessage, ElLoading } from "element-plus"
+import { ElMessage, ElLoading } from "element-plus";
 import Copyright from '@/components/Copyright.vue'
-import * as imageConversion from 'image-conversion'
-
 const imageUrl = ref('')
 const store = useStore()
 const userstore = userStore()
@@ -75,29 +73,23 @@ function articleUpload(upload: any) {
     const articleTitle = title.value
     const file = upload.file
     const time = getNowTime()
-
-    imageConversion.compressAccurately(file, 200).then(res => {
-        const compressFile = new window.File([res], 'articleCover', { type: 'image/jpeg' })
-        formData.append('articleCover', compressFile)
-        formData.append('articleTitle', articleTitle)
-        formData.append('articleContent', content)
-        formData.append('articleDate', time)
-        articlePost(formData).then(res => {
-            closeLoading()
-        }).catch(err => {
-            closeLoading()
-        })
+    formData.append('articleCover', file)
+    formData.append('articleTitle', articleTitle)
+    formData.append('articleContent', content)
+    formData.append('articleDate', time)
+    articlePost(formData).then(res => {
+        closeLoading()
+    }).catch(err => {
+        closeLoading()
     })
 }
 //图片上传验证
 function beforeCoverUpload(rawFile: any) {
     if (rawFile.type !== 'image/jpeg') {
         ElMessage.warning('图片必须为JPG格式!')
-        closeLoading()
         return false
-    } else if (rawFile.size / 1024 / 1024 / 1024 / 1024 / 1024 > 5) {
-        ElMessage.warning('图片大小不能超过5MB!')
-        closeLoading()
+    } else if (rawFile.size / 1024 / 1024 > 2) {
+        ElMessage.warning('图片大小不能超过2MB!')
         return false
     }
     return true
@@ -222,19 +214,6 @@ function submit() {
         position: absolute;
         bottom: 0;
         z-index: 999;
-    }
-}
-
-@media only screen and(max-width: 850px) {
-    .editor-box{
-        flex-direction: column;
-        .submit-box{
-            .publicMP(10px 0 0 0,0) !important;
-            .avatar-uploader{
-                .publicFlex(center,none,center);
-                flex-direction: column;
-            }
-        }
     }
 }
 </style>

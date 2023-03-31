@@ -17,7 +17,6 @@ interface buttonTextType {
     button_3: string
     button_4: string
     button_5: string
-    button_6: string
 }
 interface buttonIconType {
     button_1_icon: string
@@ -25,7 +24,6 @@ interface buttonIconType {
     button_3_icon: string
     button_4_icon: string
     button_5_icon: string
-    button_6_icon: string
 }
 interface textAmtDataType {
     words: []
@@ -54,7 +52,6 @@ export const useStore = defineStore({
                 button_3: '文章',
                 button_4: '首页',
                 button_5: '搜索',
-                button_6: '照片墙 ',
             },
             buttonIcon: {
                 button_1_icon: 'User',
@@ -62,7 +59,6 @@ export const useStore = defineStore({
                 button_3_icon: 'Management',
                 button_4_icon: 'House',
                 button_5_icon: 'Search',
-                button_6_icon: 'Picture',
             }
         },
         //TextAmt组件数据

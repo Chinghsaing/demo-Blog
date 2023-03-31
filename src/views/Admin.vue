@@ -1,43 +1,16 @@
 <template>
-    <div v-masonry fit-width="true" gutter="10" class="waterfall-container" style="width: 100%;">
-        <div v-masonry-tile v-for="(item, index) in demoList" :key="index">
-            <img :src="item" style="width: 350px;">
-        </div>
+    <div class="main">
+        <CateLog></CateLog>
     </div>
 </template>
 
 <script setup lang="ts">
-const demoList = [
-    new URL(`@/assets/images/news/5.jpg`, import.meta.url).href,
-    new URL(`@/assets/images/news/4.jpg`, import.meta.url).href,
-    new URL(`@/assets/images/news/1.jpg`, import.meta.url).href,
-    new URL(`@/assets/images/news/3.jpg`, import.meta.url).href,
-    new URL(`@/assets/images/news/2.jpg`, import.meta.url).href,
-    new URL(`@/assets/images/news/5.jpg`, import.meta.url).href,
-    new URL(`@/assets/images/news/5.jpg`, import.meta.url).href,
-    new URL(`@/assets/images/news/4.jpg`, import.meta.url).href,
-    new URL(`@/assets/images/news/1.jpg`, import.meta.url).href,
-    new URL(`@/assets/images/news/3.jpg`, import.meta.url).href,
-    new URL(`@/assets/images/news/2.jpg`, import.meta.url).href,
-    new URL(`@/assets/images/news/5.jpg`, import.meta.url).href,
-    new URL(`@/assets/images/news/5.jpg`, import.meta.url).href,
-    new URL(`@/assets/images/news/4.jpg`, import.meta.url).href,
-    new URL(`@/assets/images/news/1.jpg`, import.meta.url).href,
-    new URL(`@/assets/images/news/3.jpg`, import.meta.url).href,
-    new URL(`@/assets/images/news/2.jpg`, import.meta.url).href,
-    new URL(`@/assets/images/news/5.jpg`, import.meta.url).href,
-    new URL(`@/assets/images/news/5.jpg`, import.meta.url).href,
-    new URL(`@/assets/images/news/4.jpg`, import.meta.url).href,
-    new URL(`@/assets/images/news/1.jpg`, import.meta.url).href,
-    new URL(`@/assets/images/news/3.jpg`, import.meta.url).href,
-    new URL(`@/assets/images/news/2.jpg`, import.meta.url).href,
-    new URL(`@/assets/images/news/5.jpg`, import.meta.url).href,
-]
+import CateLog from '@/components/Article/CateLog.vue'
+const str = '/ws/location/v1/ip' + '?key=CPOBZ-UUGEF-DJBJP-JMNIH-5Q2L6-Y2BVE' + 'DaGgcoLDvYDxOeIYs1a4EiIadaRFzbc'
+const b = 'https://apis.map.qq.com/ws/location/v1/ip' + '?key=CPOBZ-UUGEF-DJBJP-JMNIH-5Q2L6-Y2BVE' + '&sig=689c3ab1a368c416d4c954d8256760e9'
+console.log(b);
+
 </script>
 
 <style scoped lang="less">
-.waterfall-container{
-    margin: 0 auto;
-    padding-top: 20px;
-}
 </style>
