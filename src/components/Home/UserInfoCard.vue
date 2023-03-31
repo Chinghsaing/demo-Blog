@@ -90,6 +90,7 @@ import { useStore } from '@/store/UserInfoState'
 import { useStore as useSignStore } from "@/store/SignState"
 import { getNowTime } from '@/hooks/hooks'
 import { ref } from 'vue'
+import * as imageConversion from 'image-conversion'
 //声明仓库
 const store = useStore()
 const signstore = useSignStore()
@@ -104,11 +105,13 @@ let oriTag = ''
 //实现请求
 function avatarUpdate(upload: any) {
     const formData = new FormData() //封装成formdata格式上传
-    formData.append('avatar', upload.file)
-    userAvatarUpdate(formData).then((res: any) => {
-        if (res.code === 400) {
-            return store.$state.userAvatar = res.data + '?' + (new Date().getTime() / 1000)
-        }
+    imageConversion.compressAccurately(upload.file, 200).then(com => {
+        formData.append('avatar', com)
+        userAvatarUpdate(formData).then((res: any) => {
+            if (res.code === 400) {
+                return store.$state.userAvatar = res.data + '?' + (new Date().getTime() / 1000)
+            }
+        })
     })
 }
 //头像上传大小格式验证
@@ -116,8 +119,8 @@ function beforeavatarUpdate(rawFile: any) {
     if (rawFile.type !== 'image/jpeg') {
         ElMessage.warning('头像必须为JPG格式!')
         return false
-    } else if (rawFile.size / 1024 / 1024  > 2) {
-        ElMessage.warning('头像大小不能超过2MB!')
+    } else if (rawFile.size / 1024 / 1024 / 1024 / 1024 / 1024 > 5) {
+        ElMessage.warning('头像大小不能超过5MB!')
         return false
     }
     return true

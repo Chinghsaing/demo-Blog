@@ -26,6 +26,9 @@ function showMessage(code: number) {
         case 800:
             ElMessage.success('删除文章成功!')
             break
+        case 900:
+            ElMessage.success('上传图片成功!')
+            break
         case 101:
             ElMessage.warning('用户名密码不能为空!')
             break
@@ -89,6 +92,8 @@ function showMessage(code: number) {
         case 703:
             ElMessage.warning('发布日期不能为空!')
             break
+        case 901:
+            ElMessage.success('图片必须为JPG格式!')
     }
 }
 

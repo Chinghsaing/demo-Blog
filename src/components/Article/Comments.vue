@@ -5,7 +5,7 @@
                 <el-row style="width: 100%;">
                     <el-col :span="2">
                         <div style="margin-right: 10px;">
-                            <el-avatar shape="square" :size="50" :src="store.$state.ArtData[id - 1].author.avatar" />
+                            <el-avatar shape="square" :size="50" :src="userstore.$state.userAvatar" />
                         </div>
                     </el-col>
                     <el-col :span="22">

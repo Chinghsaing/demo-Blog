@@ -1,6 +1,6 @@
 <template>
     <div>
-        <el-dialog v-model="store.$state.showSignView" width="50%" :lock-scroll="false" :show-close="false">
+        <el-dialog v-model="store.$state.showSignView" class="custom-dialog" :lock-scroll="false" :show-close="false">
             <div class="img-box">
                 <el-image :src="img" fit="cover" :lazy="false"
                     style="width: 100%;height: 100%;border-top-left-radius: 10px;border-bottom-left-radius: 10px;"></el-image>
@@ -9,8 +9,8 @@
                 <el-tab-pane label="登录" name="SignIn">
                     <div class="tab">
                         <div class="tab-form">
-                            <el-form :model="signInData" ref="signInFormRef" :rules="signInRule" prules=""
-                                label-width="0px" :inline="false">
+                            <el-form :model="signInData" ref="signInFormRef" :rules="signInRule" prules="" label-width="0px"
+                                :inline="false">
                                 <el-form-item>
                                     <div>
                                         <h1>登录</h1>
@@ -19,8 +19,7 @@
                                 <el-form-item prop="username">
                                     <el-col :span="15">
                                         <el-input v-model.trim="signInData.username" class="input" placeholder="用户名"
-                                            size="large" prefix-icon="User" minlength="6" maxlength="12"
-                                            autocomplete="off"
+                                            size="large" prefix-icon="User" minlength="6" maxlength="12" autocomplete="off"
                                             style="--el-input-focus-border-color:rgb(236,159,221)"></el-input>
                                     </el-col>
                                 </el-form-item>
@@ -70,8 +69,8 @@
                 <el-tab-pane label="注册" name="SignUp">
                     <div class="tab">
                         <div class="tab-form">
-                            <el-form :model="signUpData" ref="signUpFormRef" :rules="signUpRule" prules=""
-                                label-width="0px" :inline="false">
+                            <el-form :model="signUpData" ref="signUpFormRef" :rules="signUpRule" prules="" label-width="0px"
+                                :inline="false">
                                 <el-form-item>
                                     <div>
                                         <h1>注册</h1>
@@ -80,9 +79,8 @@
                                 <el-form-item prop="username">
                                     <el-col :span="15">
                                         <el-input required v-model.trim="signUpData.username" class="input"
-                                            placeholder="用户名" size="large" prefix-icon="User" minlength="6"
-                                            maxlength="12" autocomplete="off"
-                                            style="--el-input-focus-border-color:rgb(236,159,221)">
+                                            placeholder="用户名" size="large" prefix-icon="User" minlength="6" maxlength="12"
+                                            autocomplete="off" style="--el-input-focus-border-color:rgb(236,159,221)">
                                         </el-input>
                                     </el-col>
                                 </el-form-item>
@@ -96,9 +94,9 @@
                                 </el-form-item>
                                 <el-form-item prop="checkPassword">
                                     <el-col :span="15">
-                                        <el-input v-model.trim="signUpData.checkPassword" class="input"
-                                            placeholder="确认密码" type="password" :show-password="true" size="large"
-                                            prefix-icon="Lock" minlength="8" maxlength="12" autocomplete="off"
+                                        <el-input v-model.trim="signUpData.checkPassword" class="input" placeholder="确认密码"
+                                            type="password" :show-password="true" size="large" prefix-icon="Lock"
+                                            minlength="8" maxlength="12" autocomplete="off"
                                             style="--el-input-focus-border-color:rgb(236,159,221)"></el-input>
                                     </el-col>
                                 </el-form-item>
@@ -310,6 +308,7 @@ const submitSignInForm = (formEl: any) => {
     box-shadow: none;
     border-radius: 10px;
     z-index: 200;
+    width: 50%;
 }
 
 // //样式穿透需要拥有根节点才可以生效
@@ -389,6 +388,9 @@ const submitSignInForm = (formEl: any) => {
 }
 
 @media only screen and(min-width: 670px) and(max-width: 1200px) {
+    :deep(.el-dialog) {
+        width: 90% !important;
+    }
     .img-box {
         display: none !important;
     }
@@ -399,6 +401,10 @@ const submitSignInForm = (formEl: any) => {
 }
 
 @media only screen and(max-width: 670px) {
+    :deep(.el-dialog) {
+        width: 90% !important;
+    }
+
     .img-box {
         display: none !important;
     }

@@ -26,4 +26,10 @@ export const userArticle = () => getWithoutParams('/user/userarticle')
 //删除文章及其评论
 export const articleDelete = (params: any) => post('/user/artdelete', params)
 //回复评论
-export const commentReply = (params:any) => post('/user/cmtreply', params)
+export const commentReply = (params: any) => post('/user/cmtreply', params)
+//获取天气
+export const getWeather = (params: any) => get('https://devapi.qweather.com/v7/weather/now', params)
+//上传照片墙
+export const picPost = (params: any) => post('/user/picpost', params)
+//获取照片墙
+export const picList = () => getWithoutParams('/api/piclist')

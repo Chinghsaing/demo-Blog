@@ -1,16 +1,17 @@
 <template>
     <div class="tinymce-boxz">
         <Editor id="tinymcebox" v-model="store.$state.EditTemp" :init="init" />
-</div>
+    </div>
 </template>
 
 <script setup lang="ts">
 //导入模块
-import axios from '@/api/axios';
-import tinymce from 'tinymce';
+import axios from '@/api/axios'
+import tinymce from 'tinymce'
 import Editor from '@tinymce/tinymce-vue';
-import { reactive, ref, onMounted } from "vue";
-import { useStore } from '@/store/ArticleState';
+import { reactive, ref, onMounted } from "vue"
+import { useStore } from '@/store/ArticleState'
+import * as imageConversion from 'image-conversion'
 //导入插件
 import 'tinymce/models/dom'
 import 'tinymce/themes/silver'
@@ -52,16 +53,18 @@ const init = reactive({
 
     //图片上传
     images_upload_handler: (blobInfo: any, progress: any) => new Promise((resolve, reject) => {
-        const formData = new FormData()
-        formData.append('images', blobInfo.blob())
-        axios.post('/api/artimg', formData)
-            .then(res => {
-                console.log(res)
-                resolve(res.data)
-            })
-            .catch(err => {
-                reject(err)
-            })
+        imageConversion.compress(blobInfo.blob(), 200).then(res => {
+            const formData = new FormData()
+            const compressFile = new window.File([res], 'images', { type: 'image/jpeg' })
+            formData.append('images', compressFile)
+            axios.post('/user/artimg', formData)
+                .then(res => {
+                    resolve(res.data)
+                })
+                .catch(err => {
+                    reject(err)
+                })
+        })
     })
 })
 onMounted(() => {
